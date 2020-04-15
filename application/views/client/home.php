@@ -11,7 +11,7 @@
     <!-- Services Section Start -->
     <section id="section_1" class="section">
       <div class="container">
-        <h2>Sharing Platters</h2>
+        <h2>Sharing Platters</h2>       
         <br/>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">

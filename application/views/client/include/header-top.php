@@ -60,8 +60,12 @@
                     <a class="nav-link active" id = "login-tab" >Log In / Sign Up</a>
                   <?php endif; ?>
               </li>
-              <li class = "nav-item">
-                <select name="name" class="nav-link form-control"></select>
+              <li class="nav-item">
+                  <span>
+                      <select class="nav-link form-control" id = "countries">
+                        <option>Philippines</option>
+                      </select>
+                  </span>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-link-bag" href="#">
