@@ -31,7 +31,7 @@
                     </p>
                   </div>
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">$28.80</p></div>
+                    <div class=" fw-500"><p class="py-2 m-0">$ <label id = "selling_price">20.00</label></p></div>
                   </div>
                 </div>
               </div>
@@ -40,21 +40,35 @@
           <div class=" px-4 py-3 modal-bottom">
             <div class=" d-flex align-items-center">
               <div class="cart_item py-1">
-                <button class="btn">
-                  <svg width="18px" height="18px" viewBox="0 0 29 4"><title>Minus</title><g transform="translate(-5 -18)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><rect fill="currentColor" x="5" y="18" width="29" height="4" rx="2"></rect></g></svg>
+                <button class="btn qty_counter">
+                  <svg width="18px" height="18px" viewBox="0 0 29 4">
+                    <title>Minus</title>
+                    <g transform="translate(-5 -18)" fill="none" fill-rule="evenodd">
+                      <rect width="39" height="39" rx="5"></rect>
+                      <rect fill="currentColor" x="5" y="18" width="29" height="4" rx="2"></rect>
+                    </g>
+                  </svg>
                 </button>
               </div>
               <div class="cart_item py-1">
-                <input type="text" value="2" placeholder="1">
+                <input type="text" id = "qty_value" value="1" placeholder="1">
               </div>
               <div class="cart_item py-1">
-                <button class="btn">
-                  <svg width="18px" height="18px" viewBox="0 0 29 29"><title>Plus</title><g transform="translate(-5 -5)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><g stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M7 19.5h25M19.5 7v25"></path></g></g></svg>
+                <button class="btn qty_counter">
+                  <svg width="18px" height="18px" viewBox="0 0 29 29">
+                    <title>Plus</title>
+                    <g transform="translate(-5 -5)" fill="none" fill-rule="evenodd">
+                      <rect width="39" height="39" rx="5"></rect>
+                      <g stroke="currentColor" stroke-linecap="round" stroke-width="4">
+                        <path d="M7 19.5h25M19.5 7v25"></path>
+                      </g>
+                    </g>
+                  </svg>
                 </button>
               </div>
               <div class="col pr-0">
-                <button class="btn btn-primary btn-block">
-                  Add S$28.80
+                <button class="btn btn-primary btn-block add_cart">
+                  Add $20.00
                 </button>
               </div>
             </div>
