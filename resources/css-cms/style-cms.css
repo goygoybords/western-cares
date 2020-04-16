@@ -1,0 +1,129 @@
+.modal-fullscreen {
+background: #ffffff;
+}
+.modal-fullscreen .modal-content {
+background: transparent;
+border: 0;
+-webkit-box-shadow: none;
+box-shadow: none;
+}
+.modal-backdrop.modal-backdrop-fullscreen {
+background: #ffffff;
+}
+.modal-backdrop.modal-backdrop-fullscreen.in {
+opacity: .97;
+filter: alpha(opacity=97);
+}
+
+/* Signature css */
+#signatureparent{
+ margin: 0 auto;
+  width: 901px;
+}
+
+
+/* .modal-fullscreen size: we use Bootstrap media query breakpoints */
+
+.modal-update {
+  background-color: #f0ad4e;
+  color: #ffffff;
+  border-bottom: 0px;
+}
+
+.modal-blue {
+  background-color: #337ab7;
+  color: #ffffff;
+  border-bottom: 0px;
+}
+
+.modal-green {
+  background-color: #5cb85c;
+  color: #ffffff;
+  border-bottom: 0px;
+}
+
+.modal-add {
+  background-color: #393937;
+  color: #ffffff;
+  border-bottom: 0px;
+}
+
+.modal-info {
+  background-color: #5bc0de;
+  color: #ffffff;
+  border-bottom: 0px;
+}  
+
+.modal-fullscreen .modal-dialog {
+margin: 0;
+margin-right: auto;
+margin-left: auto;
+width: 100%;
+}
+@media (min-width: 768px) {
+.modal-fullscreen .modal-dialog {
+ width: 750px;
+}
+}
+@media (min-width: 992px) {
+.modal-fullscreen .modal-dialog {
+ width: 970px;
+}
+}
+@media (min-width: 1200px) {
+.modal-fullscreen .modal-dialog {
+  width: 100%;
+}
+}
+
+
+/* Login Page Styles START */
+#companyLogo {
+  width: 150px;
+  height: auto;
+  padding-bottom: 20px;
+  display:block;
+  margin:auto;
+  margin-top:20px;
+}
+
+#hatchitLogo {
+  width: 100px;
+  height: auto;
+}
+/* Login Page Styles END */
+
+/* Header Styles START */
+.navbarlogo {
+  padding-top:5px;
+}
+.head{
+  border:0px;
+  background-color: #f5f5f5;
+}
+.head-custom{
+  border-bottom:0;
+
+}
+#hatchitNavLogo {
+  width: 180px;
+  height: 45px;
+}
+/* Header Styles END */
+
+/* Pages Page Styles START */
+.pageIcon {
+  color: #333;
+}
+/* Pages Page Styles END */
+
+#bannerThumbnailContainer .bannerDeleteBtn {
+	position: absolute;
+	right: 0;
+	background-color: #fff;
+	border-radius: 20px;
+	padding: 0 3px;
+	padding-top: 1px;
+  top: 1px;
+  cursor: pointer;
+}

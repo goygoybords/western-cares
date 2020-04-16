@@ -21,13 +21,13 @@ class Users extends CI_Controller
 			        array('is_unique' => 'The email is already registered please enter another email')
 			);
 
-			$data['firstname'] = $this->input->post('firstname');
-			$data['lastname'] = $this->input->post('lastname');
+			$data['first_name'] = $this->input->post('firstname');
+			$data['last_name'] = $this->input->post('lastname');
 			$data['contactnumber'] = $this->input->post('contactnumber');
 			$data['email'] = $this->input->post('email');
 			$data['password'] = $this->users_model->hash($this->input->post('password'));
-			$data['role'] = "User";
-			$data['status'] = 0;
+			$data['role'] = "Moderator";
+			$data['removed'] = 0;
 			if ($this->form_validation->run() == FALSE)
             { 
             	  $data = ['errors' => validation_errors() , 'is_error' => 1];

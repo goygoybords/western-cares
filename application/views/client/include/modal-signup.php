@@ -1,5 +1,5 @@
 <!-- modal: login -->
-    <div id="modal-signup" class="modal">
+    <div id="modal-signup" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-head d-flex align-items-center justify-content-center">

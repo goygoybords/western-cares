@@ -1,0 +1,1640 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
+
+body {
+	font-family: 'Open Sans';
+    cursor: default;
+    height: 100%!important;
+    z-index: 10;
+}
+
+table {
+	padding-left:30px;
+    border-collapse: separate;
+    border-spacing: 0 3em;
+}
+
+.navbar-main {
+	position: relative;
+	width: 100%;
+	border-radius: unset;
+  /* padding: 8px 0; */
+  transition: padding .3s;
+  background: #fff;
+  border: none;
+	/* font-size: 18px; */
+	background-color: #fff;
+	margin-bottom: 0px;
+}
+
+.navbar-main.collapse-header {
+	position: fixed;
+	z-index: 100;
+	background-color: #2f84ad;
+}
+©
+.navbar-main.collapse-header #siteLogo {
+	display: none;
+}
+
+.navbar-main.collapse-header #siteLogoSmall {
+	top: 3px !important;
+	left: 275px;
+}
+
+.navbar-main.expand-header #siteLogoSmall {
+	top: -200px;
+}
+
+.navbar-main.collapse-header .nav li a{
+	color: #f2e245;
+}
+
+.navbar-main.collapse-header .navbar-left a{
+	color: #000;
+}
+
+.navbar-main.collapse-header .container {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.navbar-main.expand-header .container {
+	margin-top: 10px;
+}
+
+.navbar-main.expand-header .container #navBar .navbar-nav {
+	padding-top: 10px;
+}
+
+.navbar-main.collapse-header .container #navBar {
+	margin: 0px !important;
+}
+
+.navbar-main .navbar-brand {
+	color: #2f84ad;
+}
+
+.navbar-main .navbar-nav li a {
+	color: #2f84ad;
+}
+
+.navbar-main .navbar-nav li a {
+	color: #2f84ad;
+  font-size: 18px;
+	line-height: 20px;
+	font-weight: 600;
+}
+
+.writeup1 {
+	position: absolute;
+}
+
+/* .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+	color: #ffcf22;
+	background-color: inherit;
+} */
+
+/* .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+	color: #ffcf22;
+	background-color: inherit;
+}
+*/
+.navbar-main .navbar-nav li a:hover {
+	background: none !important;
+	cursor: hand;
+}
+
+#tempLogo {
+  padding-top:60px;
+}
+
+#whoWeAre {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color:#fff;
+  background-color:#161616;
+}
+
+section .section-heading {
+  font-family: 'OpenSans', sans-serif;
+}
+
+.section-heading {
+  font-size: 20px;
+  color: #fff;
+	text-align: center;
+}
+
+.offerHeading {
+  font-size: 30px;
+	font-weight: bold;
+  color: #2f84ad;
+}
+
+.offerMessage {
+  color:#fff;
+}
+
+#whatWeOffer, #contactForm {
+  text-align: center;
+  color: #000;
+}
+
+#contactInfo {
+  text-align: center;
+  color: #000;
+}
+
+.officeDetails{
+	color:fff;
+}
+
+header .intro-text {
+  padding: 100px 0 0px;
+}
+
+header .intro-text2 {
+  padding: 150px 0 150px 0;
+}
+
+header .intro-text .intro-heading {
+  font-size: 40px;
+  line-height: 75px;
+  margin: 0 0 50px;
+}
+
+header .intro-text .intro-lead-in {
+  font-style: italic;
+  font-size: 28px;
+  margin: 0 0 25px;
+  line-height: 40px;
+}
+
+header .intro-text .call-to-action, .btn-send {
+  color: #fff;
+  font-size: 18px;
+  padding: 20px 40px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  margin: 0 5px;
+  background-color: #2ecc71;
+  border-bottom: 5px solid #27ae60;
+}
+
+header {
+	height: 600px;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+	display: block;
+	/* margin-top: 105px; */
+}
+
+#mission {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/mission.png");
+  background-size: cover;
+  height:450px;
+	float:left;
+  text-align: center;
+	padding-top: 10px;
+}
+
+#searchLabel {
+  text-align:left;
+  color:#ffbf00;
+}
+
+#vision {
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/vision.png");
+  background-size: cover;
+  height:450px;
+	float:left;
+  text-align: center;
+	padding-top: 10px;
+}
+
+.section-heading-black {
+  font-size: 23px;
+  font-weight: bold;
+  color: #ffbf00;
+}
+
+.section-heading-black-left {
+  font-size: 23px;
+  font-weight: bold;
+  color: #ffbf00;
+	position:absolute;
+	bottom:0;
+	left: 0;
+	padding-left: 50px;
+	padding-bottom: 8px;
+}
+
+#writeUp {
+  height: 400px;
+  box-sizing: border-box;
+  padding: 40px 230px 0px 230px;
+  background: url('../media/images/border.png') center top no-repeat;
+	text-align: center;
+	position: relative;
+  display: block;
+}
+
+#writeUpText {
+	color: #fff;
+	font-size: 35px!important;
+	/*line-height: 33.15px!important;*/
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+/* Add Quotation marks in yellowText span temporary fix
+
+#writeUp {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 40px 40px 60px 40px;
+	text-align: center;
+	position: relative;
+  display: block;
+}
+
+#yellowText {
+	color:#ffbf00;
+	font-size: 5.5vw;
+	font-weight: 150;
+}
+
+#writeUpText {
+	color: #fff;
+	box-sizing: border-box;
+	height: 100%;
+	font-size: 4vw;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+	font-weight: 80;
+	-webkit-font-smoothing: antialiased;
+}*/
+
+#padding-Executives {
+  padding-top:170px;
+  padding-left:0px;
+}
+
+#position-label {
+  color: #ffbf00;
+  font-size: 20px;
+}
+
+.btn {
+	color: #e6e6e6;
+  line-height: 1em;
+	letter-spacing: 2px;
+  text-align: center;
+  text-shadow: none;
+	text-transform: uppercase;
+  font-size: 15px;
+	font-weight: 600;
+	box-shadow: none!important;
+	padding: 11px 17px!important;
+	background-color: transparent!important;
+	border: 2px solid rgba(255,255,255,0.7);
+	-webkit-border-radius: 0px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.btn2 {
+	color: #fff;
+	width: 200px;
+  line-height: 1em;
+	letter-spacing: 2px;
+  text-align: center;
+  text-shadow: none;
+	text-transform: uppercase;
+  font-size: 15px;
+	font-weight: 600;
+	box-shadow: none!important;
+	padding: 11px 17px!important;
+	background-color: #2f84ad;
+	border: 2px solid #2f84ad;
+	-webkit-border-radius: 0px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.inputField {
+  margin: 0;
+  font-size: 14px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+  color: #000;
+  padding: 10px;
+  border: solid 1px #c9c9c9;
+  transition: border 0.3s;
+}
+
+.btn:hover {
+	color: #fff;
+}
+
+.footer {
+  background-color: #161616;
+  color:#ffbf00;
+	height: 120px;
+	position: relative;
+}
+
+#footer-icon {
+  float:left;
+}
+
+.footer-icon {
+  color: #63c9e4;
+}
+
+#footer-text {
+	color: #555555;
+	font-size: 12px!important;
+	font-weight: 100;
+	position: relative;
+	bottom:0;
+	right: 0;
+	float:right;
+	padding-top: 35px;
+}
+
+.icon-fb{
+	transition: background ease 0.5s;
+	width: 41px;
+	height:50px;
+	background: #ffbf00;
+	fill: #fff;
+	-webkit-mask: url("../media/images/social-1_round-facebook.svg") center / contain no-repeat;
+}
+.icon-twitter{
+  transition: background ease 0.5s;
+  height:50px;
+  width: 41px;
+ 	background: #ffbf00;
+  -webkit-mask: url("../media/images/social-1_round-twitter.svg") center / contain no-repeat;
+}
+.icon-linked{
+  transition: background ease 0.5s;
+  height:50px;
+  width: 47px;
+ 	background: #ffbf00;
+  -webkit-mask: url("../media/images/social-1_round-linkedin.svg") center / contain no-repeat;
+}
+
+#homeText1 {
+	color: #fff;
+	font-size: 25px!important;
+  line-height: 27px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#homeText2 {
+	color: #fff;
+	font-size: 23px!important;
+  line-height: 27px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#homeReadmore1{
+	text-align: right;
+	line-height: 5px!important;
+	padding-right:130px;
+	padding-bottom: 0px;
+}
+
+#homeReadmore2{
+	text-align: right;
+	line-height: 5px!important;
+	padding-right:20px;
+	padding-bottom: 0px;
+}
+
+.homeWhoWeAre {
+	color: #fff;
+	font-size: 23px!important;
+  line-height: 27px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#profileText1 {
+	color: #fff;
+	font-size: 40px!important;
+  line-height: 33.15px!important;
+	font-weight: bold;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#profileText2 {
+	color: #fff;
+	font-size: 19px!important;
+  /*line-height: 33.15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;*/
+	text-align: center;
+}
+
+#contactText2 {
+	color: #fff;
+	font-size: 20px!important;
+  line-height: 33.15px!important;
+	/* font-weight: 100; */
+	font-weight: bolder;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#contactText3 {
+	color: #fff;
+	font-size: 20px!important;
+  line-height: 33.15px!important;
+	/* font-weight: 100; */
+	font-weight: bolder;
+	-webkit-font-smoothing: antialiased;
+	text-align: left;
+}
+
+#address {
+	color: #ffbf00;
+	font-size: 40px!important;
+  line-height: 33.15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+}
+
+#addressDetails {
+	color: #fff;
+	font-size: 20px!important;
+  line-height: 33.15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	padding: 20px 20px 20px 20px;
+}
+
+#servicesDetails-black {
+	color: #fff;
+	font-size: 15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: left;
+}
+
+#servicesDetails-white {
+	color: #000;
+	font-size: 15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: left;
+}
+
+#theExecutives {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color:#000;
+  background-color:#fff;
+}
+
+.visionmissionText {
+	color: #fff;
+	font-size: 15px!important;
+  line-height: 33.15px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	display: inline;
+}
+
+#homeButtons {
+	width: 100%;
+	text-align: center;
+	padding-top: 5px;
+}
+
+#homeHeader{
+	height: 600px;
+	overflow-y: hidden;
+}
+
+#profileHeader {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/executives3.png");
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  display: block;
+
+}
+
+#servicesHeader {
+	background: url("../media/images/services-banner.jpg");
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+	display: block;
+	background-position-y: -200px;
+}
+
+#facilitiesHeader {
+	background: url("../media/images/facilities-banner.jpg");
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  display: block;
+}
+
+#contactHeader{
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/contact_banner.png");
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  display: block;
+}
+
+.modal-content {
+  border-radius: 0px;
+}
+
+#homeText3 {
+	color: #fff;
+	font-size: 14.5px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	padding: 0px 75px 0px 75px;
+}
+
+#profileText {
+	color: #000;
+	font-size: 25.5px!important;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+	text-align: center;
+	padding: 0px 75px 0px 75px;
+}
+
+#blackFullSection {
+	position: relative;
+  color: #fff;
+	width: 100%;
+  height: 100%;
+  background: #161616;
+  padding: 20px 20px 20px 20px;
+	text-align: center;
+	position: relative;
+  display: block;
+}
+
+#tealFullSection {
+	position: relative;
+  color: #fff;
+	width: 100%;
+  height: 100%;
+  background: #276f92;
+  padding: 20px 20px 20px 20px;
+	text-align: center;
+	position: relative;
+  display: block;
+}
+
+#whiteHalfSection {
+  height: 100%;
+  background: #fff;
+  color:#000;
+}
+
+#blackHalfSection {
+  height: 100%;
+  background: #161616;
+  color:#fff;
+}
+
+#gradientBlueHalfSection {
+	height: 100%;
+	background-image: linear-gradient(90deg, #fff, #276f92);
+	color: #fff;
+}
+
+#yellowHalfSection {
+	height: 100%;
+  background: #ffbf00;
+  color:#fff;
+}
+
+.execImgold {
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.execImg {
+  padding: 20px 50px 50px 50px;
+}
+
+.executiveImgLeft {
+  height: 350px;
+	width: 470px;
+	position: relative;
+	display: block;
+}
+
+.executiveImgRight {
+  height: 350px;
+	width: 470px;
+  position: relative;
+  display: block;
+}
+
+/* .executiveImgLeft {
+  height: 250px;
+	width: 320px;
+	position: relative;
+	display: block;
+}
+
+.executiveImgRight {
+  height: 250px;
+	width: 320px;
+  position: relative;
+  display: block;
+} */
+
+.clientImg{
+	height: 68px;
+	width: auto;
+	padding-left: 20px;
+}
+
+.serviceImgRight{
+  height: 350px;
+	width: 100%;
+	position: relative;
+  display: block;
+}
+
+.serviceImgLeft {
+  height: 350px;
+	width: 100%;
+	position: relative;
+  display: block;
+}
+
+.serviceImgMax {
+	height: 300px;
+	width: 100%;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.darker {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: #000000;
+  opacity: 0.3;
+}
+
+
+	#padding-info-left {
+  padding-left:60px;
+	padding-right:60px;
+	height:300px;
+	position: relative;
+  display: block;
+}
+
+#padding-yellow {
+background-color: #ffbf00;
+text-align: justify;
+color: #000;
+height:450px;
+position: relative;
+display: block;
+}
+
+#padding-black {
+background-color : #000;
+text-align: justify;
+color: #ffbf00;
+height:450px;
+position: relative;
+display: block;
+}
+
+
+#padding-info-right {
+  padding-left:60px;
+	padding-right:60px;
+	height:300px;
+	position: relative;
+  display: block;
+}
+
+#noPadding {
+	padding-top:  0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	height:350px;
+}
+
+#company-label {
+	-webkit-font-smoothing: antialiased;
+	color:#ffbf00;
+	font-weight: 400;
+}
+
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.customQuotes{
+	color: #ffbf00;
+	font-size: 36px;
+	font-weight: bolder;
+}
+
+.executiveName {
+	font-weight: bolder;
+	font-size: 28px;
+	padding-top: 40px;
+	margin: 0 0 0px;
+	text-transform: uppercase;
+	/* text-shadow: 1px 1px black; */
+	color: #428bca;
+}
+
+.bannerName {
+	/* font-weight: bolder; */
+	/* font-size: 36px; */
+	padding-top: 40px;
+	margin: 0 0 0px;
+	text-transform: uppercase;
+	/* text-shadow: 1px 1px black; */
+	text-align: center;
+	color: #f2e245;
+	/* font-weight: bolder; */
+}
+
+
+.executiveNameWhite {
+	font-weight: bolder;
+	font-size: 28px;
+	padding-top: 40px;
+	margin: 0 0 0px;
+	text-transform: uppercase;
+	color: #f2e245;
+	text-shadow: 1px 1px black;
+}
+
+.executivePosition {
+	font-weight: bolder;
+	font-size: 18px;
+	color: #428bca;
+	margin: 0 0 0px;
+	text-shadow: 1px 1px #ccc;
+}
+
+.executivePositionWhite {
+	font-weight: bolder;
+	font-size: 18px;
+	color: #fff;
+	margin: 0;
+	text-shadow: 1px 1px black;
+}
+
+.executiveDescription {
+	font-size: 16px;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+}
+
+.serviceDiv1 {
+	background-color: #161616;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+	height: 100%;
+	min-height: 700px;
+}
+
+.serviceDiv2 {
+	background-color: #ffffff;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+	height: 100%;
+	min-height: 700px;
+}
+
+.subServiceList1 {
+	text-align: left;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 5px;
+	color: #ffffff;
+	/*height: 390px;*/
+}
+
+.subServiceList2 {
+	text-align: left;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-right: 5px;
+	color: #000000;
+	/*height: 390px;*/
+}
+
+.serviceName1 {
+	background-color: #ffffff;
+	width: 100%;
+	color: #d39e00;
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+  font-weight: bold;
+	padding-top: 10px;
+}
+
+.serviceName2 {
+	background-color: #ffbf00;
+	width: 100%;
+	color: #161616;
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+  font-weight:bolder;
+	padding-top: 10px;
+}
+
+.serviceImg {
+	height: 250px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	padding-top: 10px;
+}
+
+.subServiceItem{
+	margin: 10px 0;
+}
+
+.subServiceTitle{
+	color: #ffbf00;
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.serviceDescription {
+	font-size: 16px;
+	font-weight: 100;
+	-webkit-font-smoothing: antialiased;
+}
+
+.locationLabel {
+	background-color: #161616;
+	width: 100%;
+	color: #ffbf00;
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+  font-weight: bold;
+ 	padding-top: 12px;
+}
+
+.descriptionLabel {
+	background-color: #161616;
+	width: 100%;
+	color: #ffbf00;
+	height: 350px;
+	text-align: center;
+	font-size: 10px;
+ 	padding-top: 12px;
+}
+
+#US {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/cali.png");
+  height:280px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+}
+
+#AUS {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/aus.png");
+  height:280px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+}
+
+
+#PHIL {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/ph.png");
+  height:280px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+}
+
+#serviceImg {
+	height:100%;
+  width:25%;
+  background-repeat: no-repeat;
+  background-size: cover;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	vertical-align: middle;
+}
+
+#yellow-heading {
+	color:#ffbf00;
+}
+
+#contactsSection {
+  color: #000;
+	text-align: center;
+}
+
+#contactusForm {
+	padding: 10px 80px 10px 10px;
+	color: #2f84ad;
+}
+
+#submit {
+  background-color:#ffbf00;
+  padding-top: 0.7rem;
+  padding-right: 1.4rem;
+  padding-bottom: 0.7rem;
+  padding-left: 1.4rem;
+  width: 300px;
+  display: inline-block;
+}
+
+#US {
+	background: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("../media/images/cali.jpg");
+  height:420px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float:left;
+	padding-left: 0px;
+	padding-right: 0px;
+	vertical-align: middle;
+}
+
+#top-header {
+	width: 100%;
+	position: fixed;
+	background-color: #2f84ad;
+	color: #fff;
+	padding: 3px 30px 3px 30px;
+	font-size: 12px;
+}
+
+#top-header a {
+	color: #fff;
+}
+
+/* #navigation .container .navbar-header {
+	width: 100%;
+} */
+
+#navigation .container .navbar-header #siteLogo {
+	/* display: block; */
+	/* margin: 0 auto; */
+	width: fit-content;
+}
+
+.carousel-inner .item img {
+	margin: 0 auto;
+}
+
+
+footer {
+	background-color: #f4f5f5;
+}
+
+#homeCarousel .carousel-inner .item img
+{
+	width: 100%;
+}
+
+.facilities-row {
+	padding: 0 100px;
+	margin-bottom: 20px;
+}
+
+.facility-card {
+	padding: 10px 20px;
+}
+
+.facility-card .facilities-image {
+	cursor: pointer;
+}
+
+.facility-card .facilities-image img {
+	width: 100%;
+	height: 300px;
+}
+
+.facility-card .facility-description {
+	background-color: #fff;
+	padding: 20px;
+	min-height: 100px;
+	/* min-height: 150px; */
+	/* padding-top: 10px; */
+	border-bottom: 2px solid #2f84ad;
+}
+
+.facility-card .facility-description .facility-description-heading {
+	font-size: 20px;
+	display: block;
+	text-align: center;
+}
+
+
+.facility-card .facility-description p {
+	color: #5f5f5f;
+}
+
+ul.partnership li {
+  display:inline;
+	width: 100%;
+	padding: 10px 40px;
+	text-align: center;
+}
+
+ul.partnership li img {
+	height: 150px;
+	width: auto;
+	padding-bottom: 5px;
+}
+
+#homeCarousel .carousel-inner .item {
+	height: inherit;
+}
+
+#homeCarousel .carousel-inner .item img {
+	height: inherit;
+}
+
+#facilitiesSection .tab-pane {
+	display: none;
+}
+
+#navigation .navbar-toggle {
+	background-color: #2f84ad;
+}
+
+#navigation .navbar-toggle .icon-bar {
+	background-color: #fff;
+	display: block;
+	width: 22px;
+	height: 2px;
+	border-radius: 1px;
+}
+
+#navigation .icon-bar+.icon-bar {
+	margin-top: 4px;
+}
+
+#navigation .container .navbar-collapse {
+	margin-top: 10px;
+}
+
+#missionVissionSection {
+	background-color: #f4f5f5;
+	padding: 75px 0;
+}
+
+#missionVissionSection .row {
+	padding: 0 50px;
+}
+
+#missionVissionSection .missionVissionCard {
+	padding: 0 15px;
+}
+
+#missionVissionSection .missionVissionCard img {
+	width: 100%;
+	height: 250px;
+}
+
+#missionVissionSection .missionVissionCard .missionVissionCardDesc {
+	background-color: #fff;
+	padding: 20px;
+	height: 500px;
+}
+
+#partnersSection .logos {
+	text-align: center;
+	overflow-x: scroll;
+	padding-bottom: 50px;
+	padding-right: 60px;
+}
+
+#contactUsSection {
+	background: url("../media/images/parallax1.jpg") center no-repeat;
+	background-color: #fff;
+	padding: 75px 0;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+#aboutSection {
+	background-color: #f4f5f5;
+	padding: 50px 0;
+	margin-bottom: 50px;
+}
+
+#serviceSection {
+	background-color: #f4f5f5;
+	padding: 50px 0;
+	margin-bottom: 50px;
+}
+
+#serviceSection .facilityCategory {
+	padding: 0 100px;
+	color: #428bca;
+	margin-top: 50px;
+}
+
+#serviceSection .facilityInfo {
+	padding: 0 150px;
+	margin-bottom: 5px;
+}
+
+#facilitiesSection {
+	background-color: #f4f5f5;
+	padding: 75px 0;
+	margin-bottom: 50px;
+}
+
+#whiteHalfSection .executiveDescription,
+#gradientBlueHalfSection .executiveDescription {
+	line-height: 30px;
+}
+
+
+.fb-root {
+	position: fixed!important;
+}
+
+@media screen and (max-width: 1024px) {
+	#homeHeader {
+		height: 100%;
+	}
+
+	#navigation #navBar .navbar-nav span {
+		display: none;
+	}
+
+	#navigation .container .navbar-header #siteLogo span {
+		display: none;
+	}
+
+	.navbar-main.collapse-header #siteLogoSmall {
+		left: 50px;
+	}
+
+	#missionVissionSection .missionVissionCard img {
+		width: 100%;
+		height: 170px;
+	}
+
+	#missionVissionSection .missionVissionCard .missionVissionCardDesc {
+		background-color: #fff;
+		padding: 0;
+		height: 400px;
+		padding-top: 20px;
+	}
+
+	#missionVissionSection .missionVissionCard .missionVissionCardDesc .visionmissionText {
+		font-size: 12px !important;
+		line-height: 25px !important;
+	}
+
+	#serviceSection {
+		padding: 30px 0;
+	}
+
+	#serviceSection .facilityCategory {
+		margin: 0;
+		padding: 0 20px;
+		margin-top: 20px;
+	}
+
+	#serviceSection .facilityInfo {
+		padding: 0 50px;
+		margin-bottom: 5px;
+	}
+
+	#facilitiesSection .facilities-row {
+		padding: 0 50px;
+	}
+
+	#facilitiesSection .facilities-row .facility-card .facilities-image img {
+		height: 200px;
+	}
+
+	#facilitiesSection .facilities-row .facility-card .facility-description .visionmissionText {
+		line-height: 30px !important;
+	}
+
+	#noPadding {
+		padding-top: 50px;
+	}
+
+	#noPadding img {
+		width: 370px;
+		height: 250px;
+	}
+
+	#whiteHalfSection .executiveDescription,
+	#gradientBlueHalfSection .executiveDescription {
+		line-height: 21px;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+
+	#navigation .container .navbar-header #siteLogo span {
+		display: none;
+	}
+
+	#homeHeader {
+		height: 100%;
+	}
+
+	#missionVissionSection .missionVissionCard {
+		margin-bottom: 30px;
+	}
+
+	ul.partnership li {
+		padding-right: 20px;
+	}
+
+	footer .footer-logo img {
+		position: relative;
+		margin: 0 auto;
+		height: 150px !important;
+	}
+
+	footer .contactus {
+		margin-top: 30px;
+		padding: 0 25px !important;
+	}
+
+	footer .contacts {
+		float: none !important;
+		padding-right: 0 !important;
+	}
+
+	footer .mobile-footer {
+		float: none !important;
+		text-align: center;
+	}
+
+	#missionVissionSection .missionVissionCard img {
+		width: 100%;
+		height: 100%;
+	}
+
+	#contactText3 {
+		text-align: center;
+	}
+
+	#contactusForm {
+		padding: 0 30px;
+	}
+
+	#contactusForm .form-group {
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	#contactusForm .form-group .inputField {
+		width: 100% !important;
+	}
+
+	#serviceSection {
+		padding: 30px 0;
+	}
+
+	#serviceSection .facilityCategory {
+		margin: 0;
+		padding: 0 20px;
+		margin-top: 20px;
+	}
+
+	#serviceSection .facilityInfo {
+		padding: 0 50px;
+		margin-bottom: 5px;
+	}
+
+	#facilitiesSection .facilities-row {
+		padding: 0 50px;
+	}
+
+	#facilitiesSection .facilities-row .facility-card .facilities-image img {
+		height: 400px;
+	}
+	#padding-info-right , #whiteHalfSection{
+		height: auto;
+	}
+	#padding-info-right{
+		margin-bottom: 40px;
+	}
+	.missionVissionCardDesc{
+		height: auto!important;
+		padding-bottom: 10%!important;
+	}
+}
+
+@media screen and (max-width: 766px) {
+
+	.showForMobile {
+		display: block !important;
+	}
+
+	.hideForMobile {
+		display: none !important;
+	}
+
+	#navigation .container {
+		padding-bottom: 10px;
+	}
+
+	#navigation .container .navbar-collapse {
+		margin: 0px;
+	}
+
+	#navigation .container .navbar-header #siteLogo {
+		display: none;
+	}
+
+	.navbar-main #siteLogoSmall {
+		top: 8px !important;
+		left: 30px;
+	}
+
+	#missionVissionSection {
+		padding: 40px 30px;
+		padding-bottom: 0px;
+	}
+
+	#missionVissionSection .row {
+		padding: 0;
+	}
+
+	#missionVissionSection .missionVissionCard {
+		margin-bottom: 20px;
+	}
+
+	#missionVissionSection .missionVissionCard img {
+		width: 100%;
+		height: 100%;
+		max-height: 250px;
+	}
+
+	#missionVissionSection .missionVissionCard .missionVissionCardDesc {
+		background-color: #fff;
+		padding: 0;
+		height: 370px;
+		padding-top: 20px;
+	}
+
+	#missionVissionSection .missionVissionCard .missionVissionCardDesc .visionmissionText {
+		font-size: 12px !important;
+		line-height: 25px !important;
+	}
+
+	#partnersSection {
+		background-color: #fff !important;
+	}
+
+	#partnersSection .executiveName {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	#partnersSection .logos {
+		padding-bottom: 0;
+	}
+
+	ul.partnership {
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	ul.partnership li {
+		display: block;
+		padding: 0px;
+	}
+
+	ul.partnership li img {
+		width: auto !important;
+		max-height: 100px !important;
+	}
+
+	#contactUsSection {
+		padding: 0;
+	}
+
+	footer .footer-logo {
+		padding: 0 25px !important;
+	}
+
+	#serviceSection {
+		padding: 30px 0;
+	}
+
+	#serviceSection .facilityCategory {
+		margin: 0;
+		padding: 0 20px;
+		margin-top: 20px;
+	}
+
+	#serviceSection .facilityInfo {
+		padding: 0 20px;
+		margin-bottom: 5px;
+	}
+
+	#facilitiesSection {
+		padding: 25px 0;
+	}
+
+	#facilitiesSection .facilities-row {
+		padding: 0 20px;
+	}
+
+	#whiteHalfSection,
+	#gradientBlueHalfSection {
+		position: relative;
+		height: 600px;
+	}
+
+	#padding-info-left,
+	#padding-info-right {
+		padding: 0 20px;
+	}
+
+	.executiveImgRight,
+	.executiveImgLeft {
+		height: 150px !important;
+		width: 270px !important;
+		margin: 0 auto;
+	}
+
+	#noPadding {
+		height: auto;
+		width: 100%;
+		top: 15px;
+		padding: 0 !important;
+	}
+
+	#whiteHalfSection #padding-info-left {
+		margin-top: 150px;
+	}
+
+	#whiteHalfSection #noPadding .executiveImgRight,
+	#gradientBlueHalfSection #noPadding .executiveImgLeft  {
+		float: none !important;
+	}
+
+	#whiteHalfSection #noPadding {
+		position: absolute;
+		top: 15px;
+	}
+
+	#gradientBlueHalfSection {
+		background: none;
+		background-color: #276f92;
+	}
+
+	#whiteHalfSection .executiveName,
+	#gradientBlueHalfSection .executiveNameWhite {
+		font-size: 21px;
+	}
+	
+}
+
+@media screen and (max-width: 530px) {
+
+	#facilitiesSection .facilities-row ul li {
+		width: 100%;
+	}
+
+	#facilitiesSection .facilities-row .facility-card .facilities-image img {
+		height: auto;
+	}
+
+	#facilitiesSection .facilities-row .facility-card .facility-description .visionmissionText {
+		line-height: 25px !important;
+	}
+
+	#directors-row{
+		padding: 0px!important;
+	}
+	#padding-info-right{
+		margin-top: 50%;
+	}
+	#padding-info-right , #padding-info-left , #whiteHalfSection{
+		height: auto;
+	}
+	#padding-info-left{
+		margin-bottom: 40px;
+	}
+	.fadeInRight #noPadding img{
+		float: none!important;
+	}
+	#title-row{
+		padding: 0px 50px!important; 
+	}
+}
+
+@media screen and (max-width: 320px) {
+	
+}
