@@ -35,7 +35,7 @@
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto w-100 justify-content-end">
               <li class="nav-item">
-                <a class="nav-link" href="#">Menu</a>
+                <a class="nav-link" href="<?=base_url();?>">Menu</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="<?=base_url();?>store-information">Store Information</a>
@@ -52,7 +52,7 @@
                         </a>
                         <div id="#dropdown_user_menu" class="dropdown-menu ">
                             <a href="#" class="dropdown-item">Account Details</a>
-                            <a href="#" class="dropdown-item">Order History</a>
+                            <a href="<?php echo base_url();?>user-detail" class="dropdown-item">Order History</a>
                             <a href="<?php echo site_url('users/logout');?>" class="dropdown-item">Logout</a>
                         </div>
                     </div>

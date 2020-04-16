@@ -11,7 +11,7 @@
     <!-- Services Section Start -->
     <section id="section_1" class="section">
       <div class="container">
-        <h2>Sharing Platters</h2>       
+        <h2>Surgical Gear</h2>       
         <br/>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
@@ -77,12 +77,33 @@
               </div>
             </a>
           </div>
+          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
+            <a href="#modal-item-info" data-toggle="modal" class="d-block">
+              <div class="section_item d-flex">
+                <div>
+                  <div class="section_item_img">
+                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="section_item_info">
+                    <h3>Sample Item</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
+                  </div>
+                  <div>
+                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
+                    <button class="btn btn-primary">Add</button>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>  
     </section>
     <section id="section_2" class="section">
       <div class="container">
-        <h2>Bento Boxes</h2>
+        <h2>Scanner</h2>
         <div class="row">
           <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
             <a href="#modal-item-info" data-toggle="modal" class="d-block">
@@ -150,10 +171,12 @@
         </div>
       </div>  
     </section>
+
     <section id="section_3" class="section">
       <div class="container">
-        <h2>Sharing Platters</h2>
+        <h2>Respatory Mask</h2>
         <div class="row">
+          <?php foreach($surgical_mask_items as $s): ?>
           <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
             <a href="#modal-item-info" data-toggle="modal" class="d-block">
               <div class="section_item d-flex">
@@ -164,59 +187,23 @@
                 </div>
                 <div class="col">
                   <div class="section_item_info">
-                    <h3>Sample Item</h3>
+                    <h3><?php echo $s['item_code']; ?></h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
                   </div>
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
+                    <div class=" fw-500">
+                      <p class="py-2 m-0">
+                        <label id = "current_curreny">Php</label>
+                        <?php echo $s['selling_price']; ?>
+                      </p>
+                    </div>
                     <button class="btn btn-primary">Add</button>
                   </div>
                 </div>
               </div>
             </a>
           </div>
-          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-            <a href="#modal-item-info" data-toggle="modal" class="d-block">
-              <div class="section_item d-flex">
-                <div>
-                  <div class="section_item_img">
-                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="section_item_info">
-                    <h3>Sample Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
-                  </div>
-                  <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
-                    <button class="btn btn-primary">Add</button>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-            <a href="#modal-item-info" data-toggle="modal" class="d-block">
-              <div class="section_item d-flex">
-                <div>
-                  <div class="section_item_img">
-                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="section_item_info">
-                    <h3>Sample Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
-                  </div>
-                  <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
-                    <button class="btn btn-primary">Add</button>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>  
     </section>
@@ -227,12 +214,25 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div style="box-shadow:none !important;" class="modal-head d-flex align-items-center justify-content-center">
-            <a href="#" data-dismiss="modal"><svg width="18px" height="18px" viewBox="0 0 26 27" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Close</title><defs><rect width="39" height="39" rx="5"></rect></defs><g transform="translate(-6 -6)" fill="none" fill-rule="evenodd"><g transform="rotate(135 17.586 18.914)"><rect fill="#212121" y="15.448" width="34" height="4" rx="2"></rect><rect fill="#212121" transform="rotate(90 17 17.448)" y="15.448" width="34" height="4" rx="2"></rect></g></g></svg></a>
+            <a href="#" data-dismiss="modal">
+              <svg width="18px" height="18px" viewBox="0 0 26 27" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <title>Close</title>
+                <defs>
+                  <rect width="39" height="39" rx="5"></rect>
+                </defs>
+                <g transform="translate(-6 -6)" fill="none" fill-rule="evenodd">
+                  <g transform="rotate(135 17.586 18.914)">
+                    <rect fill="#212121" y="15.448" width="34" height="4" rx="2"></rect>
+                    <rect fill="#212121" transform="rotate(90 17 17.448)" y="15.448" width="34" height="4" rx="2"></rect>
+                  </g>
+                </g>
+              </svg>
+            </a>
           </div>
           <div class="modal-body px-4">
             <div class="row">
               <div class="col-md-5">
-                  <img style="width: 100%;" src="img/sample.jpg" alt="">
+                  <img style="width: 100%;" src="<?php echo base_url()?>resources/img/sample.jpg" alt="">
               </div>
               <div class="col-md-7">
                 <div style="min-height: 400px;">
@@ -243,7 +243,7 @@
                     </p>
                   </div>
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">S$28.80</p></div>
+                    <div class=" fw-500"><p class="py-2 m-0">$28.80</p></div>
                   </div>
                 </div>
               </div>

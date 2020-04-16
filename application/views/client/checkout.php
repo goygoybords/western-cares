@@ -1,10 +1,10 @@
 <?php $this->load->view('client/include/header');?>
-    <?php $this->load->view('client/include/header-top');?>
-
-    <div class="spacer"></div>
-    <section class="section">
+    
+    <section class="section checkout_section">
         <div class="container">
-            <h2>Checkout</h2>
+            <div class="pt-4">
+              <a href="<?php echo base_url(); ?>" class="text-white"><i class="lnr lnr-arrow-left mr-2"></i> <u>Continue Shopping</u></a>
+            </div>
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel pb-4">
