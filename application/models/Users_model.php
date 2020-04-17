@@ -64,6 +64,25 @@ class Users_model extends CI_Model
     return $this->db->update(Users_table::_TABLE_NAME, $user);
   }
 
+  public function get($id) 
+  {
+    $this->db->select("*");
+    $this->db->from(Users_table::_TABLE_NAME);
+    $this->db->where(Users_table::_USER_ID, $id);
+    $this->db->where("removed", FALSE);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
+  public function get_email($email) 
+  {
+    $this->db->select("email");
+    $this->db->from(Users_table::_TABLE_NAME);
+    $this->db->where(Users_table::_EMAIL, $email);
+    $query = $this->db->get();
+    return $query->row();
+  }
+
   private function toDTO($data, $total, $limit, $rows, $offset) {
     $result =[
             'total' => $total,

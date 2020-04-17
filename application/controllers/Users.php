@@ -43,12 +43,25 @@ class Users extends CI_Controller
 
 	public function edit($id)
 	{
+		$original = $this->users_model->get($id);
+		$email = $this->input->post('email');
+		$get_email  = $this->users_model->get_email($email);
+
+		if($original->email == $get_email->email)
+		{
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		}
+		else
+		{
+			$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]|valid_email',
+		        array('is_unique' => 'The email is already registered please enter another email')
+			);
+		}
+
 		$this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('contactnumber', 'Password Confirmation', 'required');
-  //       $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]|valid_email',
-		//         array('is_unique' => 'The email is already registered please enter another email')
-		// );
+        
 		$value['success'] = 1;
 		$value['message'] = "success:updated";
 
