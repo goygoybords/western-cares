@@ -316,8 +316,8 @@ button:focus {
 .panel.panel-navbar ul li.active a,
 .panel.panel-navbar ul li:hover a{
   font-weight: 600;
-  border-color: rgb(10, 99, 67);
-  color: rgb(10, 99, 67);
+  border-color: #0a5fab;
+  color: #0a5fab;
 }
 .panel-empty-cart img{
   opacity: 0.2;

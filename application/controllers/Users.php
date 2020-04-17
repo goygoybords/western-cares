@@ -43,12 +43,29 @@ class Users extends CI_Controller
 
 	public function edit($id)
 	{
-		$data['first_name'] = $this->input->post('editFirstName');
-		$data['last_name'] = $this->input->post('editLastName');
-		$data['contactnumber'] = $this->input->post('editContactNumber');
-		$data['email'] = $this->input->post('editEmail');
-		$this->users_model->update($id, $data);
-		echo json_encode("sucess: updated");
+		$this->form_validation->set_rules('firstname', 'Firstname', 'required');
+        $this->form_validation->set_rules('lastname', 'Lastname', 'required');
+        $this->form_validation->set_rules('contactnumber', 'Password Confirmation', 'required');
+  //       $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]|valid_email',
+		//         array('is_unique' => 'The email is already registered please enter another email')
+		// );
+		$value['success'] = 1;
+		$value['message'] = "success:updated";
+
+		if ($this->form_validation->run() == FALSE)
+        { 
+        	  $data = ['errors' => validation_errors() , 'is_error' => 1];
+              echo json_encode($data);
+        }
+        else
+        {
+        	$data['first_name'] = $this->input->post('firstname');
+			$data['last_name'] = $this->input->post('lastname');
+			$data['contactnumber'] = $this->input->post('contactnumber');
+			$data['email'] = $this->input->post('email');
+			$this->users_model->update($id, $data);
+	    	echo json_encode($value);
+    	}
 	}
 
 	public function logout() 

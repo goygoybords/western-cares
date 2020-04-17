@@ -25,8 +25,9 @@
                 </div>
                 <div class="col-md-8">
                     <h2>Account</h2>
-                    <?php echo form_open('users/edit/'.$id); ?>
+                    <form id = "editUserForm" data-user-id = "<?php echo $user_detail->id; ?>" method="POST">
                         <div class="panel py-4 px-4">
+                            <div id = "error_mesage" style="color:red;"></div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -107,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                    <?php echo form_close(); ?>
+                    </form>
                 </div>
             </div>
         </div>
