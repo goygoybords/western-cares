@@ -10,10 +10,10 @@
                     <div class="panel panel-navbar px-0 py-3">
                         <ul class="navbar">
                             <li class="nav-item">
-                                <a href="#" class="px-4">Account Details</a>
+                                <a href="<?=base_url();?>account-details" class="px-4">Account Details</a>
                             </li>
                             <li class="nav-item active">
-                                <a href="#" class="px-4">Order History</a>
+                                <a href="<?=base_url();?>user-detail" class="px-4">Order History</a>
                             </li>
                         </ul>
                     </div>

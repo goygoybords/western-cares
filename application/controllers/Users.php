@@ -41,10 +41,20 @@ class Users extends CI_Controller
 		} 
 	}
 
+	public function edit($id)
+	{
+		$data['first_name'] = $this->input->post('editFirstName');
+		$data['last_name'] = $this->input->post('editLastName');
+		$data['contactnumber'] = $this->input->post('editContactNumber');
+		$data['email'] = $this->input->post('editEmail');
+		$this->users_model->update($id, $data);
+		echo json_encode("sucess: updated");
+	}
+
 	public function logout() 
 	{
 		// Check if there is an existing user session
-		if($this->session->userdata('is_logged_in')) 
+		if($this->session->userdata('isLogged')) 
 		{
 			$this->session->sess_destroy();
 		}
@@ -81,12 +91,12 @@ class Users extends CI_Controller
 				if($result) 
 				{
 					// Set the user session
-					$this->session->set_userdata('is_logged_in', TRUE);
-					$this->session->set_userdata('session_user_id', $result[Users_table::_USER_ID]);
-					$this->session->set_userdata('session_user_email', $result[Users_table::_EMAIL]);
-					$this->session->set_userdata('session_user_role', $result[Users_table::_ROLE]);
-					$this->session->set_userdata('session_user_firstname', $result[Users_table::_FIRST_NAME]);
-					$this->session->set_userdata('session_user_lastname', $result[Users_table::_LAST_NAME]);
+					$this->session->set_userdata('isLogged', TRUE);
+					$this->session->set_userdata('userID', $result['id']);
+					$this->session->set_userdata('username', $result['username']);
+					$this->session->set_userdata('name', $result['first_name'] . ' ' .$result['last_name']);
+			 		$this->session->set_userdata('email', $result['email']);
+			 		$this->session->set_userdata('role', $result['role']);
 				} 
 				else 
 				{
@@ -102,12 +112,5 @@ class Users extends CI_Controller
 			// Redirect to the login page if it is not an AJAX request
 			redirect('', 'refresh');
 		}
-	}
-
-
-
-                
-
-              
-                    
+	}                  
 }

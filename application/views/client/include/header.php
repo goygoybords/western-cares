@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?=base_url();?>resources/css/main.css">    
     <link rel="stylesheet" href="<?=base_url();?>resources/css/responsive.css">
     <link rel="stylesheet" href="<?=base_url();?>resources/css/flags.css?ddasda=42342423">
+    <link href="<?=base_url();?>resources/css/bootstrap-formhelpers.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <style type="text/css">
         .flag-text { margin-left: 10px; }

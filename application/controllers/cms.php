@@ -286,7 +286,8 @@ class Cms extends CI_Controller {
 		$this->load->view('cms/logs', $data);
 	}
 
-	public function login() {
+	public function login()
+	{
 		$data = array();
 
 		if($this->session->userdata('isLogged')) {
@@ -308,7 +309,8 @@ class Cms extends CI_Controller {
 			 	$this->session->set_userdata('email', $result['email']);
 			 	$this->session->set_userdata('role', $result['role']);
 
-				if($rememberMe) {
+				if($rememberMe) 
+				{
 			 		$this->session->set_userdata('rememberMe', TRUE);
 				}
 

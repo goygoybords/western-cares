@@ -30,6 +30,7 @@ class Users extends CI_Model {
     )));
     $this->db->from(Users::_TABLE_NAME);
     $this->db->where(Users::_USERNAME, $username);
+    $this->db->where_in('role', array('Administrator'));
     $this->db->where(Users::_REMOVED, FALSE);
     $this->db->limit(1);
     $query = $this->db->get();
@@ -91,13 +92,13 @@ class Users extends CI_Model {
     return $query->result_array();
   }
 
-  public function get($id) {
-    $this->db->select(Users::_ID . ', ' . Users::_USERNAME . ', ' .
-      Users::_FIRST_NAME . ', ' . Users::_LAST_NAME . ', ' .
-      Users::_EMAIL . ', ' . Users::_ROLE);
+  public function get($id) 
+  {
+    $this->db->select("*");
     $this->db->from(Users::_TABLE_NAME);
     $this->db->where(Users::_ID, $id);
+    $this->db->where(Users::_REMOVED, FALSE);
     $query = $this->db->get();
-    return $query->row_array();
+    return $query->row();
   }
 }

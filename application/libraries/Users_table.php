@@ -8,6 +8,7 @@ class Users_table {
   const _LAST_NAME = 'last_name';
   const _CONTACT_NUMBER = 'contactnumber';
   const _USER_ID = 'id';
+  const _USERNAME = 'username';
   const _EMAIL = 'email';
   const _PASSWORD = 'password';
   const _ROLE = 'role';

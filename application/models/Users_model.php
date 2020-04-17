@@ -1,32 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Users_model extends CI_Model {
+class Users_model extends CI_Model 
+{
   /**
   * Public constructor.
   */
-  public function __construct() {
+  public function __construct() 
+  {
   	// Call parent constructor
     parent::__construct();
     // Load the Users_table class
     $this->load->library('users_table');
-  }
-
-  public function check_username($username) {
-    $result = FALSE;
-    $this->db->select(implode(', ', array(
-      Users_table::_USER_ID,
-      Users_table::_EMAIL
-    )));
-    $this->db->from(Users_table::_TABLE_NAME);
-    $this->db->where(Users_table::_EMAIL, $username);
-    $query = $this->db->get();
-
-    if($query->num_rows() > 0) {
-      $result = TRUE;
-    }
-
-    return $result;
   }
 
   public function login($email, $password) 
@@ -38,7 +23,8 @@ class Users_model extends CI_Model {
       Users_table::_FIRST_NAME,
       Users_table::_LAST_NAME,
       Users_table::_PASSWORD,
-      Users_table::_ROLE
+      Users_table::_ROLE,
+      Users_table::_USERNAME,
     )));
     $this->db->from(Users_table::_TABLE_NAME);
     $this->db->where(Users_table::_EMAIL, $email);
@@ -56,44 +42,12 @@ class Users_model extends CI_Model {
           Users_table::_EMAIL => $row[Users_table::_EMAIL],
           Users_table::_FIRST_NAME => $row[Users_table::_FIRST_NAME],
           Users_table::_LAST_NAME => $row[Users_table::_LAST_NAME],
-          Users_table::_ROLE => $row[Users_table::_ROLE]
+          Users_table::_ROLE => $row[Users_table::_ROLE],
+          Users_table::_USERNAME => $row[Users_table::_USERNAME]
         );
       }
     }
     return $result;
-  }
-
-  public function get_all() {
-    $this->db->select('*');
-    $this->db->from(Users_table::_TABLE_NAME);
-    //$this->db->where(Users_Table::_STATUS . '=' . 0);
-    $query = $this->db->get();
-    return $query->result_array();
-
-  }
-
-  public function add($user) {
-    $this->db->insert(Users_table::_TABLE_NAME, $user);
-    return $this->db->insert_id();
-  }
-
-  public function update_user($id, $userInfo) {
-    $this->db->where(Users_table::_USER_ID, $id);
-    return $this->db->update(Users_table::_TABLE_NAME, $userInfo);
-  }
-
-  public function remove($id) {
-    $this->db->set(Users_table::_STATUS, TRUE);
-    $this->db->where(Users_table::_USER_ID, $id);
-    return $this->db->update(Users_table::_TABLE_NAME);
-  }
-
-  public function get($id) {
-    $this->db->select('*');
-    $this->db->from(Users_table::_TABLE_NAME);
-    $this->db->where(Users_table::_USER_ID, $id);
-    $query = $this->db->get();
-    return $query->row_array();
   }
 
   public function hash($password) {
@@ -102,6 +56,12 @@ class Users_model extends CI_Model {
 
   private function verify($password, $hash) {
     return password_verify($password, $hash);
+  }
+
+  public function update($id, $user) 
+  {
+    $this->db->where(Users_table::_USER_ID, $id);
+    return $this->db->update(Users_table::_TABLE_NAME, $user);
   }
 
   private function toDTO($data, $total, $limit, $rows, $offset) {
@@ -114,5 +74,4 @@ class Users_model extends CI_Model {
       ];
       return $result;
   }
-
 }

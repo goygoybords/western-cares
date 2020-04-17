@@ -42,16 +42,16 @@
               </li>
               <li class="nav-item">
                 <!-- <a class="nav-link active" id = "login-tab" href="#modal-login" data-toggle="modal"> -->
-                  <?php if($this->session->userdata('is_logged_in') == TRUE): ?>
+                  <?php if($this->session->userdata('isLogged') == TRUE): ?>
                     <div class="dropdown">
                         <a class="nav-link active d-flex align-items-center" href="#dropdown_user_menu" data-toggle="dropdown">
                             <div>
-                              Hi, <?php echo $this->session->userdata('session_user_firstname'). " ".$this->session->userdata('session_user_lastname'); ?>
+                              Hi, <?php echo $this->session->userdata('name'); ?>
                             </div>
                             <div class="pl-3"><i class="lnr lnr-chevron-down"></i></div>
                         </a>
                         <div id="#dropdown_user_menu" class="dropdown-menu ">
-                            <a href="#" class="dropdown-item">Account Details</a>
+                            <a href="<?php echo base_url();?>account-details" class="dropdown-item">Account Details</a>
                             <a href="<?php echo base_url();?>user-detail" class="dropdown-item">Order History</a>
                             <a href="<?php echo site_url('users/logout');?>" class="dropdown-item">Logout</a>
                         </div>
