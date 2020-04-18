@@ -6,6 +6,7 @@ class Cms extends CI_Controller {
 		parent::__construct();
 		$this->load->model('users');
 		$this->load->model('customers');
+		$this->load->model('products');
 		$this->load->model('customer_ailment');
 		$this->load->model('logs');
 		$this->load->model('pages');
@@ -249,6 +250,19 @@ class Cms extends CI_Controller {
 
 		$data['username'] = $this->session->userdata('username');
 		$this->load->view('cms/customers', $data);
+	}
+
+	public function products()
+	{
+		$data = array();
+
+		if(!$this->session->userdata('isLogged')) 
+		{
+			redirect('cms/login', 'refresh');
+		}
+
+		$data['username'] = $this->session->userdata('username');
+		$this->load->view('cms/products', $data);
 	}
 
 	public function orders()
@@ -589,7 +603,8 @@ class Cms extends CI_Controller {
 		}
 	}
 
-	public function remove_customer() {
+	public function remove_customer() 
+	{
 		if($this->input->is_ajax_request())
 		{
 			$id = $this->input->post('id');
@@ -610,6 +625,42 @@ class Cms extends CI_Controller {
 		}
 	}
 	/* Helper Methods for Customers END */
+
+
+	/* Helper Methods for Products START */
+	public function all_products() 
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			echo json_encode($this->products->get_all());
+		} else {
+			redirect('cms/products', 'refresh');
+		}
+	}
+
+	public function get_product() 
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			$id = $this->input->post('id');
+			echo json_encode($this->products->get($id));
+		} else {
+			redirect('cms/customers', 'refresh');
+		}
+	}
+
+	public function remove_product() 
+	{
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->input->post('id');
+			echo json_encode($this->products->remove($id));
+		}
+		else
+		{
+			redirect('cms/customers', 'refresh');
+		}
+	}
 
 	public function save($page_id) {
 		$page = array(
