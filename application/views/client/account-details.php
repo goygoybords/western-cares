@@ -6,7 +6,8 @@
     <?php $this->load->view('client/include/modal-dining-preference'); ?>
     <?php $this->load->view('client/include/modal-shopping-cart'); ?>
     <?php $this->load->view('client/include/modal-specific-item'); ?>
- 
+    <?php $this->load->view('client/include/modal-change-password'); ?>
+
     <div class="spacer"></div>
     <section class="section">
         <div class="container">
@@ -103,7 +104,7 @@
                                     <div class="py-4">
                                         <button class="btn btn-block btn-primary" id = "btnUpdate">Update</button>
                                     </div>
-                                    <a href="#" class="text-dark"><u>Change Password</u></a>
+                                    <a href="#modal-password" data-toggle = "modal" class="text-dark"><u>Change Password</u></a>
                                     <br/>
                                 </div>
                             </div>
@@ -113,5 +114,7 @@
             </div>
         </div>
     </section>
+
+   
 
     <?php $this->load->view('client/include/footer'); ?>

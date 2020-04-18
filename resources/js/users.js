@@ -173,4 +173,58 @@ $(document).ready(
           });
       }
     );
+
+    $('#btnChangePassword').click(
+      function(e) 
+      {
+        // Prevent default action of button
+        e.preventDefault();
+
+        var id = $("#passwordForm").attr('data-user-id');
+        var password = $('#passwordForm #txtPassword').val();
+        var passconf = $('#passwordForm #txtPasswordConfirmation').val();
+
+        $.ajax({
+            data : 
+            {
+              password: password,
+              passconf: passconf,
+              csrf_token_name : $.cookie('csrf_cookie_name'),
+            },
+            dataType : 'json',
+            type: 'post',
+            url : 'users/change_password/' + id,
+            success : function(data) 
+            {
+              if(data.is_error == 1)
+              {
+                  $("#passwordForm #error_mesage").html();
+                  $("#passwordForm #error_mesage").html(data.errors);
+              }
+              else if(data.success == 1)
+              {
+                  $("#passwordForm #error_mesage").html()
+                  swal({
+                    title: "Good job!",
+                    text: "Password Update Successful",
+                    icon: "success",
+                    button: "Success!",
+                  }).then(function(e)
+                  { 
+                      setTimeout(function(){location.reload();});
+                  });
+              }
+            },
+            error : function(jqXHR, textStatus, errorThrown) 
+            {
+              // Log the status
+              console.error(textStatus);
+              // Log the error response object
+              console.error(jqXHR);
+              // Log error thrown
+              console.error(errorThrown);
+            }
+          });
+      }
+    );
 });

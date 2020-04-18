@@ -16,7 +16,9 @@ class Users extends CI_Controller
 			$this->form_validation->set_rules('firstname', 'Firstname', 'required');
             $this->form_validation->set_rules('lastname', 'Lastname', 'required');
             $this->form_validation->set_rules('contactnumber', 'Password Confirmation', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|max_length[25]|regex_match["^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"]',
+				array('regex_match' => 'Password must contain at least eight characters, at least one letter and one number')
+			);
             $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]|valid_email',
 			        array('is_unique' => 'The email is already registered please enter another email')
 			);
@@ -78,6 +80,30 @@ class Users extends CI_Controller
 			$data['email'] = $this->input->post('email');
 			$this->users_model->update($id, $data);
 			$this->session->set_userdata('name', $data['first_name'] . ' ' .$data['last_name']);
+	    	echo json_encode($value);
+    	}
+	}
+
+
+	public function change_password($id)
+	{
+		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|max_length[25]|regex_match["^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"]',
+			array('regex_match' => 'Password must contain at least eight characters, at least one letter and one number')
+		);
+		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'trim|required|matches[password]');
+       
+		$value['success'] = 1;
+		$value['message'] = "success:updated";
+
+		if ($this->form_validation->run() == FALSE)
+        { 
+        	  $data = ['errors' => validation_errors() , 'is_error' => 1];
+              echo json_encode($data);
+        }
+        else
+        {
+        	$data['password'] = $this->users_model->hash( $this->input->post('password') );
+			$this->users_model->update($id, $data);
 	    	echo json_encode($value);
     	}
 	}
