@@ -44,58 +44,24 @@ window.operateEvents = {
     'click .btn-view': function (e, value, row)
       {
         e.preventDefault();
-        var id = row.id;
+        var id = row.product_id;
         $.ajax({
-          url : 'get_customer',
+          url : 'get_product',
           dataType : 'json',
           type : 'post',
           data : { id : id },
           success : function(data, textStatus, jqXHR) 
           {
+            console.log(data);
             //Populate the users table
-            $('#viewCustomer').modal('show');
-            $('#viewCustomer').attr('data-customer-id', id);
-            $('#viewCustomer #txtFirstName').val(data.first_name);
-            $('#viewCustomer #txtLastName').val(data.last_name);
-            $('#viewCustomer #txtAddress').val(data.address);
-            $('#viewCustomer #txtEmail').val(data.email);
-            $('#viewCustomer #txtBirthdate').val(data.birthdate);
-
-            $('#viewCustomer  #lash_length').val(data.lash_length);
-            $('#viewCustomer  #lash_thickness').val(data.lash_thickness);
-            $('#viewCustomer  #lash_color').val(data.lash_color);
-            if(data.tint_applied == 'Y')
-              $('#viewCustomer').find(':radio[name=tint_applied][value="Y"]').prop('checked', true);
-            else
-              $('#viewCustomer').find(':radio[name=tint_applied][value="N"]').prop('checked', true);
-
-            $('#viewCustomer #tint_date_applied').val(data.tint_date_applied);
-            $('#viewCustomer #more_details').val(data.ailment_more_details);
-
-            $("#viewCustomer #test").attr("src", data.signature_image);
-
-            $.ajax({
-                data : { id : id },
-                dataType : 'json',
-                type: 'post',
-                url : 'get_ailment_items',
-                success : function(data)
-                {
-                  for(var i = 0; i < data.length; i++)
-                  {
-                    var row = {
-                      ailment:data[i].ailment,
-                    };
-                    $("#gridsaveView").swidget().addRow(row);
-                    $("#gridsaveView").swidget().saveChanges();
-                  }
-                },
-                error : function(jqXHR, textStatus, errorThrown) {
-                  console.log(jqXHR);
-                  console.log(textStatus);
-                  console.log(errorThrown);
-                }
-              });
+            $('#viewProduct').modal('show');
+            $('#viewProduct').attr('data-customer-id', id);
+            $('#viewProduct #txtItemCode').val(data.item_code);
+            $('#viewProduct #txtDescription').val(data.description);
+            $('#viewProduct #txtBrand').val(data.brand); 
+            $('#viewProduct #txtDimension').val(data.dimension);
+            $('#viewProduct #txtUnit').val(data.uom);  
+            $('#viewProduct #txtCategory').val(data.category);
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status

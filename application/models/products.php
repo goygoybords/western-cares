@@ -62,8 +62,14 @@ class Products extends CI_Model {
 
   public function get($id) 
   {
-    $query = $this->db->query("SELECT * FROM products WHERE product_id = $id");
-    $test = $query->result();
+    $this->db->select("p.*, u.description as uom, pc.description as category");
+    $this->db->from("products p");
+    $this->db->join('product_uom u','p.unit_id = u.id');
+    $this->db->join('product_categories pc','p.category_id = pc.category_id');
+    $this->db->where("p.removed", FALSE);
+    $this->db->where("p.product_id", $id);
+    $query = $this->db->get();
+    $test = $query->row();
     return $test;
   }
 
