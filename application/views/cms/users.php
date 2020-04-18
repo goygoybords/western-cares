@@ -6,7 +6,7 @@
       content="width=device-width,
         initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-    <title>Hatchit CMS - Users</title>
+    <title>Western Cares CMS - Users</title>
 
     <link type="text/css" rel="stylesheet"
       href="<?php echo base_url(); ?>resources/css-cms/bootstrap.min.css" />
@@ -62,10 +62,16 @@
                       placeholder="Email" class="form-control" />
                   </div>
                   <div class="form-group">
+                    <label for="txtContactNumber">Contact Number</label>
+                    <input type="email" name="txtContactNumber" id="txtContactNumber"
+                      placeholder="Email" class="form-control" />
+                  </div>
+                  <div class="form-group">
                     <label for="selRole">Role</label>
-                    <select name="selRole" class="form-control" id="selRole" disabled>
+                    <select name="selRole" class="form-control" id="selRole">
                       <option value="Administrator">Administrator</option>
                       <option value="Moderator">Moderator</option>
+                      <option value="Supplier">Supplier</option>
                     </select>
                   </div>
                 </form>
@@ -114,6 +120,11 @@
                   <div class="form-group">
                     <label for="txtEmail">Email</label>
                     <input type="email" name="txtEmail" id="txtEmail"
+                      placeholder="Email" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="txtContactNumber">Contact Number</label>
+                    <input type="email" name="txtContactNumber" id="txtContactNumber"
                       placeholder="Email" class="form-control" />
                   </div>
                   <div class="form-group">

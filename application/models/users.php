@@ -11,6 +11,7 @@ class Users extends CI_Model {
   const _EMAIL = 'email';
   const _ROLE = 'role';
   const _REMOVED = 'removed';
+  const _CONTACT_NUMBER = 'contactnumber';
 
   public function __construct() {
     $this->load->database();
@@ -65,7 +66,7 @@ class Users extends CI_Model {
 
   public function add($user) 
   {
-    $user[Users::_PASSWORD] = md5($user[Users::_PASSWORD]);
+    $user[Users::_PASSWORD] = $this->hash(($user[Users::_PASSWORD]));
     $this->db->insert(Users::_TABLE_NAME, $user);
     $insert_id = $this->db->insert_id();
     return  $insert_id;

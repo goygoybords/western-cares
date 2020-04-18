@@ -33,7 +33,8 @@ $(document).ready(
           email : $('#txtEmail').val(),
           first_name : $('#txtFirstName').val(),
           last_name : $('#txtLastName').val(),
-          role : $('#selRole').val()
+          role : $('#selRole').val(),
+          contact_number : $("#txtContactNumber").val()
         };
 
         $.ajax({
@@ -82,7 +83,8 @@ $(document).ready(
           email : $('#editUsers #txtEmail').val(),
           first_name : $('#editUsers #txtFirstName').val(),
           last_name : $('#editUsers #txtLastName').val(),
-          role : $('#editUsers #selRole').val()
+          role : $('#editUsers #selRole').val(),
+          contactnumber : $('#editUsers #txtContactNumber').val(),
         };
         var id = $('#editUsers').attr('data-user-id');
 
@@ -199,6 +201,7 @@ $(document).ready(
             $('#editUsers #txtUsername').val(data.username);
             $('#editUsers #txtEmail').val(data.email);
             $('#editUsers #txtFirstName').val(data.first_name);
+            $('#editUsers #txtContactNumber').val(data.contactnumber);
             $('#editUsers #selRole').prepend('<option value="' + data.role + '">' + data.role + '</option>');
             $('#editUsers #selRole')[0].selectedIndex = 0;
           },

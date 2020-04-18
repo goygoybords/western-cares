@@ -353,14 +353,17 @@ class Cms extends CI_Controller {
 	}
 
 	public function add_user() {
-		if($this->input->is_ajax_request()) {
+		if($this->input->is_ajax_request()) 
+		{
 			$user = array(
 				Users::_USERNAME => $this->input->post('user')[Users::_USERNAME],
 				Users::_PASSWORD => $this->input->post('user')[Users::_PASSWORD],
 				Users::_FIRST_NAME => $this->input->post('user')[Users::_FIRST_NAME],
 				Users::_LAST_NAME => $this->input->post('user')[Users::_LAST_NAME],
 				Users::_EMAIL => $this->input->post('user')[Users::_EMAIL],
-				Users::_ROLE => $this->input->post('user')[Users::_ROLE]
+				Users::_ROLE => $this->input->post('user')[Users::_ROLE],
+				Users::_CONTACT_NUMBER => $this->input->post('user')['contact_number'],
+
 			);
 			$result = $this->users->add($user);
 
@@ -377,14 +380,17 @@ class Cms extends CI_Controller {
 		}
 	}
 
-	public function edit_user() {
-		if($this->input->is_ajax_request()) {
+	public function edit_user() 
+	{
+		if($this->input->is_ajax_request()) 
+		{
 			$id = $this->input->post('id');
 			$user = array(
 				Users::_USERNAME => $this->input->post('user')[Users::_USERNAME],
 				Users::_FIRST_NAME => $this->input->post('user')[Users::_FIRST_NAME],
 				Users::_LAST_NAME => $this->input->post('user')[Users::_LAST_NAME],
-				Users::_EMAIL => $this->input->post('user')[Users::_EMAIL]
+				Users::_EMAIL => $this->input->post('user')[Users::_EMAIL],
+				Users::_CONTACT_NUMBER => $this->input->post('user')['contactnumber']
 			);
 			$result = $this->users->update($id, $user);
 
@@ -410,8 +416,10 @@ class Cms extends CI_Controller {
 		}
 	}
 
-	public function get_user() {
-		if($this->input->is_ajax_request()) {
+	public function get_user() 
+	{
+		if($this->input->is_ajax_request()) 
+		{
 			$id = $this->input->post('id');
 			echo json_encode($this->users->get($id));
 		} else {
