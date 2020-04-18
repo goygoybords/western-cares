@@ -52,23 +52,23 @@
                                     <div class="form-group">
                                         <div class="d-flex">
                                             <div>
-                                                <div class="dropdown">
-                                                    <div data-toggle="dropdown" class="form-dropdown cursor-pointer d-flex align-items-center">
-                                                        <div><img width="30" src="img/flag/flag-ph.png" alt=""></div>
-                                                        <div class="pl-2"><i class="fa fa-caret-down"></i></div>
-                                                    </div>
-                                                    <div class="dropdown-menu py-0">
+                                                <!-- <div class="dropdown-menu py-0">
                                                         <a href="#" class="dropdown-item px-3 py-2 d-flex align-items-center">
-                                                            <div><img width="30" src="img/flag/flag-ph.png" alt=""></div>
+                                                          <div><img width="30" src="img/flag/flag-ph.png" alt=""></div>
+                                                            <div class="flag flag-ph"></div>
                                                             <div class="pl-2">Philippines</div>
                                                         </a>
                                                         <a href="#" class="dropdown-item px-3 py-2 d-flex align-items-center">
                                                             <div><img width="30" src="img/flag/flag-sg.png" alt=""></div>
                                                             <div class="pl-2">Signapore</div>
                                                         </a>
-                                                        
-                                                    </div>
-                                                </div>
+                                                    </div> -->
+                                                    <?php $code = $this->session->userdata('country_code');?>
+                                                <select class="form-control" id = "select-country-edit">
+                                                    <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
+                                                    <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
+                                                    <option value="CH" <?php if($code=="CH") echo 'selected="selected"'; ?> >CH</option>
+                                                </select>
                                             </div>
                                             <div class="col px-0 pos-relative">
                                                <input type="text" class="form-control" name = "editContactNumber" value="<?php echo $user_detail->contactnumber;?>" id = "editContactNumber">

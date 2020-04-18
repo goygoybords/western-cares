@@ -28,8 +28,10 @@ class Users extends CI_Controller
 			$data['contactnumber'] = $this->input->post('contactnumber');
 			$data['email'] = $this->input->post('email');
 			$data['password'] = $this->users_model->hash($this->input->post('password'));
+			$data['country_code'] = trim($this->input->post('country_code'));
 			$data['role'] = "Moderator";
 			$data['removed'] = 0;
+
 			if ($this->form_validation->run() == FALSE)
             { 
             	  $data = ['errors' => validation_errors() , 'is_error' => 1];
@@ -151,6 +153,7 @@ class Users extends CI_Controller
 					$this->session->set_userdata('isLogged', TRUE);
 					$this->session->set_userdata('userID', $result['id']);
 					$this->session->set_userdata('username', $result['username']);
+					$this->session->set_userdata('country_code', $result['country_code']);
 					$this->session->set_userdata('name', $result['first_name'] . ' ' .$result['last_name']);
 			 		$this->session->set_userdata('email', $result['email']);
 			 		$this->session->set_userdata('role', $result['role']);

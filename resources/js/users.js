@@ -15,6 +15,44 @@ $(document).ready(
         $('#modal-signup').modal('show');
       });
 
+    $(".qty_counter").on("click", function () 
+      {
+          var $button = $(this);
+          var oldValue = $("#qty_value").val();
+          var button_cart = $(".add_cart").text();
+          var price = $("#selling_price").text();
+          price = $.trim(price);
+          price = parseFloat(price);
+
+          button_cart = button_cart.replace("Add $","");
+          button_cart = $.trim(button_cart);
+          button_cart = parseFloat(button_cart);
+          button_cart = button_cart.toFixed(2);
+
+          if ($.trim($button.text()) == "Plus") 
+          {
+              var newVal = parseFloat(oldValue) + 1;
+              var total = newVal * price;
+              total = parseFloat(total);
+              $(".add_cart").text("Add $" + total.toFixed(2)); 
+          } 
+          else 
+          {
+              if (oldValue > 0) 
+              {
+                  var newVal = parseFloat(oldValue) - 1;
+                  var total = newVal * price;
+                  total = parseFloat(total);
+                  $(".add_cart").text("Add $" + total.toFixed(2)); 
+              } 
+              else 
+              {
+                  newVal = 0;
+              }
+          }
+          $("#qty_value").val(newVal);
+        });
+
     $('#registerButton').click(
       function(e) {
         // Prevent default action of button
@@ -25,6 +63,7 @@ $(document).ready(
             contactnumber : $('#registrationForm #contactnumber').val(),
             email : $('#registrationForm #email').val(),
             password : $('#registrationForm #password').val(),
+            country_code : $('#registrationForm #select-country').val(),
             csrf_token_name : $.cookie('csrf_cookie_name')
           };
           // Invoke the AJAX request for updating user information
@@ -101,7 +140,7 @@ $(document).ready(
               }
               else if(data.success == 1)
               {
-                  setTimeout(function(){location.reload();},1500);
+                  setTimeout(function(){location.reload();});
                   // window.location.replace('dashboard');
               }
             },

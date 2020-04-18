@@ -1,4 +1,4 @@
-<!-- modal: login -->
+    <!-- modal: login -->
     <div id="modal-signup" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -37,10 +37,25 @@
                 <input class="form-control" value="" id = "lastname" name="lastname" required type="text">
                 <label>Last Name</label>
               </div>
-              <div class="form-group">
-                <input class="form-control" value="" id = "contactnumber" name="contactnumber" required type="text">
-                <label>Contact Number</label>
+            
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <select class="form-control" id = "country_code" name="country_code">
+                        <option value="PH">PH</option>
+                        <option value="US">US</option>
+                        <option value="CH">CH</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <input class="form-control" value="" id = "contactnumber" name="contactnumber" required type="text">
+                    <label>Contact Number</label>
+                  </div>
+                </div>
               </div>
+             
               <div class="form-group">
                 <input class="form-control" value="" id = "email" name="email" required type="email">
                 <label>Email Address</label>

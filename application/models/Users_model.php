@@ -25,6 +25,7 @@ class Users_model extends CI_Model
       Users_table::_PASSWORD,
       Users_table::_ROLE,
       Users_table::_USERNAME,
+      'country_code',
     )));
     $this->db->from(Users_table::_TABLE_NAME);
     $this->db->where(Users_table::_EMAIL, $email);
@@ -43,7 +44,8 @@ class Users_model extends CI_Model
           Users_table::_FIRST_NAME => $row[Users_table::_FIRST_NAME],
           Users_table::_LAST_NAME => $row[Users_table::_LAST_NAME],
           Users_table::_ROLE => $row[Users_table::_ROLE],
-          Users_table::_USERNAME => $row[Users_table::_USERNAME]
+          Users_table::_USERNAME => $row[Users_table::_USERNAME],
+          'country_code' => $row['country_code'],
         );
       }
     }

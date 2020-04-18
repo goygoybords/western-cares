@@ -97,48 +97,38 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/users.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/bootstrap-formhelpers.min.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>resources/js/cleave.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>resources/js/cleave-phone.i18n.js"></script>
+
     <script type="text/javascript">
-      $(document).ready(function(){
+      $(function(ready)
+      {
+        var cleave = new Cleave('#contactnumber', 
+        {
+            phone: true,
+            phoneRegionCode: 'PH'
+        });
 
+        $('#country_code').change(function()
+        {
+          cleave.setPhoneRegionCode(this.value);
+          cleave.setRawValue('');
+        });
 
-          $(".qty_counter").on("click", function () 
-          {
-              var $button = $(this);
-              var oldValue = $("#qty_value").val();
-              var button_cart = $(".add_cart").text();
-              var price = $("#selling_price").text();
-              price = $.trim(price);
-              price = parseFloat(price);
+        var cleave_edit = new Cleave('#editContactNumber', 
+        {
+            phone: true,
+            phoneRegionCode: $("#select-country-edit").val(),
+        });
 
-              button_cart = button_cart.replace("Add $","");
-              button_cart = $.trim(button_cart);
-              button_cart = parseFloat(button_cart);
-              button_cart = button_cart.toFixed(2);
-
-              if ($.trim($button.text()) == "Plus") 
-              {
-                  var newVal = parseFloat(oldValue) + 1;
-                  var total = newVal * price;
-                  total = parseFloat(total);
-                  $(".add_cart").text("Add $" + total.toFixed(2)); 
-              } 
-              else 
-              {
-                  if (oldValue > 0) 
-                  {
-                      var newVal = parseFloat(oldValue) - 1;
-                      var total = newVal * price;
-                      total = parseFloat(total);
-                      $(".add_cart").text("Add $" + total.toFixed(2)); 
-                  } 
-                  else 
-                  {
-                      newVal = 0;
-                  }
-              }
-              $("#qty_value").val(newVal);
-            });
+        $('#select-country-edit').change(function(){
+          cleave_edit.setPhoneRegionCode(this.value);
+          cleave_edit.setRawValue('');
+        });
+  
       });
+
+        
     </script>
     
   </body>
