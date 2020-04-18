@@ -78,7 +78,7 @@ class Users extends CI_Controller
         {
         	$data['first_name'] = $this->input->post('firstname');
 			$data['last_name'] = $this->input->post('lastname');
-			$data['contactnumber'] = $this->input->post('contactnumber');
+			$data['contactnumber'] = trim($this->input->post('contactnumber'));
 			$data['email'] = $this->input->post('email');
 			$this->users_model->update($id, $data);
 			$this->session->set_userdata('name', $data['first_name'] . ' ' .$data['last_name']);
