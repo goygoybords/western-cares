@@ -52,7 +52,6 @@ window.operateEvents = {
           data : { id : id },
           success : function(data, textStatus, jqXHR) 
           {
-            console.log(data);
             //Populate the users table
             $('#viewProduct').modal('show');
             $('#viewProduct').attr('data-customer-id', id);
@@ -61,7 +60,11 @@ window.operateEvents = {
             $('#viewProduct #txtBrand').val(data.brand); 
             $('#viewProduct #txtDimension').val(data.dimension);
             $('#viewProduct #txtUnit').val(data.uom);  
+            $('#viewProduct #txtCost').val(data.cost);
+            $('#viewProduct #txtSellingPrice').val(data.selling_price);
             $('#viewProduct #txtCategory').val(data.category);
+            $('#viewProduct #viewImage').append('<img height = 200px width = 200px src="'+  base_url + data.image_path + '" alt="something" />');
+
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status
@@ -184,22 +187,22 @@ window.operateEvents = {
 $(document).ready(
   function() {
 
-    // Signature Code for JS START
-    var tmpObject = {
-    color:"#f00",
-    lineWidth:5,
-    height: 200,
-    width:600,
-    'UndoButton':true
-    };
-    tmpObject["background-color"] = "#F6F6F6";
+    // // Signature Code for JS START
+    // var tmpObject = {
+    // color:"#f00",
+    // lineWidth:5,
+    // height: 200,
+    // width:600,
+    // 'UndoButton':true
+    // };
+    // tmpObject["background-color"] = "#F6F6F6";
 
-    $sigdiv = $("#signatureparent").jSignature(tmpObject);
-    $sigdivedit = $("#signatureparentedit").jSignature(tmpObject);
-    // UPON Button submit, in order to get value of signature, use Code
-    var image_draw = $sigdiv.jSignature('isModified') ? $sigdiv.jSignature('getData', 'image/jsignature;base30') : '';
-         dataToBePassedAsAdd = image_draw;
-    var image_draw_edit = $sigdivedit.jSignature('isModified') ? $sigdivedit.jSignature('getData', 'image/jsignature;base30') : '';
+    // $sigdiv = $("#signatureparent").jSignature(tmpObject);
+    // $sigdivedit = $("#signatureparentedit").jSignature(tmpObject);
+    // // UPON Button submit, in order to get value of signature, use Code
+    // var image_draw = $sigdiv.jSignature('isModified') ? $sigdiv.jSignature('getData', 'image/jsignature;base30') : '';
+    //      dataToBePassedAsAdd = image_draw;
+    // var image_draw_edit = $sigdivedit.jSignature('isModified') ? $sigdivedit.jSignature('getData', 'image/jsignature;base30') : '';
 
 
     // Signature Code for JS END
@@ -209,39 +212,49 @@ $(document).ready(
       function(e) {
         e.preventDefault();
         // Prepare user object
+        var file_data = $('#addProduct #txtProductImage')[0];   
+        // var form_data = new FormData();                  
+        // form_data.append('file', file_data);
+
+        var form = $('#addProductForm')[0];
+        var data = new FormData(form);
 
         var customer = {
-          email : $('#addCustomer #txtEmail').val(),
-          first_name : $('#addCustomer #txtFirstName').val(),
-          last_name : $('#addCustomer #txtLastName').val(),
-          address : $('#addCustomer #txtAddress').val(),
-          csrf_token_name : $('#addCustomer input[name="csrf_token_name"]').val(),
-          signature_image: $sigdiv.jSignature('isModified') ? $sigdiv.jSignature('getData', 'image/jsignature;base30') : '',
-          birthdate : $('#addCustomer #txtBirthdate').val(),
-
-          lash_length:$('#addCustomer #lash_length option:selected').val(),
-          lash_thickness:$('#addCustomer #lash_thickness option:selected').val(),
-          lash_color: $('#addCustomer #lash_color option:selected').val(),
-          tint_applied: $("#addCustomer input[name='tint_applied']:checked").val(),
-          tint_date_applied: $('#addCustomer #tint_date_applied').val(),
-          ailment_more_details: $('#addCustomer #more_details').val(),
-          ailment : $("#gridsave").swidget().dataSource.data,
+          item_code : $('#addProduct #txtItemCode').val(),
+          description : $('#addProduct #txtDescription').val(),
+          brand : $('#addProduct #txtBrand').val(),
+          dimension : $('#addProduct #txtDimension').val(),
+          csrf_token_name : $('#addProduct input[name="csrf_token_name"]').val(),
+          uom_id : $('#addProduct #selUom').val(),
+          category_id:$('#addProduct #selCategory option:selected').val(),
+          product_image: file_data,
+          cost : $('#addProduct #txtCost').val(),
+          selling_price : $('#addProduct #txtSellingPrice').val(),
         };
 
         $.ajax({
-          url : 'add_customer',
+          url : 'add_product',
           dataType : 'json',
+          enctype: 'multipart/form-data',
+          processData: false,  // Important!
+          contentType: false,
+          cache: false,          
           type : 'post',
-          data : { customer : customer },
+          data : data,
           success : function(data, textStatus, jqXHR)
           {
-            //Check server data after insert
-            if(data == 'user_exists')
-              alert("User Exists");
+            if(data.error == 1)
+            {
+                alert(data.errors);
+            }
             else
-              window.location.reload();
+            {
+               window.location.reload();
+            }
+
           },
-          error : function(jqXHR, textStatus, errorThrown) {
+          error : function(jqXHR, textStatus, errorThrown) 
+          {
             // Log the status
             console.error(textStatus);
             // Log the error response object
@@ -439,7 +452,7 @@ $(document).ready(
 // }
 window.onload = function() {
   var gridsave =  initGridSave($("#gridsave"));
-  $('#addCustomer').on('hidden.bs.modal', function () {
+  $('#addProduct').on('hidden.bs.modal', function () {
       gridsave.swidget().destroy();
       gridsave =  initGridSave($("#gridsave"));
   });

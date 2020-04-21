@@ -20,12 +20,10 @@ class Products extends CI_Model {
     $this->load->database();
   }
 
-
-  public function add($product) 
+  public function add($productInfo) 
   {
-    $this->db->insert(Products::_TABLE_NAME, $product);
-    $insert_id = $this->db->insert_id();
-    return  $insert_id;
+    $this->db->insert(Products::_TABLE_NAME, $productInfo);
+    return $this->db->insert_id();
   }
 
  //  public function update($id, $user) {
@@ -71,6 +69,28 @@ class Products extends CI_Model {
     $query = $this->db->get();
     $test = $query->row();
     return $test;
+  }
+
+  public function get_all_categories() 
+  {
+    $this->db->select("*");
+    $this->db->from("product_categories");
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_all_uom() 
+  {
+    $this->db->select("*");
+    $this->db->from("product_uom");
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function update($id, $productInfo) 
+  {
+    $this->db->where(Products::_PRODUCT_ID, $id);
+    return $this->db->update(Products::_TABLE_NAME, $productInfo);
   }
 
 
