@@ -19,19 +19,24 @@
           </div>
           <div class="modal-body px-4">
             <div class="row">
-              <div class="col-md-5">
-                  <img style="width: 100%;" src="<?php echo base_url()?>resources/img/sample.jpg" alt="">
+              <div class="col-md-5" id = "specific_image">
+                  <!-- <img style="width: 100%;" src="<?php echo base_url()?>resources/img/sample.jpg" alt=""> -->
               </div>
               <div class="col-md-7">
                 <div style="min-height: 400px;">
                   <div class="section_item_info">
-                    <h2>Heavenly Platter</h2>
-                    <p>
-                      12 Pieces. Includes Baked Pork Buns (6 pieces) and Fried Beancurd Skin with Shrimp (6 pieces).
+                    <h2 id = "specific_item_code">specific_item_code</h2>
+                    <p id = "specific_description">
+                     
                     </p>
                   </div>
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">$ <label id = "selling_price">20.00</label></p></div>
+                    <div class=" fw-500">
+                      <p class="py-2 m-0">
+                        <label id = "specific_moadl_currency" >Php </label>
+                        <label id = "specific_moadl_selling_price"></label>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -68,7 +73,7 @@
               </div>
               <div class="col pr-0">
                 <button class="btn btn-primary btn-block add_cart">
-                  Add $20.00
+                  Add <label id = "specific_button_price"></label>
                 </button>
               </div>
             </div>

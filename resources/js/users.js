@@ -19,13 +19,13 @@ $(document).ready(
       {
           var $button = $(this);
           var oldValue = $("#qty_value").val();
-          var button_cart = $(".add_cart").text();
-          var price = $("#selling_price").text();
+          var button_cart = $("#specific_button_price").text();
+          var price = $("#specific_moadl_selling_price").text();
           price = $.trim(price);
           price = parseFloat(price);
 
-          button_cart = button_cart.replace("Add $","");
-          button_cart = $.trim(button_cart);
+          // button_cart = button_cart.replace("Add"," ");
+          // button_cart = $.trim(button_cart);
           button_cart = parseFloat(button_cart);
           button_cart = button_cart.toFixed(2);
 
@@ -34,7 +34,8 @@ $(document).ready(
               var newVal = parseFloat(oldValue) + 1;
               var total = newVal * price;
               total = parseFloat(total);
-              $(".add_cart").text("Add $" + total.toFixed(2)); 
+
+              $("#specific_button_price").text(total.toFixed(2)); 
           } 
           else 
           {
@@ -43,7 +44,7 @@ $(document).ready(
                   var newVal = parseFloat(oldValue) - 1;
                   var total = newVal * price;
                   total = parseFloat(total);
-                  $(".add_cart").text("Add $" + total.toFixed(2)); 
+                  $("#specific_button_price").text(total.toFixed(2)); 
               } 
               else 
               {
@@ -264,6 +265,42 @@ $(document).ready(
               console.error(errorThrown);
             }
           });
+      }
+    );
+
+    $('.viewItemModal').click(
+      function(e) 
+      {
+        e.preventDefault();
+        var id = $(this).attr('data-product-id');
+        var base_url = $("#base_url").val();
+        $.ajax({
+          url : 'products/get_product/' + id,
+          dataType : 'json',
+          type : 'post',
+          data : { id : id },
+          success : function(data, textStatus, jqXHR) 
+          {
+            //Populate the users table
+            $("#modal-item-info").modal('show');
+            $('#modal-item-info').attr('data-customer-id', id);
+            $('#specific_image').append('<img style = "width:100%" src="'+  base_url+data.image_path + '" alt="" />');
+
+            $("#specific_item_code").html(data.item_code);
+            $('#specific_moadl_selling_price').html(data.selling_price);
+            $('#specific_button_price').html(data.selling_price);
+            $("#specific_description").html(data.description + " ." +data.dimension);
+          },
+          error : function(jqXHR, textStatus, errorThrown) 
+          {
+              // Log the status
+              console.error(textStatus);
+              // Log the error response object
+              console.error(jqXHR);
+              // Log error thrown
+              console.error(errorThrown);
+          }
+        });
       }
     );
 });

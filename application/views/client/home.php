@@ -96,23 +96,24 @@
         <div class="row">
           <?php foreach($surgical_mask_items as $s): ?>
             <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-              <a href="#modal-item-info" data-toggle="modal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
+              <a href="#" class = "viewItemModal" data-toggle="modal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
                 <div class="section_item d-flex">
                   <div>
                     <div class="section_item_img">
-                      <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
+                      <img src="<?php echo base_url().$s['image_path']; ?>" alt="">
                     </div>
                   </div>
                   <div class="col">
                     <div class="section_item_info">
                       <h3><?php echo $s['item_code']; ?></h3>
-                      <p><?php echo $s['description']; ?></p>
+                      <p><?php echo $s['description']." . ".$s['dimension']; ?></p>
                     </div>
                     <div>
                       <div class=" fw-500">
                         <p class="py-2 m-0">
                           <label id = "current_curreny">Php</label>
-                          <?php echo $s['selling_price']; ?>
+                          <label id = "spanSellingPrice"><?php echo $s['selling_price']; ?></label>
+                          
                         </p>
                       </div>
                       <button class="btn btn-primary" data-product-id = "<?php echo $s['product_id']; ?>">Add</button>

@@ -107,13 +107,7 @@ class Products_model extends CI_Model {
 
   public function get($id) 
   {
-    $this->db->select(implode(', ', array(
-      Products_table::_PRODUCT_ID,
-      Products_table::_ITEM_NAME,
-      Products_table::_MIN_VALUE,
-      Products_table::_UNIT,
-      Products_table::_STATUS
-    )));
+    $this->db->select('*');
     $this->db->from(Products_table::_TABLE_NAME);
     $this->db->where(Products_table::_PRODUCT_ID , $id);
     $query = $this->db->get();
