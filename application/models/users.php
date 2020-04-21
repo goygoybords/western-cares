@@ -31,7 +31,7 @@ class Users extends CI_Model {
     )));
     $this->db->from(Users::_TABLE_NAME);
     $this->db->where(Users::_USERNAME, $username);
-    $this->db->where_in('role', array('Administrator'));
+    $this->db->where_in('role', array('Administrator', 'Supplier'));
     $this->db->where(Users::_REMOVED, FALSE);
     $this->db->limit(1);
     $query = $this->db->get();

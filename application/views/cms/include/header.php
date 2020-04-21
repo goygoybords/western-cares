@@ -63,6 +63,7 @@
             <span class="hidden-xs">Download Report</span>
           </a>
         </li> -->
+        <?php if($this->session->userdata('role') == 'Administrator'): ?>
         <li>
           <a href="<?php echo base_url(); ?>cms/customers">
             <i class="fa fa-users"></i>
@@ -88,10 +89,24 @@
           </a>
         </li>
         <li>
+            <a href="<?php echo base_url(); ?>cms/quotations">
+              <i class="fa fa-list"></i>
+              <span class="hidden-xs">Quotations</span>
+            </a>
+          </li>
+        <li>
           <a href="<?php echo base_url(); ?>cms/logs">
             <i class="fa fa-list"></i>
             <span class="hidden-xs">Logs</span>
           </a>
         </li>
+        <?php else: ?>
+          <li>
+            <a href="<?php echo base_url(); ?>cms/quotations">
+              <i class="fa fa-list"></i>
+              <span class="hidden-xs">Quotations</span>
+            </a>
+          </li>
+        <?php endif;?>
       </ul>
     </aside>

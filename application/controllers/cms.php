@@ -279,6 +279,19 @@ class Cms extends CI_Controller {
 		$this->load->view('cms/orders', $data);
 	}
 
+	public function quotations()
+	{
+		$data = array();
+
+		if(!$this->session->userdata('isLogged')) 
+		{
+			redirect('cms/login', 'refresh');
+		}
+
+		$data['username'] = $this->session->userdata('username');
+		$this->load->view('cms/quotations', $data);
+	}
+
 	public function services() {
 		$data = array();
 
@@ -334,7 +347,10 @@ class Cms extends CI_Controller {
 				}
 
 				$this->logs->log($this->session->userdata('userID'), $this->session->userdata('name') .' has successfully logged in.');
-				redirect('cms/customers', 'refresh');
+				if($result['role'] == 'Administrator')
+					redirect('cms/orders', 'refresh');
+				else
+					redirect('cms/quotations', 'refresh');
 			} else {
 				$data['error_message'] = 'Invalid username and password!';
 			}
