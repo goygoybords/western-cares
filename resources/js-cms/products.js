@@ -109,69 +109,34 @@ window.operateEvents = {
       'click .btn-edit': function(e, value, row)
       {
         e.preventDefault();
-        var id = row.id;
+        var id = row.product_id;
         $.ajax({
-          url : 'get_customer',
+          url : 'get_product',
           dataType : 'json',
           type : 'post',
           data : {
             csrf_token_name :
-              $('#editCustomers input[name="csrf_token_name"]').val(),
+              $('#editProduct input[name="csrf_token_name"]').val(),
             id : id
           },
           success : function(data, textStatus, jqXHR)
           {
-            $('#editCustomer').modal('show');
-            $('#editCustomer').attr('data-customer-id', id);
-            $('#editCustomer #txtFirstName').val(data.first_name);
-            $('#editCustomer #txtLastName').val(data.last_name);
-            $('#editCustomer #txtAddress').val(data.address);
-            $('#editCustomer #txtEmail').val(data.email);
-            $('#editCustomer #txtBirthdate').val(data.birthdate);
-
-            $('#editCustomer #lash_length').val(data.lash_length);
-            $('#editCustomer #lash_thickness').val(data.lash_thickness);
-            $('#editCustomer #lash_color').val(data.lash_color);
-            if(data.tint_applied == 'Y')
-              $('#editCustomer').find(':radio[name=tint_applied][value="Y"]').prop('checked', true);
-            else
-              $('#editCustomer').find(':radio[name=tint_applied][value="N"]').prop('checked', true);
-
-            $('#editCustomer  #tint_date_applied').val(data.tint_date_applied);
-            $('#editCustomer  #more_details').val(data.ailment_more_details);
-
-            if(data.signature_image != "")
-            {
-              $("#editCustomer #fromAjax").html('<img id="editViewSignature" style="width: auto; padding: 40px; padding-bottom: 30px; max-height: 320px; margin: 0 auto;"/>');
-              $("#editCustomer #editViewSignature").attr("src", data.signature_image);
-            }
-            
-
-            $.ajax({
-                data : { id : id },
-                dataType : 'json',
-                type: 'post',
-                url : 'get_ailment_items',
-                success : function(data)
-                {
-                  for(var i = 0; i < data.length; i++)
-                  {
-                    var row = {
-                      ailment:data[i].ailment,
-                    };
-                    $("#gridsaveEdit").swidget().addRow(row);
-                    $("#gridsaveEdit").swidget().saveChanges();
-                  }
-                },
-                error : function(jqXHR, textStatus, errorThrown) {
-                  console.log(jqXHR);
-                  console.log(textStatus);
-                  console.log(errorThrown);
-                }
-              });
+            $('#editProduct').modal('show');
+            $('#editProduct').attr('data-customer-id', id);
+            $('#editProduct #txtItemCode').val(data.item_code);
+            $('#editProduct #txtDescription').val(data.description);
+            $('#editProduct #txtBrand').val(data.brand);
+            $('#editProduct #txtDimension').val(data.dimension);
+            $('#editProduct #selUom').val(data.unit_id);
+            $('#editProduct #selCategory').val(data.category_id);
+            $('#editProduct #txtIDEdit').val(id);
+            $('#editProduct #txtCost').val(data.cost);
+            $('#editProduct #txtPrice').val(data.selling_price);
+            $('#editProduct #viewImage').append('<img height = 200px width = 200px src="'+  base_url + data.image_path + '" alt="something" />');
 
           },
-          error : function(jqXHR, textStatus, errorThrown) {
+          error : function(jqXHR, textStatus, errorThrown) 
+          {
             // Log the status
             console.error(textStatus);
             // Log the error response object
@@ -270,41 +235,57 @@ $(document).ready(
       function(e) {
         e.preventDefault();
         // Prepare user object
-        var customer = {
-          email : $('#editCustomer #txtEmail').val(),
-          first_name : $('#editCustomer #txtFirstName').val(),
-          last_name : $('#editCustomer #txtLastName').val(),
-          address : $('#editCustomer #txtAddress').val(),
-          birthdate : $('#editCustomer #txtBirthdate').val(),
+        var file_data = $('#editProduct #txtProductImage')[0];   
+        var id = $('#editProduct').attr('data-customer-id');
+        // var form_data = new FormData();                  
+        // form_data.append('file', file_data);
 
-          lash_length:$('#editCustomer #lash_length option:selected').val(),
-          lash_thickness:$('#editCustomer #lash_thickness option:selected').val(),
-          lash_color: $('#editCustomer #lash_color option:selected').val(),
-          tint_applied: $("#editCustomer input[name='tint_applied']:checked").val(),
-          tint_date_applied: $('#editCustomer #tint_date_applied').val(),
-          signature_image: $sigdivedit.jSignature('isModified') ? $sigdivedit.jSignature('getData', 'image/jsignature;base30') : '',
-          ailment_more_details: $('#editCustomer #more_details').val(),
-          ailment : $("#gridsaveEdit").swidget().dataSource.data,
+        var form = $('#editProductForm')[0];
+        var data = new FormData(form);
+        var id = $('#editProduct').attr('data-customer-id');
+        form.append('id', id);
+
+        var customer = {
+          item_code : $('#editProduct #txtItemCode').val(),
+          description : $('#editProduct #txtDescription').val(),
+          brand : $('#editProduct #txtBrand').val(),
+          dimension : $('#editProduct #txtDimension').val(),
+          csrf_token_name : $('#editProduct input[name="csrf_token_name"]').val(),
+          uom_id : $('#editProduct #selUom').val(),
+          category_id:$('#editProduct #selCategory option:selected').val(),
+          product_image: file_data,
+          cost : $('#editProduct #txtCost').val(),
+          selling_price : $('#editProduct #txtSellingPrice').val(),
+          csrf_token_name : $('#editProduct input[name="csrf_token_name"]').val(),
         };
-        var id = $('#editCustomer').attr('data-customer-id');
+
+        
 
         $.ajax({
-          url : 'edit_customer',
+          url : 'edit_product',
           dataType : 'json',
+          enctype: 'multipart/form-data',
           type : 'post',
-          data : {
-            csrf_token_name :
-              $('#editCustomer input[name="csrf_token_name"]').val(),
-            customer : customer,
-            id : id
-          },
+          processData: false,  // Important!
+          contentType: false,
+          cache: false,  
+          data : data,
           success : function(data, textStatus, jqXHR)
           {
-            //Check server data after update
-            if(data)
+            console.log(data);
+            if(data.error == 1)
+            {
+              alert(data.errors);
+            }
+            else
             {
               window.location.reload();
             }
+            //Check server data after update
+            // if(data)
+            // {
+            //   window.location.reload();
+            // }
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status
@@ -458,7 +439,7 @@ window.onload = function() {
   });
 
   var gridsaveEdit =  initGridSaveEdit($("#gridsaveEdit"));
-  $('#editCustomer').on('hidden.bs.modal', function () {
+  $('#editProduct').on('hidden.bs.modal', function () {
       gridsaveEdit.swidget().destroy();
       gridsaveEdit =  initGridSaveEdit($("#gridsaveEdit"));
   });

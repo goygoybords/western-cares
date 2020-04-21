@@ -26,10 +26,11 @@ class Products extends CI_Model {
     return $this->db->insert_id();
   }
 
- //  public function update($id, $user) {
- //    $this->db->where(Customers::_ID, $id);
- //    return $this->db->update(Customers::_TABLE_NAME, $user);
- //  }
+  public function update($id, $user) 
+  {
+    $this->db->where(Products::_PRODUCT_ID, $id);
+    return $this->db->update(Products::_TABLE_NAME, $user);
+  }
 
   public function remove($id) 
   {
@@ -87,11 +88,7 @@ class Products extends CI_Model {
     return $query->result_array();
   }
 
-  public function update($id, $productInfo) 
-  {
-    $this->db->where(Products::_PRODUCT_ID, $id);
-    return $this->db->update(Products::_TABLE_NAME, $productInfo);
-  }
+
 
 
  //  public function base30_to_jpeg($base30_string, $output_file, $location, $height, $width) {

@@ -106,13 +106,13 @@
                   <div class="col-md-6">
                     <div class="form-group">
                           <label for="txtPrice">Cost</label>
-                          <input type="text" class = "form-control" name="txtCost" id = "txtCost" required="">
+                          <input type="text" placeholder="Cost" class = "form-control" name="txtCost" id = "txtCost" required="">
                         </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                           <label for="txtPrice">Selling Price</label>
-                          <input type="text" class = "form-control" id="txtPrice" name="txtPrice" />
+                          <input type="text"  placeholder="Selling Price" class = "form-control" id="txtPrice" name="txtPrice" />
                         </div>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
         <!-- end of add Modal -->
 
         <!-- edit Modal-->
-        <div class="modal modal-fullscreen fade" id="editCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+        <div class="modal modal-fullscreen fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
          data-keyboard="false">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -149,22 +149,22 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
                 <h4 class="modal-title">Edit Customer Information</h4>
               </div>
-              <?php echo form_open('edit_customer', array('id' => 'editCustomerForm')); ?>
+              <?php echo form_open('edit_product', array('id' => 'editProductForm')); ?>
               <div class="modal-body" style="padding: 25px;">
                 <div class = "row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="txtFirstName">First Name</label>
-                          <input type="text" name="txtFirstName" id="txtFirstName"
-                            placeholder="First Name" class="form-control" />
+                      <label for="txtItemCode">Item Code</label>
+                          <input type="text" name="txtItemCode" id="txtItemCode"
+                            placeholder="Item Code" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="form-group">
-                          <label for="txtLastName">Last Name</label>
-                          <input type="text" name="txtLastName" id="txtLastName"
-                            placeholder="Last Name" class="form-control" />
+                          <label for="txtDescription">Description</label>
+                          <input type="text" name="txtDescription" id="txtDescription"
+                            placeholder="Description" class="form-control" />
                         </div>
                     </div>
                   </div>
@@ -172,145 +172,65 @@
                 <div class = "row">
                   <div class="col-md-6">
                     <div class="form-group">
-                          <label for="txtAddress">Address</label>
-                          <input type="text" name="txtAddress" id="txtAddress"
-                            placeholder="Address" class="form-control" />
-                        </div>
+                          <label for="txtBrand">Brand</label>
+                          <input type="text" name="txtBrand" id="txtBrand"
+                            placeholder="Brand" class="form-control" />
+                        </div> 
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                          <label for="txtEmail">Email</label>
-                          <input type="email" name="txtEmail" id="txtEmail"
-                            placeholder="Email" class="form-control" />
+                          <label for="txtDimension">Dimension</label>
+                          <input type="text" name="txtDimension" id="txtDimension"
+                            placeholder="Dimension" class="form-control" />
                         </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                          <label for="txtBirthdate">Birthdate</label>
-                          <input type="date" name="txtBirthdate" id="txtBirthdate"
-                            placeholder="txtBirthdate" class="form-control" />
-                        </div>
-                  </div>
-                </div>
-                <br>
-                  <h4>Lash/Brows Information</h4>
-                  <hr />
                 <div class="row">
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="txtLashLength">Lash Length</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_length" >
-                          <option value="short">Short</option>
-                          <option value="medium">Medium</option>
-                          <option value="long">Long</option>
-                        </select>
-                    </div>
+                          <label for="txtBirthdate">Unit of Measure</label>
+                          <select name="selUom" id = "selUom" class="form-control">
+                              <?php foreach($uom as $c): ?>
+                                <option value="<?php echo $c['id']; ?>"><?php echo $c['description']; ?></option>
+                              <?php endforeach; ?>
+                            </select>
+                          </select>
+                        </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="txtLashThickness">Lash Thickness</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_thickness" >
-                          <option value="thin">Thin</option>
-                          <option value="average">Average</option>
-                          <option value="thick">Thick</option>
-                        </select>
-                    </div>
+                          <label for="txtCategory">Category</label>
+                          <select name="selCategory" id = "selCategory" class="form-control">
+                            <?php foreach($categories as $c): ?>
+                              <option value="<?php echo $c['category_id']; ?>"><?php echo $c['description']; ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label for="txtLashColor">Lash Color</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_color">
-                          <option value="blonde">blonde</option>
-                          <option value="brown">brown</option>
-                          <option value="red">red</option>
-                          <option value="black">black</option>
-                        </select>
+                          <label for="txtProductImage">File Upload</label>
+                          <input type="file" id="txtProductImage" name="txtProductImage" accept="image/*" />
                         </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                        <label for="txtTintApplied">Tint Applied</label><br>
-                          <input class="mr-2" class="form-control" type="radio" value="Y" id = "tint_applied" name="tint_applied"> Y
-                          <input class="mr-2" class="form-control" type="radio" value="N" id = "tint_applied" name="tint_applied"> N
-                      </div>
+                          <label for="txtPrice">Cost</label>
+                          <input type="text" placeholder="Cost" class = "form-control" name="txtCost" id = "txtCost" required="">
+                        </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="txtDateTintApplied">Tint Applied</label>
-                      <input type="date" id = "tint_date_applied" class="form-control form-control-sm mb-0" >
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                          <label for="txtMoreDetails">More Details</label>
-                          <input type="text" name="more_details" id="more_details"
-                            placeholder="Ailemnt More Details" class="form-control" />
+                          <label for="txtPrice">Selling Price</label>
+                          <input type="hidden" name="txtIDEdit" id = "txtIDEdit">
+                          <input type="text" placeholder="Selling Price" class = "form-control" id="txtPrice" name="txtPrice" />
                         </div>
                   </div>
                 </div>
-                <br>
-                  <h4 style="padding-bottom:8px"> Medical Information</h4>
-                  <hr />
-                <div id="tank">
-                  <div class = "row">
-                    <div class="col-md-4">
-                      <span><h5> * Please select the ailment and press the add entry button to fill up the table </h5> </span>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="selAilments">Ailments</label>
-                        <select id="ailment_edit" name="ailment_edit" class="form-control">
-                          <option value="allergy">Allergy</option>
-                          <option value="allergy_to_latex">Allergy to latex</option>
-                          <option value="conjunctivitis">Conjunctivitis</option>
-                          <option value="cataract">Cataract</option>
-                          <option value="dry_eye_syndrome">Dry Eye Syndrome</option>
-                          <option value="trichotillomanie">Trichotillomanie</option>
-                          <option value="diabetic">Diabetic</option>
-                          <option value="glaucoma">Glaucoma</option>
-                          <option value="sensitive_eyes">Sensitive Eyes</option>
-                          <option value="retinopathy">Retinopathy</option>
-                          <option value="Alopecia">Alopecia</option>
-                          <option value="eczema">Eczema</option>
-                          <option value="contact_lens">Contact Lens</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <br>
-                      <button id="btnAddRowSaveEdit" type="button" class="btn btn-primary pull-left">
-                        <i class="fa fa-plus"></i> Add Entry
-                      </button>
-                    </div>
-                  </div>
-                  <br>
-
-                  <div class="row">
-                    <div class="panel-body text-center">
-                        <div id="gridsaveEdit"></div>
-                    </div>
-                  </div>
-                </div>
-
                 <div class="row">
-                  <div class="col-md-12">
-                    <h4>Customer's Signature</h4>
-                    <hr />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4 pull-left">
-                    <div id = "fromAjax">
-                      <div id="signatureparentedit">
-                        <div id="signatureedit"></div>
-                      </div>
-                    </div>
+                  <div id = "viewImage">
                   </div>
                 </div>
                 <br>

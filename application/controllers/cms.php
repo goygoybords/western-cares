@@ -712,43 +712,69 @@ class Cms extends CI_Controller {
 				} 
 			}
         }
+	}
 
+	public function edit_product()
+	{
+		$target_dir = "resources/img/";
+		$target_file = $target_dir . basename($_FILES["txtProductImage"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+		$id = $this->input->post('txtIDEdit');
 
-		
-		
-		// else 
-		// {
-		     
-		// }
-
-        // else 
-        // {
-  //       	$image = $this->upload->data('file_path');
-
-  //       	$data['item_code'] = $this->input->post('customer')['item_code'];
-  //       	$data['description'] = $this->input->post('customer')['description'];
-  //       	$data['dimension'] = $this->input->post('customer')['dimension'];
-  //       	$data['brand'] = $this->input->post('customer')['brand'];
-  //       	$data['category_id'] = $this->input->post('customer')['category_id'];
-  //       	$data['unit_id'] = $this->input->post('customer')['unit_id'];
-  //       	$data['cost'] = $this->input->post('customer')['cost'];
-  //       	$data['selling_price'] = $this->input->post('customer')['selling_price'];
-  //       	$data['current_quantity'] = 0;
-  //       	$data['removed'] = 0;
-  //       	$data['image_path'] = $this->upload->data('full_path') ;
+		$this->form_validation->set_rules('txtItemCode', 'Item Code', 'required');
+        $this->form_validation->set_rules('txtDescription', 'Description', 'required');
+        $this->form_validation->set_rules('txtDimension', 'Dimension', 'required');
+        $this->form_validation->set_rules('txtBrand', 'Brand', 'required');
+        $this->form_validation->set_rules('txtCost', 'Cost', 'required|numeric');
+        $this->form_validation->set_rules('txtPrice', 'Price', 'required|numeric');
+        
+		if ($this->form_validation->run() == FALSE)
+        { 
+        	  $data = ['errors' => validation_errors() , 'error' => 1];
+              echo json_encode($data);
+        }
+        else
+        {
+        	$data['item_code'] = $this->input->post('txtItemCode');
+        	$data['description'] = $this->input->post('txtDescription');
+        	$data['dimension'] = $this->input->post('txtDimension') ;
+        	$data['brand'] = $this->input->post('txtBrand');
+        	$data['category_id'] = $this->input->post('selCategory');
+        	$data['unit_id'] = $this->input->post('selUom');
+        	$data['cost'] = $this->input->post('txtCost');
+        	$data['selling_price'] = $this->input->post('txtPrice');
         	
-  //       	$this->products->add($data);
-        	//echo "okay";
-        //}
-          
-		// if($this->input->is_ajax_request())
-		// {
-		// 	
-		// }
-		// else
-		// {
-		// 	redirect('cms/customers', 'refresh');
-		// }
+
+        	if(!empty($_FILES['txtProductImage']['name']))
+        	{
+        		$result = $this->products->get($id);
+        		if (file_exists($result->image_path)) 
+				{
+					unlink($result->image_path);
+				}
+        	}
+        	
+			// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) 
+			// {
+			// 	$value['error'] = 1;
+			// 	$value['errors'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+			//     echo json_encode($value);
+			//     $uploadOk = 0;
+			//     exit;
+			// }
+
+			if($uploadOk == 1)
+			{
+				if (move_uploaded_file($_FILES["txtProductImage"]["tmp_name"], $target_file)) 
+				{
+					$data['image_path'] = $target_file;
+				} 
+			}
+        	$result = $this->products->update($id,$data);
+        	echo json_encode("success:updated");
+        }
 	}
 
 	public function get_product() 
