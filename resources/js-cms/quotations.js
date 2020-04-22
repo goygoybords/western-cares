@@ -218,25 +218,6 @@ window.operateEvents = {
 $(document).ready(
   function() {
 
-    // Signature Code for JS START
-    var tmpObject = {
-    color:"#f00",
-    lineWidth:5,
-    height: 200,
-    width:600,
-    'UndoButton':true
-    };
-    tmpObject["background-color"] = "#F6F6F6";
-
-    $sigdiv = $("#signatureparent").jSignature(tmpObject);
-    $sigdivedit = $("#signatureparentedit").jSignature(tmpObject);
-    // UPON Button submit, in order to get value of signature, use Code
-    var image_draw = $sigdiv.jSignature('isModified') ? $sigdiv.jSignature('getData', 'image/jsignature;base30') : '';
-         dataToBePassedAsAdd = image_draw;
-    var image_draw_edit = $sigdivedit.jSignature('isModified') ? $sigdivedit.jSignature('getData', 'image/jsignature;base30') : '';
-
-
-    // Signature Code for JS END
 
     // Add a new user -- AJAX Request
     $('#btnCreate').click(
@@ -244,36 +225,45 @@ $(document).ready(
         e.preventDefault();
         // Prepare user object
 
-        var customer = {
-          email : $('#addCustomer #txtEmail').val(),
-          first_name : $('#addCustomer #txtFirstName').val(),
-          last_name : $('#addCustomer #txtLastName').val(),
-          address : $('#addCustomer #txtAddress').val(),
-          csrf_token_name : $('#addCustomer input[name="csrf_token_name"]').val(),
-          signature_image: $sigdiv.jSignature('isModified') ? $sigdiv.jSignature('getData', 'image/jsignature;base30') : '',
-          birthdate : $('#addCustomer #txtBirthdate').val(),
+        var form = $('#addQuotationForm')[0];
+        var data = new FormData(form);
+        data.append("quoted_items", JSON.stringify($("#gridsave").swidget().dataSource.data) );
 
-          lash_length:$('#addCustomer #lash_length option:selected').val(),
-          lash_thickness:$('#addCustomer #lash_thickness option:selected').val(),
-          lash_color: $('#addCustomer #lash_color option:selected').val(),
-          tint_applied: $("#addCustomer input[name='tint_applied']:checked").val(),
-          tint_date_applied: $('#addCustomer #tint_date_applied').val(),
-          ailment_more_details: $('#addCustomer #more_details').val(),
-          ailment : $("#gridsave").swidget().dataSource.data,
-        };
+
+        // var customer = {
+        //   company_name : $('#addQuotation #txtCompanyName').val(),
+        //   address : $('#addQuotation #txtAddress').val(),
+        //   alternate_email : $('#addQuotation #txtEmail').val(),
+        //   attachment : $('#addQuotation #txtAttachment').val(), 
+        //   quoted_items : $("#gridsave").swidget().dataSource.data,
+        //   csrf_token_name : $('#addQuotation input[name="csrf_token_name"]').val(),
+        // };
 
         $.ajax({
-          url : 'add_customer',
-          dataType : 'json',
+          url : 'add_quotation',
+          //dataType : 'json',
+          enctype: 'multipart/form-data',
+          processData: false,  // Important!
+          contentType: false,
+          cache: false,  
           type : 'post',
-          data : { customer : customer },
+          data : data,
           success : function(data, textStatus, jqXHR)
           {
             //Check server data after insert
-            if(data == 'user_exists')
-              alert("User Exists");
+            console.log(data);
+            if(data.error === 1)
+            {
+              alert(data.errors);
+            }
             else
-              window.location.reload();
+            {
+              alert("okay");
+            }
+            // if(data == 'user_exists')
+            //   alert("User Exists");
+            // else
+            //   window.location.reload();
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status
@@ -374,17 +364,23 @@ $(document).ready(
     $('#btnAddRowSave').click(
         function(e)
         {
-          var item = $('#ailment').val();
+          var item = $('#selProducts').val();
             if($("#gridsave").swidget().dataSource.data.length!==0)
             {
-               var row ={ ailment: item };
+               var row ={ 
+                          ailment: item ,
+                          cost: 0,
+                        };
 
               $("#gridsave").swidget().addRow(row);
               $("#gridsave").swidget().saveChanges();
            }
            else
            {
-             var row ={ ailment: item };
+             var row ={ 
+                      ailment: item ,
+                          cost: 0, 
+                        };
              $("#gridsave").swidget().addRow(row);
              $("#gridsave").swidget().saveChanges();
            }
@@ -471,7 +467,7 @@ $(document).ready(
 // }
 window.onload = function() {
   var gridsave =  initGridSave($("#gridsave"));
-  $('#addCustomer').on('hidden.bs.modal', function () {
+  $('#addQuotation').on('hidden.bs.modal', function () {
       gridsave.swidget().destroy();
       gridsave =  initGridSave($("#gridsave"));
   });
@@ -503,17 +499,23 @@ function getFields()
 {
   return {
           ailment:{path:"ailment",type:String,},
+          cost: {path: "cost", type:String,}
         };
 }
 function getColumns()
 {
-  return [{field:"ailment",title:"Ailment"},
+  return [
+          {field:"ailment",title:"Ailment"},
+          {field:"cost",title:"Cost"},
           {title:"Action",buttons:[{cls:"btn btn-danger",commandName:"delete",caption:"<span class=''><i class='fa fa-trash'></i></span>"}]}];
 }
 
 function getColumnsView()
 {
-  return [{field:"ailment",title:"Ailment"}];
+  return [
+            {field:"ailment",title:"Ailment"},
+            {field:"cost",title:"Cost"}
+        ];
 }
 
 function initGridSave(x){

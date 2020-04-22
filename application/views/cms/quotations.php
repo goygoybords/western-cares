@@ -29,146 +29,65 @@
     <?php $this->load->view('cms/include/header'); ?>
 
     <!-- Add Customer Modal -->
-      <div class="modal modal-fullscreen fade" id="addCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+      <div class="modal modal-fullscreen fade" id="addQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
          data-keyboard="false">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header modal-add">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: black;">&times;</span></button>
-                <h4 class="modal-title">Create New Customer</h4>
+                <h4 class="modal-title">Create New Quotation</h4>
               </div>
-              <?php echo form_open('add_customer', array('id' => 'addCustomerForm')); ?>
+              <?php echo form_open('add_quotation', array('id' => 'addQuotationForm')); ?>
               <div class="modal-body" style="padding: 25px;">
-                <div class = "row">
+                <!-- <div class = "row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="txtFirstName">First Name</label>
-                          <input type="text" name="txtFirstName" id="txtFirstName"
-                            placeholder="First Name" class="form-control" />
+                      <label for="txtFirstName">Company Name</label>
+                          <input type="text" name="txtCompanyName" id="txtCompanyName"
+                            placeholder="Company Name" class="form-control" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="form-group">
-                          <label for="txtLastName">Last Name</label>
-                          <input type="text" name="txtLastName" id="txtLastName"
+                          <label for="txtAddress">Address</label>
+                          <input type="text" name="txtAddress" id="txtAddress"
                             placeholder="Last Name" class="form-control" />
                         </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class = "row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                          <label for="txtAddress">Address</label>
-                          <input type="text" name="txtAddress" id="txtAddress"
-                            placeholder="Address" class="form-control" />
-                        </div>
-                  </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <div class="form-group">
                           <label for="txtEmail">Email</label>
                           <input type="email" name="txtEmail" id="txtEmail"
                             placeholder="Email" class="form-control" />
                         </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                          <label for="txtBirthdate">Birthdate</label>
-                          <input type="date" name="txtBirthdate" id="txtBirthdate"
-                            placeholder="txtBirthdate" class="form-control" />
-                        </div>
-                  </div>
-                </div>
-                <br>
-                <h4 for="medicalInformation">Lash/Brows Information</h4>
-                <hr />
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashLength">Lash Length</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_length" >
-                          <option value="short">Short</option>
-                          <option value="medium">Medium</option>
-                          <option value="long">Long</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashThickness">Lash Thickness</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_thickness" >
-                          <option value="thin">Thin</option>
-                          <option value="average">Average</option>
-                          <option value="thick">Thick</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashColor">Lash Color</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_color">
-                          <option value="blonde">blonde</option>
-                          <option value="brown">brown</option>
-                          <option value="red">red</option>
-                          <option value="black">black</option>
-                        </select>
-                        </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="txtTintApplied">Tint Applied</label>
-                        <br>
-                          <input class="mr-2" class="form-control" type="radio" value="Y" id = "tint_applied" name="tint_applied"> Y
-                          <input class="mr-2" class="form-control" type="radio" value="N" id = "tint_applied" name="tint_applied"> N
+                  </div> -->
+                  <div class="col-md-12">
+                   <div class="form-group">
+                          <label for="txtBirthdate">Attachments</label>
+                          <input type='file' name="txtAttachment[]" id="txtAttachment" class="form-control txtAttachment"  multiple accept = "application/msword, application/vnd.ms-excel, application/pdf, image/*">
                       </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="txtDateTintApplied">Tint Applied</label>
-                      <input type="date" id = "tint_date_applied" class="form-control form-control-sm mb-0" >
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                          <label for="txtMoreDetails">More Details</label>
-                          <input type="text" name="more_details" id="more_details"
-                            placeholder="Ailemnt More Details" class="form-control" />
-                        </div>
-                  </div>
                 </div>
                 <br>
-                  <h4 style="padding-bottom:8px"> Medical Information </h4>
+                  <h4 style="padding-bottom:8px"> Product Information </h4>
                   <hr />
                 <br>
                 <div id="tank">
                   <div class = "row">
                     <div class="col-md-4">
-                      <span><h5> * Please select the ailment and press the add entry button to fill up the table </h5> </span>
+                      <span><h5> * Please select the item </h5> </span>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <label for="selAilments">Ailments</label>
-                        <select id="ailment" name="ailment" class="form-control">
-                          <option value="allergy">Allergy</option>
-                          <option value="allergy_to_latex">Allergy to latex</option>
-                          <option value="conjunctivitis">Conjunctivitis</option>
-                          <option value="cataract">Cataract</option>
-                          <option value="dry_eye_syndrome">Dry Eye Syndrome</option>
-                          <option value="trichotillomanie">Trichotillomanie</option>
-                          <option value="diabetic">Diabetic</option>
-                          <option value="glaucoma">Glaucoma</option>
-                          <option value="sensitive_eyes">Sensitive Eyes</option>
-                          <option value="retinopathy">Retinopathy</option>
-                          <option value="Alopecia">Alopecia</option>
-                          <option value="eczema">Eczema</option>
-                          <option value="contact_lens">Contact Lens</option>
+                        <select id="selProducts" name="selProducts" class="form-control">
+                            <?php foreach ($products as $p): ?>
+                                <option value="<?php echo $p['item_code'];?>"><?php echo $p['item_code']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                       </div>
                     </div>
@@ -184,19 +103,6 @@
                     <div class="panel-body text-center">
                         <div id="gridsave"></div>
                     </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h4>Customer's Signature</h4>
-                    <hr />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4 pull-left">
-                    <div id="signatureparent">
-                        <div id="signature"></div>
-                      </div>
                   </div>
                 </div>
                 <br>
@@ -258,70 +164,9 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                          <label for="txtBirthdate">Birthdate</label>
-                          <input type="date" name="txtBirthdate" id="txtBirthdate"
-                            placeholder="txtBirthdate" class="form-control" />
-                        </div>
-                  </div>
-                </div>
-                <br>
-                  <h4>Lash/Brows Information</h4>
-                  <hr />
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashLength">Lash Length</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_length" >
-                          <option value="short">Short</option>
-                          <option value="medium">Medium</option>
-                          <option value="long">Long</option>
-                        </select>
+                        <label for="txtBirthdate">Attachments</label>
+                        <input type='file' name="txtAttachment[]" id="txtAttachment" class="form-control txtAttachment"  multiple accept = "application/msword, application/vnd.ms-excel, application/pdf, image/*"> 
                     </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashThickness">Lash Thickness</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_thickness" >
-                          <option value="thin">Thin</option>
-                          <option value="average">Average</option>
-                          <option value="thick">Thick</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashColor">Lash Color</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_color">
-                          <option value="blonde">blonde</option>
-                          <option value="brown">brown</option>
-                          <option value="red">red</option>
-                          <option value="black">black</option>
-                        </select>
-                        </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="txtTintApplied">Tint Applied</label><br>
-                          <input class="mr-2" class="form-control" type="radio" value="Y" id = "tint_applied" name="tint_applied"> Y
-                          <input class="mr-2" class="form-control" type="radio" value="N" id = "tint_applied" name="tint_applied"> N
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="txtDateTintApplied">Tint Applied</label>
-                      <input type="date" id = "tint_date_applied" class="form-control form-control-sm mb-0" >
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                          <label for="txtMoreDetails">More Details</label>
-                          <input type="text" name="more_details" id="more_details"
-                            placeholder="Ailemnt More Details" class="form-control" />
-                        </div>
                   </div>
                 </div>
                 <br>
@@ -449,80 +294,6 @@
                         </div>
                   </div>
                 </div>
-                <br>
-                  <h4>Lash/Brows Information</h4>
-                  <hr />
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashLength">Lash Length</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_length" >
-                          <option value="short">Short</option>
-                          <option value="medium">Medium</option>
-                          <option value="long">Long</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashThickness">Lash Thickness</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_thickness" >
-                          <option value="thin">Thin</option>
-                          <option value="average">Average</option>
-                          <option value="thick">Thick</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label for="txtLashColor">Lash Color</label>
-                        <select class="form-control form-control-sm mb-0" id="lash_color">
-                          <option value="blonde">blonde</option>
-                          <option value="brown">brown</option>
-                          <option value="red">red</option>
-                          <option value="black">black</option>
-                        </select>
-                        </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="txtTintApplied">Tint Applied</label><br>
-                          <input class="mr-2" class="form-control" type="radio" value="Y" id = "tint_applied" name="tint_applied"> Y
-                          <input class="mr-2" class="form-control" type="radio" value="N" id = "tint_applied" name="tint_applied"> N
-                      </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="txtDateTintApplied">Tint Applied</label>
-                      <input type="date" id = "tint_date_applied" class="form-control form-control-sm mb-0" >
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                          <label for="txtMoreDetails">More Details</label>
-                          <input type="text" name="more_details" id="more_details"
-                            placeholder="Ailemnt More Details" class="form-control" />
-                        </div>
-                  </div>
-                </div>
-                <br>
-                  <h4 style="padding-bottom:8px"> Medical Information: </h4>
-                  <hr />
-                  <div class="row">
-                    <div class="panel-body text-center">
-                        <div id="gridsaveView"></div>
-                    </div>
-                  </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h4>Customer's Signature</h4>
-                    <hr />
-                  </div>
-                </div>
                 <div class="row">
                   <div class="col-md-4 pull-left">
                     <img id="test" style="width: auto; padding: 40px; padding-bottom: 30px; max-height: 320px; margin: 0 auto;"/>
@@ -568,7 +339,7 @@
           <div class="panel panel-default">
             <div class="users-control">
               <a class="btn btn-success" href="#"
-                data-toggle="modal" data-target="#addCustomer">
+                data-toggle="modal" data-target="#addQuotation">
                 <i class="fa fa-user-plus"></i>
                 Add Quotation
               </a>

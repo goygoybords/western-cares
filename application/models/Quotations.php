@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Products extends CI_Model {
-  const _TABLE_NAME = 'products';
-  const _PRODUCT_ID = 'product_id';
+class Quotations extends CI_Model 
+{
+  const _TABLE_NAME = 'quotations';
+  const _PRODUCT_ID = 'quotation_id';
   const _ITEM_CODE = 'item_code';
   const _DESCRIPTION = 'description';
   const _DIMENSION = 'dimension';
@@ -22,10 +23,22 @@ class Products extends CI_Model {
 
   public function add($productInfo) 
   {
-    $this->db->insert(Products::_TABLE_NAME, $productInfo);
+    $this->db->insert(Quotations::_TABLE_NAME, $productInfo);
     return $this->db->insert_id();
   }
-  
+
+  public function add_attachment($productInfo) 
+  {
+    $this->db->insert('attachments', $productInfo);
+    return $this->db->insert_id();
+  }
+
+  public function add_quotation_detail($productInfo) 
+  {
+    $this->db->insert('quotation_detail', $productInfo);
+    return $this->db->insert_id();
+  }
+
   public function update($id, $user) 
   {
     $this->db->where(Products::_PRODUCT_ID, $id);
@@ -71,21 +84,6 @@ class Products extends CI_Model {
     $test = $query->row();
     return $test;
   }
-
-
-  public function get_by_name($name) 
-  {
-    $this->db->select("p.*, u.description as uom, pc.description as category");
-    $this->db->from("products p");
-    $this->db->join('product_uom u','p.unit_id = u.id');
-    $this->db->join('product_categories pc','p.category_id = pc.category_id');
-    $this->db->where("p.removed", FALSE);
-    $this->db->where("p.item_code", $name);
-    $query = $this->db->get();
-    $test = $query->row();
-    return $test;
-  }
-
 
   public function get_all_categories() 
   {

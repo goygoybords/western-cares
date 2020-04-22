@@ -11,6 +11,8 @@ class Cms extends CI_Controller {
 		$this->load->model('logs');
 		$this->load->model('pages');
 		$this->load->model('page_sections');
+		$this->load->model('quotations');
+
 	
 		//$this->load->library('jSignature_Tools_Base30');
 		
@@ -288,8 +290,80 @@ class Cms extends CI_Controller {
 			redirect('cms/login', 'refresh');
 		}
 
+		$data['products'] = $this->products->get_all();
 		$data['username'] = $this->session->userdata('username');
 		$this->load->view('cms/quotations', $data);
+	}
+
+	public function add_quotation()
+	{
+
+		$target_dir = "resources/uploads/";
+		$uploadOk = 1;
+		$countfiles = count($_FILES['txtAttachment']['name']);
+		$quoted_items = json_decode($_POST['quoted_items'], true);
+
+		if ($countfiles == 0)
+        { 
+        	 $data['error'] = 1;
+			 $data['errors'] = "Please upload a file.";
+             echo json_encode($data);
+        }
+        else
+        {
+        	$qutoation['user_id'] = $this->session->userdata('userID');
+			$qutoation['status'] = 1;
+			$quote_id = $this->quotations->add($qutoation);
+
+			foreach ($quoted_items as $s ) 
+			{
+				$product_id = $this->products->get_by_name($s['ailment']);
+				$quotation_detail['quotation_id'] = $quote_id;
+				$quotation_detail['product_id'] = $product_id->product_id;
+				$quotation_detail['quoted_cost'] = $s['cost'];
+				$quotation_detail['status'] = 1;
+				$this->quotations->add_quotation_detail($quotation_detail);
+			}
+
+		    for($i=0; $i < $countfiles; $i++)
+		    {
+		    	$target_file = $target_dir . basename($_FILES["txtAttachment"]["name"][$i]);
+		    	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		    	
+	       		if (file_exists($target_file)) 
+				{
+					$data['error'] = 1;
+					$data['errors'] = "Sorry, file already exists.";
+					$uploadOk = 0;
+					echo json_encode($data);
+				}
+
+				if($uploadOk == 1)
+				{
+					if (move_uploaded_file($_FILES["txtAttachment"]["tmp_name"][$i], $target_file)) 
+					{
+						$attachment['quotation_id'] = $quote_id;
+						$attachment['image_path'] = $target_file;
+						$this->quotations->add_attachment($attachment);
+					} 
+				}		 
+		      }
+		      echo "okay";
+        }
+
+		
+		// $salesItemsRecord = $this->input->post('salesItems');
+		// 		if(!empty($salesItemsRecord))
+		// 		{
+		// 			for ($i = 0; $i < count($salesItemsRecord); $i++) 
+		// 			{
+		// 				$salesItemsInfo[Transaction_Items_table::_TRANSACTION_ID] = $resultSalesInfo;
+		// 				$salesItemsInfo[Transaction_Items_table::_LOADED_ITEM] = $salesItemsRecord[$i]['item_name'];
+		// 				$salesItemsInfo[Transaction_Items_table::_QUANTITY] = $salesItemsRecord[$i]['quantity'];
+		// 				$salesItemsInfo[Transaction_Items_table::_LOADED_UOM] = $salesItemsRecord[$i]['uom'];
+		// 				$resultSalesItemsInfo = $this->sales_model->add_sales_items($salesItemsInfo);
+		//  			}
+	 // 			}
 	}
 
 	public function services() {
