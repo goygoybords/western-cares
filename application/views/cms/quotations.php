@@ -308,7 +308,7 @@
           </div> <!-- modal-dialog-wide CLOSE -->
         </div> <!-- modal CLOSE -->
         <!-- end of view -->
-        <div class="modal fade" id="removeCustomer" tabindex="-1" role="dialog"aria-labelledby="myModalLabel">
+        <div class="modal fade" id="removeQuotation" tabindex="-1" role="dialog"aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header modal-remove">
@@ -316,10 +316,10 @@
                   aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h3 class="modal-title">Remove Customer</h3>
+                <h3 class="modal-title">Remove Quotation</h3>
               </div>
               <div class="modal-body">
-                <p id="customerToRemove">Are you sure you want to remove selected customer?</p>
+                <p id="customerToRemove">Are you sure you want to remove selected quotation?</p>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default"
@@ -335,7 +335,11 @@
           </div>
         </div>
         <section id="adminContent" class="col-md-offset-2 col-md-10">
-          <h1>Quotations</h1>
+          <?php if($this->session->userdata('role') == "Administrator"): ?>
+            <h1> Quotations</h1>
+          <?php else: ?>
+            <h1>My Quotations</h1>
+          <?php endif; ?>
           <div class="panel panel-default">
             <div class="users-control">
               <a class="btn btn-success" href="#"
@@ -354,17 +358,15 @@
               </form> -->
             </div>
             <input type="hidden" name="base_url" id="base_url" value="<?php echo base_url(); ?>">
-            <table id="tblCustomers" class="table table-condensed table-striped table-hover"
+            <table id="tblQuotations" class="table table-condensed table-striped table-hover"
             data-toolbar="#toolbar" data-search="true" data-minimum-count-columns="2" data-pagination="true"
-       data-id-field="id" data-page-list="[5, 10, 25, 50, 100, ALL]" data-show-footer="false">
+       data-id-field="quotation_id" data-page-list="[5, 10, 25, 50, 100, ALL]" data-show-footer="false">
               <thead>
                 <tr>
-                  <th data-field="id">ID</th>
-                  <th data-field="first_name">Name</th>
+                  <th data-field="quotation_id">#</th>
+                  <th data-field="supplier">Company Name</th>
                   <th data-field="address">Address</th>
                   <th data-field="email">Email</th>
-                  <th data-field="birthdate">Birthdate</th>
-                  <th data-field="signature_image" data-formatter="signatureFormatter">Signed</th>
                   <th data-field="action" data-formatter="actionFormatter" data-events="operateEvents">Actions</th>
                 </tr>
               </thead>

@@ -39,6 +39,17 @@ class Quotations extends CI_Model
     return $this->db->insert_id();
   }
 
+  public function get_quotations_by_supplier($id) 
+  {
+    $this->db->select("q.*, u.company_name as supplier, u.email, u.address");
+    $this->db->from("quotations q");
+    $this->db->join('users u','u.id = q.user_id');
+    $this->db->where("q.user_id", $id);
+    $this->db->where("q.status", 1);
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function update($id, $user) 
   {
     $this->db->where(Products::_PRODUCT_ID, $id);
@@ -47,9 +58,9 @@ class Quotations extends CI_Model
 
   public function remove($id) 
   {
-    $this->db->set(Products::_REMOVED, 1);
-    $this->db->where(Products::_PRODUCT_ID, $id);
-    return $this->db->update(Products::_TABLE_NAME);
+    $this->db->set('status', 0);
+    $this->db->where('quotation_id', $id);
+    return $this->db->update('quotations');
   }
 
   public function get_all() 
@@ -74,12 +85,9 @@ class Quotations extends CI_Model
 
   public function get($id) 
   {
-    $this->db->select("p.*, u.description as uom, pc.description as category");
-    $this->db->from("products p");
-    $this->db->join('product_uom u','p.unit_id = u.id');
-    $this->db->join('product_categories pc','p.category_id = pc.category_id');
-    $this->db->where("p.removed", FALSE);
-    $this->db->where("p.product_id", $id);
+    $this->db->select("*");
+    $this->db->from("quotations");
+    $this->db->where("quotation_id", $id);
     $query = $this->db->get();
     $test = $query->row();
     return $test;

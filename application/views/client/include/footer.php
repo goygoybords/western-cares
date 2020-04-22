@@ -125,7 +125,6 @@
           cleave_edit.setPhoneRegionCode(this.value);
           cleave_edit.setRawValue('');
         });
-  
       });
 
         

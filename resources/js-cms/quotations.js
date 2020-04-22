@@ -2,12 +2,12 @@ initTable();
 function initTable()
 {
 
-  var $table = $('#tblCustomers');
+  var $table = $('#tblQuotations');
 
   $table.bootstrapTable({
     pagination: true,
     search: true,
-    url: 'all_customers'
+    url: 'all_quotations_by_supplier'
   });
 }
 
@@ -19,11 +19,11 @@ function actionFormatter(value, row, index)
         <a class="btn btn-info btn-view">\
           <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
         </a>\
-        <a class="btn btn-warning btn-edit">\
-          <i class="fa fa-edit"></i><span class="hidden-sm hidden-xs"> Edit</span>\
-        </a>\
         <a class="btn btn-danger btn-delete">\
           <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
+        </a>\
+        <a class="btn btn-primary btn-post">\
+          <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Post</span>\
         </a>\
       </div>'
     ].join("");
@@ -44,9 +44,9 @@ window.operateEvents = {
     'click .btn-view': function (e, value, row)
       {
         e.preventDefault();
-        var id = row.id;
+        var id = row.quotation_id;
         $.ajax({
-          url : 'get_customer',
+          url : 'get_quotation',
           dataType : 'json',
           type : 'post',
           data : { id : id },
@@ -111,21 +111,22 @@ window.operateEvents = {
       'click .btn-delete': function (e, value, row)
       {
         e.preventDefault();
-        var id = row.id;
+        var id = row.quotation_id;
 
         $.ajax({
-          url : 'get_customer',
+          url : 'get_quotation',
           dataType : 'json',
           type : 'post',
           data : {
             csrf_token_name :
-              $('#removeCustomer input[name="csrf_token_name"]').val(),
+              $('#removeQuotation input[name="csrf_token_name"]').val(),
             id : id
           },
-          success : function(data, textStatus, jqXHR) {
-            $('#removeCustomer').modal('show');
-            $('#removeCustomer').attr('data-customer-id', id);
-            $('#customerToRemove').html('Are you sure you want to remove ' + data.first_name + " " + data.last_name + "?");
+          success : function(data, textStatus, jqXHR) 
+          {
+            $('#removeQuotation').modal('show');
+            $('#removeQuotation').attr('data-customer-id', id);
+            $('#customerToRemove').html('Are you sure you want to remove the selected quotation?');
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status
@@ -241,7 +242,7 @@ $(document).ready(
 
         $.ajax({
           url : 'add_quotation',
-          //dataType : 'json',
+          dataType : 'json',
           enctype: 'multipart/form-data',
           processData: false,  // Important!
           contentType: false,
@@ -251,14 +252,13 @@ $(document).ready(
           success : function(data, textStatus, jqXHR)
           {
             //Check server data after insert
-            console.log(data);
             if(data.error === 1)
             {
               alert(data.errors);
             }
             else
             {
-              alert("okay");
+               window.location.reload();
             }
             // if(data == 'user_exists')
             //   alert("User Exists");
@@ -332,15 +332,16 @@ $(document).ready(
     $('#btnRemove').click(
       function(e) {
         e.preventDefault();
-        var id = $('#removeCustomer').attr('data-customer-id');
+        var id = $('#removeQuotation').attr('data-customer-id');
 
+        alert(id);
         $.ajax({
-          url : 'remove_customer',
+          url : 'remove_quotation',
           dataType : 'json',
           type : 'post',
           data : {
             csrf_token_name :
-              $('#removeCustomer input[name="csrf_token_name"]').val(),
+              $('#removeQuotation input[name="csrf_token_name"]').val(),
             id : id
           },
           success : function(data, textStatus, jqXHR) {

@@ -272,6 +272,7 @@ $(document).ready(
       function(e) 
       {
         e.preventDefault();
+
         var id = $(this).attr('data-product-id');
         var base_url = $("#base_url").val();
         $.ajax({
@@ -284,6 +285,7 @@ $(document).ready(
             //Populate the users table
             $("#modal-item-info").modal('show');
             $('#modal-item-info').attr('data-customer-id', id);
+            $('#specific_image').empty();
             $('#specific_image').append('<img style = "width:100%" src="'+  base_url+data.image_path + '" alt="" />');
             $("#specific_item_code").html(data.item_code);
             $('#specific_moadl_selling_price').html(data.selling_price);

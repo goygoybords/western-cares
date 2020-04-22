@@ -96,7 +96,7 @@
         <div class="row">
           <?php foreach($surgical_mask_items as $s): ?>
             <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-              <a href="#" class = "viewItemModal" data-toggle="modal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
+              <a href="#" class = "viewItemModal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
                 <div class="section_item d-flex">
                   <div>
                     <div class="section_item_img">
