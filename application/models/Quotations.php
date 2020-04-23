@@ -45,7 +45,7 @@ class Quotations extends CI_Model
     $this->db->from("quotations q");
     $this->db->join('users u','u.id = q.user_id');
     $this->db->where("q.user_id", $id);
-    $this->db->where("q.status", 1);
+    $this->db->where_in("q.status", array('UNPOSTED', 'POSTED', 'APPROVED'));
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -85,13 +85,36 @@ class Quotations extends CI_Model
 
   public function get($id) 
   {
-    $this->db->select("*");
-    $this->db->from("quotations");
-    $this->db->where("quotation_id", $id);
+    $this->db->select("q.*, u.*,");
+    $this->db->from("quotations q");
+    $this->db->join('users u','q.user_id = u.id');
+    $this->db->where("q.quotation_id", $id);
     $query = $this->db->get();
     $test = $query->row();
     return $test;
   }
+
+  public function get_detail($id) 
+  {
+    $this->db->select("q.quoted_cost, p.item_code");
+    $this->db->from("quotation_detail q");
+    $this->db->join('products p','p.product_id = q.quotation_id');
+    $this->db->where("q.quotation_id", $id);
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  public function get_attachments($id)
+  {
+    $this->db->select("a.image_path");
+    $this->db->from("attachments a");
+    $this->db->join('quotations q','q.quotation_id = a.quotation_id');
+    $this->db->where("q.quotation_id", $id);
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
+  
 
   public function get_all_categories() 
   {

@@ -39,32 +39,7 @@
               </div>
               <?php echo form_open('add_quotation', array('id' => 'addQuotationForm')); ?>
               <div class="modal-body" style="padding: 25px;">
-                <!-- <div class = "row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="txtFirstName">Company Name</label>
-                          <input type="text" name="txtCompanyName" id="txtCompanyName"
-                            placeholder="Company Name" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <div class="form-group">
-                          <label for="txtAddress">Address</label>
-                          <input type="text" name="txtAddress" id="txtAddress"
-                            placeholder="Last Name" class="form-control" />
-                        </div>
-                    </div>
-                  </div>
-                </div> -->
                 <div class = "row">
-                  <!-- <div class="col-md-6">
-                    <div class="form-group">
-                          <label for="txtEmail">Email</label>
-                          <input type="email" name="txtEmail" id="txtEmail"
-                            placeholder="Email" class="form-control" />
-                        </div>
-                  </div> -->
                   <div class="col-md-12">
                    <div class="form-group">
                           <label for="txtBirthdate">Attachments</label>
@@ -240,7 +215,7 @@
         <!-- end of Edit -->
 
         <!-- edit Modal-->
-        <div class="modal modal-fullscreen fade" id="viewCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
+        <div class="modal modal-fullscreen fade" id="viewQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
          data-keyboard="false">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -250,21 +225,20 @@
               </div>
               <?php echo form_open('view_customer', array('id' => 'viewCustomerForm')); ?>
               <div class="modal-body" style="padding: 25px;">
-
                 <div class = "row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="txtFirstName">First Name</label>
-                          <input type="text" name="txtFirstName" id="txtFirstName"
-                            placeholder="First Name" class="form-control" />
+                      <label for="txtCompanyName">Company Name</label>
+                          <input type="text" name="txtCompanyName" id="txtCompanyName"
+                            placeholder="Company Name" class="form-control" disabled="" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <div class="form-group">
-                          <label for="txtLastName">Last Name</label>
-                          <input type="text" name="txtLastName" id="txtLastName"
-                            placeholder="Last Name" class="form-control" />
+                          <label for="txtAddress">Address</label>
+                          <input type="text" name="txtAddress" id="txtAddress"
+                            placeholder="Address" class="form-control" disabled="" />
                         </div>
                     </div>
                   </div>
@@ -272,26 +246,18 @@
                 <div class = "row">
                   <div class="col-md-6">
                     <div class="form-group">
-                          <label for="txtAddress">Address</label>
-                          <input type="text" name="txtAddress" id="txtAddress"
-                            placeholder="Address" class="form-control" />
-                        </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
                           <label for="txtEmail">Email</label>
                           <input type="email" name="txtEmail" id="txtEmail"
-                            placeholder="Email" class="form-control" />
+                            placeholder="Email" class="form-control" disabled="" />
                         </div>
                   </div>
-                </div>
-                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                          <label for="txtBirthdate">Birthdate</label>
-                          <input type="date" name="txtBirthdate" id="txtBirthdate"
-                            placeholder="txtBirthdate" class="form-control" />
-                        </div>
+                          <label for="txtAddress">Attachments</label>
+                          <ul id = "display_attachment">
+                            <li id = "display_attachment"></li>
+                          </ul>
+                    </div> 
                   </div>
                 </div>
                 <div class="row">
@@ -299,7 +265,20 @@
                     <img id="test" style="width: auto; padding: 40px; padding-bottom: 30px; max-height: 320px; margin: 0 auto;"/>
                   </div>
                 </div>
-
+                <div id="tank">
+                  <div class = "row">
+                    <div class="col-md-4">
+                      <span><h5> * Quoted Items </h5> </span>
+                    </div>
+                    <br>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="panel-body text-center">
+                        <div id="gridsaveView"></div>
+                    </div>
+                  </div>
+                </div>
                 <br>
                 </form>
                 <br><br><br>
@@ -367,6 +346,7 @@
                   <th data-field="supplier">Company Name</th>
                   <th data-field="address">Address</th>
                   <th data-field="email">Email</th>
+                  <th data-field="status">Status</th>
                   <th data-field="action" data-formatter="actionFormatter" data-events="operateEvents">Actions</th>
                 </tr>
               </thead>

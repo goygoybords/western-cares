@@ -52,42 +52,50 @@ window.operateEvents = {
           data : { id : id },
           success : function(data, textStatus, jqXHR) 
           {
-            //Populate the users table
-            $('#viewCustomer').modal('show');
-            $('#viewCustomer').attr('data-customer-id', id);
-            $('#viewCustomer #txtFirstName').val(data.first_name);
-            $('#viewCustomer #txtLastName').val(data.last_name);
-            $('#viewCustomer #txtAddress').val(data.address);
-            $('#viewCustomer #txtEmail').val(data.email);
-            $('#viewCustomer #txtBirthdate').val(data.birthdate);
-
-            $('#viewCustomer  #lash_length').val(data.lash_length);
-            $('#viewCustomer  #lash_thickness').val(data.lash_thickness);
-            $('#viewCustomer  #lash_color').val(data.lash_color);
-            if(data.tint_applied == 'Y')
-              $('#viewCustomer').find(':radio[name=tint_applied][value="Y"]').prop('checked', true);
-            else
-              $('#viewCustomer').find(':radio[name=tint_applied][value="N"]').prop('checked', true);
-
-            $('#viewCustomer #tint_date_applied').val(data.tint_date_applied);
-            $('#viewCustomer #more_details').val(data.ailment_more_details);
-
-            $("#viewCustomer #test").attr("src", data.signature_image);
-
+            $('#viewQuotation').modal('show');
+            $('#viewQuotation').attr('data-customer-id', id);
+            $('#viewQuotation #txtCompanyName').val(data.company_name);
+            $('#viewQuotation #txtAddress').val(data.address);
+            $('#viewQuotation #txtEmail').val(data.email);
+            
             $.ajax({
                 data : { id : id },
                 dataType : 'json',
                 type: 'post',
-                url : 'get_ailment_items',
+                url : 'get_quotation_detail',
                 success : function(data)
                 {
                   for(var i = 0; i < data.length; i++)
                   {
                     var row = {
-                      ailment:data[i].ailment,
+                      ailment:data[i].item_code,
+                      cost: data[i].quoted_cost
                     };
                     $("#gridsaveView").swidget().addRow(row);
                     $("#gridsaveView").swidget().saveChanges();
+                  }
+                },
+                error : function(jqXHR, textStatus, errorThrown) {
+                  console.log(jqXHR);
+                  console.log(textStatus);
+                  console.log(errorThrown);
+                }
+              });
+
+
+            $.ajax({
+                data : { id : id },
+                dataType : 'json',
+                type: 'post',
+                url : 'get_attachment',
+                success : function(data)
+                {
+                  console.log(data.image_path);
+
+                  for(var i = 0; i < data.length; i++)
+                  {
+
+                    $("#display_attachment").append("<li><a href = 'download_attachment'> " + data[i].image_path + "</a></li>");
                   }
                 },
                 error : function(jqXHR, textStatus, errorThrown) {
@@ -334,7 +342,6 @@ $(document).ready(
         e.preventDefault();
         var id = $('#removeQuotation').attr('data-customer-id');
 
-        alert(id);
         $.ajax({
           url : 'remove_quotation',
           dataType : 'json',
@@ -480,7 +487,7 @@ window.onload = function() {
   });
 
   var gridsaveView =  initGridSaveView($("#gridsaveView"));
-  $('#viewCustomer').on('hidden.bs.modal', function () {
+  $('#viewQuotation').on('hidden.bs.modal', function () {
       gridsaveView.swidget().destroy();
       gridsaveView =  initGridSaveView($("#gridsaveView"));
   });

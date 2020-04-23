@@ -63,9 +63,21 @@
                   </div>
                   <div class="form-group">
                     <label for="txtContactNumber">Contact Number</label>
-                    <input type="email" name="txtContactNumber" id="txtContactNumber"
-                      placeholder="Email" class="form-control" />
+                    <input type="text" name="txtContactNumber" id="txtContactNumber"
+                      placeholder="Contact Number" class="form-control" />
                   </div>
+                  <div class="form-group">
+                    <label for="txtCompanyName">Company Name</label>
+                    <input type="text" name="txtCompanyName" id="txtCompanyName"
+                      placeholder="Company Name" class="form-control" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtAddress">Address</label>
+                    <input type="text" name="txtAddress" id="txtAddress"
+                      placeholder="Address" class="form-control" />
+                  </div>
+
                   <div class="form-group">
                     <label for="selRole">Role</label>
                     <select name="selRole" class="form-control" id="selRole">
@@ -126,6 +138,17 @@
                     <label for="txtContactNumber">Contact Number</label>
                     <input type="email" name="txtContactNumber" id="txtContactNumber"
                       placeholder="Email" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <label for="txtCompanyName">Company Name</label>
+                    <input type="text" name="txtCompanyName" id="txtCompanyName"
+                      placeholder="Company Name" class="form-control" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtAddress">Address</label>
+                    <input type="text" name="txtAddress" id="txtAddress"
+                      placeholder="Address" class="form-control" />
                   </div>
                   <div class="form-group">
                     <label for="selRole">Role</label>

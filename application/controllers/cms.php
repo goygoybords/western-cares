@@ -301,7 +301,8 @@ class Cms extends CI_Controller {
 		{
 			$id = $this->session->userdata('userID');
 			echo json_encode($this->quotations->get_quotations_by_supplier($id));
-		} else {
+		} 
+		else {
 			redirect('cms/quotations', 'refresh');
 		}
 	}
@@ -369,6 +370,43 @@ class Cms extends CI_Controller {
 		}
 	}
 
+	public function get_attachment()
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			$id = $this->input->post('id');
+			echo json_encode($this->quotations->get_attachments($id));
+		} 
+		else 
+		{
+			redirect('cms/quotations', 'refresh');
+		}
+
+	}
+
+	public function download_attachment()
+	{
+		$filepath ;
+		if(file_exists($filepath)) 
+		{
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filepath));
+            flush(); // Flush system output buffer
+            readfile($filepath);
+            die();
+        } 
+        else 
+        {
+            http_response_code(404);
+	        die();
+        }
+	}
+
 	public function get_quotation()
 	{
 		if($this->input->is_ajax_request()) 
@@ -379,8 +417,23 @@ class Cms extends CI_Controller {
 		else {
 			redirect('cms/customers', 'refresh');
 		}
+	}
+
+	public function get_quotation_detail()
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			$id = $this->input->post('id');
+			echo json_encode($this->quotations->get_detail($id));
+		} 
+		else {
+			redirect('cms/customers', 'refresh');
+		}
 
 	}
+
+
+	
 
 	public function remove_quotation() 
 	{
@@ -501,6 +554,8 @@ class Cms extends CI_Controller {
 				Users::_EMAIL => $this->input->post('user')[Users::_EMAIL],
 				Users::_ROLE => $this->input->post('user')[Users::_ROLE],
 				Users::_CONTACT_NUMBER => $this->input->post('user')['contact_number'],
+				Users::_COMPANY_NAME => $this->input->post('user')['company_name'],
+				Users::_ADDRESS => $this->input->post('user')['address'],
 
 			);
 			$result = $this->users->add($user);
@@ -528,7 +583,9 @@ class Cms extends CI_Controller {
 				Users::_FIRST_NAME => $this->input->post('user')[Users::_FIRST_NAME],
 				Users::_LAST_NAME => $this->input->post('user')[Users::_LAST_NAME],
 				Users::_EMAIL => $this->input->post('user')[Users::_EMAIL],
-				Users::_CONTACT_NUMBER => $this->input->post('user')['contactnumber']
+				Users::_CONTACT_NUMBER => $this->input->post('user')['contactnumber'],
+				Users::_COMPANY_NAME => $this->input->post('user')['company_name'],
+				Users::_ADDRESS => $this->input->post('user')['address'],
 			);
 			$result = $this->users->update($id, $user);
 

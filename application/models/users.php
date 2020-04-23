@@ -12,6 +12,8 @@ class Users extends CI_Model {
   const _ROLE = 'role';
   const _REMOVED = 'removed';
   const _CONTACT_NUMBER = 'contactnumber';
+  const _COMPANY_NAME = 'company_name';
+  const _ADDRESS = 'address';
 
   public function __construct() {
     $this->load->database();

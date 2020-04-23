@@ -34,7 +34,9 @@ $(document).ready(
           first_name : $('#txtFirstName').val(),
           last_name : $('#txtLastName').val(),
           role : $('#selRole').val(),
-          contact_number : $("#txtContactNumber").val()
+          contact_number : $("#txtContactNumber").val(),
+          company_name : $("#txtCompanyName").val(),
+          address : $("#txtAddress").val(),
         };
 
         $.ajax({
@@ -85,6 +87,8 @@ $(document).ready(
           last_name : $('#editUsers #txtLastName').val(),
           role : $('#editUsers #selRole').val(),
           contactnumber : $('#editUsers #txtContactNumber').val(),
+          company_name : $('#editUsers #txtCompanyName').val(),
+          address : $('#editUsers #txtAddress').val(),
         };
         var id = $('#editUsers').attr('data-user-id');
 
@@ -192,7 +196,8 @@ $(document).ready(
               $('#editUsers input[name="csrf_token_name"]').val(),
             id : id
           },
-          success : function(data, textStatus, jqXHR) {
+          success : function(data, textStatus, jqXHR) 
+          {
             // Populate the users table
             $('#editUsers').modal('show');
             $('#editUsers').attr('data-user-id', id);
@@ -202,6 +207,8 @@ $(document).ready(
             $('#editUsers #txtEmail').val(data.email);
             $('#editUsers #txtFirstName').val(data.first_name);
             $('#editUsers #txtContactNumber').val(data.contactnumber);
+            $('#editUsers #txtCompanyName').val(data.company_name);
+            $('#editUsers #txtAddress').val(data.address);
             $('#editUsers #selRole').prepend('<option value="' + data.role + '">' + data.role + '</option>');
             $('#editUsers #selRole')[0].selectedIndex = 0;
           },
