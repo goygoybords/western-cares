@@ -213,7 +213,7 @@
           </div> <!-- modal-dialog-wide CLOSE -->
         </div> <!-- modal CLOSE -->
         <!-- end of Edit -->
-
+        <input type="hidden" id="session_role" data-value="<?php echo $this->session->userdata('role');?>"/>
         <!-- edit Modal-->
         <div class="modal modal-fullscreen fade" id="viewQuotation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static"
          data-keyboard="false">
@@ -255,7 +255,6 @@
                     <div class="form-group">
                           <label for="txtAddress">Attachments</label>
                           <ul id = "display_attachment">
-                            <li id = "display_attachment"></li>
                           </ul>
                     </div> 
                   </div>

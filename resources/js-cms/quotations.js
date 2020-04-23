@@ -2,31 +2,60 @@ initTable();
 function initTable()
 {
 
+  var session =  $("#session_role").data('value');
   var $table = $('#tblQuotations');
 
-  $table.bootstrapTable({
-    pagination: true,
-    search: true,
-    url: 'all_quotations_by_supplier'
-  });
+  if(session == "Administrator")
+  {
+    $table.bootstrapTable({
+      pagination: true,
+      search: true,
+      url: 'all_quotations_by_supplier_admin'
+    });
+  }
+  else
+  {
+      $table.bootstrapTable({
+      pagination: true,
+      search: true,
+      url: 'all_quotations_by_supplier'
+    });
+  }
+  
 }
 
 // Action Formatter for Sales
 function actionFormatter(value, row, index)
 {
-    return [
-      '<div class="btn-group" role="grid">\
-        <a class="btn btn-info btn-view">\
-          <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
-        </a>\
-        <a class="btn btn-danger btn-delete">\
-          <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
-        </a>\
-        <a class="btn btn-primary btn-post">\
-          <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Post</span>\
-        </a>\
-      </div>'
-    ].join("");
+  if($("#session_role").data('value') == "Administrator") 
+  {
+      return [
+        '<div class="btn-group" role="grid">\
+          <a class="btn btn-info btn-view">\
+            <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
+          </a>\
+          <a class="btn btn-danger btn-delete">\
+            <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
+          </a>\
+          <a class="btn btn-primary btn-post">\
+            <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Post</span>\
+          </a>\
+        </div>'
+      ].join("");
+    }
+    else
+    {
+      return [
+        '<div class="btn-group" role="grid">\
+          <a class="btn btn-info btn-view">\
+            <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
+          </a>\
+          <a class="btn btn-danger btn-delete">\
+            <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
+          </a>\
+        </div>'
+      ].join("");
+    }
 }
 
 function signatureFormatter(value, row, index)
@@ -94,8 +123,8 @@ window.operateEvents = {
 
                   for(var i = 0; i < data.length; i++)
                   {
-
-                    $("#display_attachment").append("<li><a href = 'download_attachment'> " + data[i].image_path + "</a></li>");
+                      var dis = "<li><a href ='"+data[i].image_path+"'>"+ data[i].filename+"</a></li>";
+                    $("#display_attachment").append(dis);
                   }
                 },
                 error : function(jqXHR, textStatus, errorThrown) {

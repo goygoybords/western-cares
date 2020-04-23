@@ -50,6 +50,16 @@ class Quotations extends CI_Model
     return $query->result_array();
   }
 
+  public function get_quotations_by_supplier_admin() 
+  {
+    $this->db->select("q.*, u.company_name as supplier, u.email, u.address");
+    $this->db->from("quotations q ");
+    $this->db->join('users u','u.id = q.user_id');
+    $this->db->where_in("q.status", array('UNPOSTED', 'POSTED', 'APPROVED'));
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+
   public function update($id, $user) 
   {
     $this->db->where(Products::_PRODUCT_ID, $id);
@@ -106,15 +116,13 @@ class Quotations extends CI_Model
 
   public function get_attachments($id)
   {
-    $this->db->select("a.image_path");
+    $this->db->select("a.image_path, a.filename");
     $this->db->from("attachments a");
     $this->db->join('quotations q','q.quotation_id = a.quotation_id');
     $this->db->where("q.quotation_id", $id);
     $query = $this->db->get();
     return $query->result_array();
   }
-
-  
 
   public function get_all_categories() 
   {

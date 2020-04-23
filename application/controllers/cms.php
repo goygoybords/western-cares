@@ -302,9 +302,23 @@ class Cms extends CI_Controller {
 			$id = $this->session->userdata('userID');
 			echo json_encode($this->quotations->get_quotations_by_supplier($id));
 		} 
-		else {
+		else 
+		{
 			redirect('cms/quotations', 'refresh');
 		}
+	}
+
+	public function all_quotations_by_supplier_admin()
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			echo json_encode($this->quotations->get_quotations_by_supplier_admin());
+		} 
+		else 
+		{
+			redirect('cms/quotations', 'refresh');
+		}
+
 	}
 
 	public function add_quotation()
@@ -384,27 +398,14 @@ class Cms extends CI_Controller {
 
 	}
 
-	public function download_attachment()
+	public function download_attachment($filepath)
 	{
-		$filepath ;
-		if(file_exists($filepath)) 
-		{
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($filepath));
-            flush(); // Flush system output buffer
-            readfile($filepath);
-            die();
-        } 
-        else 
-        {
-            http_response_code(404);
-	        die();
-        }
+
+		$filepath = base_url().$filepath;
+		$this->load->helper('download');
+		$data = file_get_contents($filepath);
+		force_download($data);
+		
 	}
 
 	public function get_quotation()
