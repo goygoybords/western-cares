@@ -398,14 +398,42 @@ class Cms extends CI_Controller {
 
 	}
 
-	public function download_attachment($filepath)
+	public function download_attachment($filename)
 	{
+		ignore_user_abort(true);
+		set_time_limit(0); // disable the time limit for this script
+		$path = base_url()."resources/uploads/"; // change the path to fit your websites document structure
+		$dl_file = preg_replace("([^\w\s\d\-_~,;:\[\]\(\).]|[\.]{2,})", '', $filename); // simple file name validation
+		$dl_file = filter_var($dl_file, FILTER_SANITIZE_URL); // Remove (more) invalid characters
+		$fullPath = $path.$dl_file;
 
-		$filepath = base_url().$filepath;
-		$this->load->helper('download');
-		$data = file_get_contents($filepath);
-		force_download($data);
-		
+		if ($fd = fopen ($fullPath, "r")) 
+		{
+		    $fsize = filesize($fullPath);
+		    $path_parts = pathinfo($fullPath);
+		    $ext = strtolower($path_parts["extension"]);
+		    switch ($ext) 
+		    {
+		        case "pdf":
+		        header("Content-type: application/pdf");
+		        header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\""); // use 'attachment' to force a file download
+		        break;
+		        // add more headers for other content types here
+		        default;
+		        header("Content-type: application/octet-stream");
+		        header("Content-Disposition: filename=\"".$path_parts["basename"]."\"");
+		        break;
+		    }
+		   //header("Content-length: $fsize");
+		   	header('Cache-Control: max-age=0'); //use this to open files directly
+		    while(!feof($fd)) 
+		    {
+		        $buffer = fread($fd, 2048);
+		        echo $buffer;
+		    }
+		}
+		fclose ($fd);
+		exit;
 	}
 
 	public function get_quotation()

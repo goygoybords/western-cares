@@ -123,7 +123,7 @@ window.operateEvents = {
 
                   for(var i = 0; i < data.length; i++)
                   {
-                      var dis = "<li><a href ='"+data[i].image_path+"'>"+ data[i].filename+"</a></li>";
+                      var dis = "<li><a href ='download_attachment/"+data[i].filename+"'>"+ data[i].filename+"</a></li>";
                     $("#display_attachment").append(dis);
                   }
                 },
