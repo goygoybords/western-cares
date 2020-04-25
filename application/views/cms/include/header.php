@@ -64,12 +64,12 @@
           </a>
         </li> -->
         <?php if($this->session->userdata('role') == 'Administrator'): ?>
-        <li>
+        <!-- <li>
           <a href="<?php echo base_url(); ?>cms/customers">
             <i class="fa fa-users"></i>
             <span class="hidden-xs">Customers</span>
           </a>
-        </li>
+        </li> -->
         <li>
           <a href="<?php echo base_url(); ?>cms/orders">
             <i class="fa fa-graduation-cap"></i>
