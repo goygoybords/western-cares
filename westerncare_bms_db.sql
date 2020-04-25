@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2020 at 09:10 AM
+-- Generation Time: Apr 25, 2020 at 08:32 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 7.0.1
 
@@ -29,16 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `attachments` (
   `attachment_id` int(11) NOT NULL,
   `quotation_id` int(11) NOT NULL,
-  `image_path` varchar(250) NOT NULL
+  `image_path` varchar(250) NOT NULL,
+  `filename` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attachments`
 --
 
-INSERT INTO `attachments` (`attachment_id`, `quotation_id`, `image_path`) VALUES
-(1, 1, 'resources/uploads/ALLAN VISA.pdf'),
-(2, 1, 'resources/uploads/visa.pdf');
+INSERT INTO `attachments` (`attachment_id`, `quotation_id`, `image_path`, `filename`) VALUES
+(1, 1, 'resources/uploads/ALLAN VISA.pdf', 'ALLANVISA.pdf'),
+(2, 1, 'resources/uploads/visa.pdf', 'visa.pdf'),
+(3, 2, 'resources/uploads/lot plan tacloban.jpg', 'lot plan tacloban.jpg');
 
 -- --------------------------------------------------------
 
@@ -209,7 +211,35 @@ INSERT INTO `logs` (`id`, `user_id`, `date`, `message`) VALUES
 (89, 3, '2020-04-21 09:10:49', 'supplier sup has successfully logged in.'),
 (90, 3, '2020-04-21 09:17:18', 'supplier sup has successfully logged out.'),
 (91, 3, '2020-04-22 00:48:09', 'supplier sup has successfully logged in.'),
-(92, 3, '2020-04-22 07:10:03', 'supplier sup has successfully logged out.');
+(92, 3, '2020-04-22 07:10:03', 'supplier sup has successfully logged out.'),
+(93, 3, '2020-04-22 07:45:16', 'supplier sup has successfully logged in.'),
+(94, 2, '2020-04-23 04:40:26', 'admin admin has successfully logged in.'),
+(95, 2, '2020-04-23 04:40:30', 'admin admin has successfully logged out.'),
+(96, 3, '2020-04-23 04:40:34', 'supplier sup has successfully logged in.'),
+(97, 3, '2020-04-23 07:16:40', 'supplier sup has successfully logged out.'),
+(98, 2, '2020-04-23 07:16:45', 'admin admin has successfully logged in.'),
+(99, 2, '2020-04-23 07:27:55', 'admin admin has added a new user [etasd].'),
+(100, 2, '2020-04-23 07:30:26', 'admin admin has added a new user [kobe12345].'),
+(101, 2, '2020-04-23 07:36:32', 'admin admin has updated a user [supplier].'),
+(102, 2, '2020-04-23 07:37:33', 'admin admin has updated a user [supplier].'),
+(103, 2, '2020-04-23 07:40:03', 'admin admin has successfully logged out.'),
+(104, 3, '2020-04-23 07:40:08', 'supplier sup has successfully logged in.'),
+(105, 3, '2020-04-23 08:32:01', 'supplier sup has successfully logged out.'),
+(106, 2, '2020-04-23 08:32:04', 'admin admin has successfully logged in.'),
+(107, 2, '2020-04-23 08:39:26', 'admin admin has successfully logged out.'),
+(108, 3, '2020-04-23 08:39:30', 'supplier sup has successfully logged in.'),
+(109, 3, '2020-04-23 08:40:31', 'supplier sup has successfully logged out.'),
+(110, 2, '2020-04-23 08:40:34', 'admin admin has successfully logged in.'),
+(111, 2, '2020-04-23 08:50:57', 'admin admin has successfully logged out.'),
+(112, 3, '2020-04-23 08:51:01', 'supplier sup has successfully logged in.'),
+(113, 3, '2020-04-23 08:51:26', 'supplier sup has successfully logged out.'),
+(114, 2, '2020-04-23 08:51:30', 'admin admin has successfully logged in.'),
+(115, 2, '2020-04-23 08:54:43', 'admin admin has successfully logged out.'),
+(116, 3, '2020-04-23 08:54:47', 'supplier sup has successfully logged in.'),
+(117, 3, '2020-04-23 08:54:50', 'supplier sup has successfully logged out.'),
+(118, 2, '2020-04-24 06:31:23', 'admin admin has successfully logged in.'),
+(119, 2, '2020-04-25 02:01:54', 'admin admin has successfully logged in.'),
+(120, 2, '2020-04-25 02:07:32', 'admin admin has successfully logged out.');
 
 -- --------------------------------------------------------
 
@@ -265,10 +295,24 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `item_code`, `description`, `dimension`, `brand`, `category_id`, `unit_id`, `cost`, `selling_price`, `current_quantity`, `image_path`, `removed`) VALUES
 (1, 'FFFP2 CE', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '900.00', 0, 'resources/img/fffp2.jpg', 0),
-(2, 'FFFP3 with Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '950.00', 0, 'resources/img/n-88.png', 0),
-(3, 'KN95 FFFP3 without Respirator', 'Anti Pollution Face Mask', '22x20x11 cm 30 pcs/box', 'OEM', 3, 6, '850.00', '1000.00', 0, 'resources/img/3m.png', 0),
-(5, 'FFFP2 without Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '1000.00', 0, 'resources/img/fffp2.jpg', 0),
-(8, 'wing asdasd', 'chun asdasdasd', '120x120 asdasd', 'tat asdasd', 6, 8, '25.00', '35.00', 0, 'resources/img/PARAN Sketch Plan.jpg', 0);
+(2, 'FFFP3 with Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '950.00', 0, 'resources/img/ffp3.png', 0),
+(5, 'FFFP2 without Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '1000.00', 0, 'resources/img/ffp2-without.png', 0),
+(9, 'YH-830 Non dependent', 'YH-830 Bi-Level PAP with non dependent humidifier\r\n', '48.5x32.5x21.5', 'OEM', 7, 6, '1500.00', '3500.00', 0, 'resources/img/yh-830.png', 0),
+(10, 'YH-830 Bi-Level PAP Ventilator', 'YH-830 Bi-Level PAP Ventilator', '48.5x32.5x21.5', 'OEM', 7, 6, '1500.00', '3500.00', 0, 'resources/img/yh-830 pap ventilator.png', 0),
+(11, 'Disposable Shoe Cover', 'Disposable Shoe Cover', '', 'OEM', 4, 26, '650.00', '1000.00', 0, 'resources/img/dispoasble shoe cover 1.png', 0),
+(12, 'Disposable Shoe Cover (Boots)', 'Disposable Shoe Cover', '', 'OEM', 4, 26, '650.00', '1000.00', 0, 'resources/img/dispoasble shoe cover 2.png', 0),
+(13, 'Thermal Scanner 1', 'Thermal Scanner ', '165x110x45mm', 'Lead', 2, 26, '650.00', '1000.00', 0, 'resources/img/thermal scanner 1.png', 0),
+(14, 'Thermal Scanner 2', 'Thermal Scanner ', '165x110x45mm', 'Lead', 2, 26, '650.00', '1000.00', 0, 'resources/img/thermal scanner 2.png', 0),
+(15, 'Medical Nitrile Globes ', 'Medical Nitrile Globes ', '23x12.5x5.5', 'Medicom', 5, 26, '650.00', '950.00', 0, 'resources/img/nitrile-gloves.png', 0),
+(16, 'Examination Vinyl Gloves', 'Examination Vinyl Gloves', '20x12.5x7', 'Luvas De Vinil', 5, 26, '650.00', '950.00', 0, 'resources/img/vinyl-gloves.png', 0),
+(17, 'Sterile Latex Gloves', 'Sterile Latex Gloves', '25.6x13x22.5', 'Medicom', 5, 26, '650.00', '950.00', 0, 'resources/img/sterile-latex.png', 0),
+(18, 'Isolation Gown', 'Isolation Gown', '60x40x45', 'OEM', 1, 26, '850.00', '1500.00', 0, 'resources/img/isolation gown.png', 0),
+(19, 'Disposable Head Cover', 'Disposable Head Cover', '60x40x45', 'OEM', 1, 26, '850.00', '1500.00', 0, 'resources/img/disposable head cover.png', 0),
+(20, 'Disposable PPE Type 1', 'Disposable PPE Type 1', '50x32x2cm', 'OEM', 6, 26, '30.00', '100.00', 0, 'resources/img/disposable-ppe-1.png', 0),
+(21, 'Disposable PPE Type 2', 'Disposable PPE Type 2', '50x32x2cm', 'OEM', 6, 26, '1500.00', '2500.00', 0, 'resources/img/disposable-ppe-2.png', 0),
+(22, 'Disposable PPE Type 3', 'Disposable PPE Type 3', '50x32x2cm', 'OEM', 6, 26, '1500.00', '2500.00', 0, 'resources/img/disposable-ppe-3.png', 0),
+(23, 'Medical Goggles', 'Medical Goggles', '16x9x8cm', 'OEM', 6, 26, '20.00', '350.00', 0, 'resources/img/medical-goggles.png', 0),
+(24, 'Face Shield', 'Double Anti Fog \r\nThickness: 0.18mm', '32x19cm\r\n32x22cm\r\n34x26cm', 'OEM', 6, 26, '50.00', '75.00', 0, 'resources/img/face-shield.png', 0);
 
 -- --------------------------------------------------------
 
@@ -359,7 +403,8 @@ CREATE TABLE `quotations` (
 --
 
 INSERT INTO `quotations` (`quotation_id`, `user_id`, `status`) VALUES
-(1, 3, '1');
+(1, 3, 'UNPOSTED'),
+(2, 3, 'REMOVED');
 
 -- --------------------------------------------------------
 
@@ -380,7 +425,8 @@ CREATE TABLE `quotation_detail` (
 --
 
 INSERT INTO `quotation_detail` (`quotation_detail_id`, `quotation_id`, `product_id`, `quoted_cost`, `status`) VALUES
-(1, 1, 1, 123.00, 1);
+(1, 1, 1, 123.00, 1),
+(2, 2, 1, 23.00, 1);
 
 -- --------------------------------------------------------
 
@@ -445,6 +491,7 @@ CREATE TABLE `users` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `company_name` varchar(250) NOT NULL,
+  `address` varchar(250) NOT NULL,
   `country_code` varchar(2) DEFAULT NULL,
   `contactnumber` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -457,16 +504,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `company_name`, `country_code`, `contactnumber`, `email`, `password`, `role`, `removed`) VALUES
-(1, 'kevin', 'kevin sean', 'kobe', '', 'US', '1 232 323 2323', 'kevin@yahoo.com', '$2y$10$nKclJv8peFoZic1WJN5gueRuveyjdQkpWNx2DbOZ9F8Xq/5tLETjC', 'Moderator', 0),
-(2, 'admin', 'admin', 'admin', '', 'PH', '12345', 'admin@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Administrator', 0),
-(3, 'supplier', 'supplier', 'sup', 'CHINA SUPP', 'PH', '12345', 'supplier@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Supplier', 0),
-(4, NULL, 'kobe', 'kobe', '', 'PH', '12345', 'kobe@lakers.com', '$2y$10$.bwdFTQJyTBfoZNht9RVEeDR.kXUeuwz7Jf2J40O.6fA2kmUXLQ0C', 'Moderator', 0),
-(5, NULL, 'Christopher ', 'Chan', '', 'PH', '12345', 'christopher@yahoo.com', '$2y$10$eNdZwwqhMB7LttgvcGgWL.ZMHDQGxan4f6jb9eGGLNr76A3KuTQ5u', 'Moderator', 0),
-(6, NULL, 'Amy', 'Lao Shi', '', 'CH', '00 1 889 123 4178', 'laoshi@gmail.com', '$2y$10$vutg1UTSpztWWixNLWkLOuUObnYNO8THyVE96vKXPz9yGNJPrP72.', 'Moderator', 0),
-(7, NULL, 'wing', 'chun', '', 'PH', '0923 252 5162', 'wingchun@gmail.com', '$2y$10$Lio3NaboH5sKdXTzZJyacuBNlEtsXpV1fzLX0bzckfUv.04JrOtd2', 'Moderator', 0),
-(8, 'cmsadmin', 'cms', 'cms', '', NULL, '', 'cmsadmin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Supplier', 0),
-(9, 'asdasdasd', 'asdasd', 'asdasd', '', NULL, '88888888888888', 'tessdsdsd@yahoo.com', '$2y$10$c4GvST87iLBgmyhgajZSFexmf4vk58IPAjebwygN6sOm93xPBaB1m', 'Administrator', 0);
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `company_name`, `address`, `country_code`, `contactnumber`, `email`, `password`, `role`, `removed`) VALUES
+(1, 'kevin', 'kevin sean', 'kobe', '', '', 'US', '1 232 323 2323', 'kevin@yahoo.com', '$2y$10$nKclJv8peFoZic1WJN5gueRuveyjdQkpWNx2DbOZ9F8Xq/5tLETjC', 'Moderator', 0),
+(2, 'admin', 'admin', 'admin', '', '', 'PH', '12345', 'admin@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Administrator', 0),
+(3, 'supplier', 'supplier', 'sup', 'cHINA  up', 'CHINA up', 'PH', '12345', 'supplier@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Supplier', 0),
+(4, NULL, 'kobe', 'kobe', '', '', 'PH', '12345', 'kobe@lakers.com', '$2y$10$.bwdFTQJyTBfoZNht9RVEeDR.kXUeuwz7Jf2J40O.6fA2kmUXLQ0C', 'Moderator', 0),
+(5, NULL, 'Christopher ', 'Chan', '', '', 'PH', '12345', 'christopher@yahoo.com', '$2y$10$eNdZwwqhMB7LttgvcGgWL.ZMHDQGxan4f6jb9eGGLNr76A3KuTQ5u', 'Moderator', 0),
+(6, NULL, 'Amy', 'Lao Shi', '', '', 'CH', '00 1 889 123 4178', 'laoshi@gmail.com', '$2y$10$vutg1UTSpztWWixNLWkLOuUObnYNO8THyVE96vKXPz9yGNJPrP72.', 'Moderator', 0),
+(7, NULL, 'wing', 'chun', '', '', 'PH', '0923 252 5162', 'wingchun@gmail.com', '$2y$10$Lio3NaboH5sKdXTzZJyacuBNlEtsXpV1fzLX0bzckfUv.04JrOtd2', 'Moderator', 0),
+(8, 'cmsadmin', 'cms', 'cms', '', '', NULL, '', 'cmsadmin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Supplier', 0),
+(9, 'asdasdasd', 'asdasd', 'asdasd', '', '', NULL, '88888888888888', 'tessdsdsd@yahoo.com', '$2y$10$c4GvST87iLBgmyhgajZSFexmf4vk58IPAjebwygN6sOm93xPBaB1m', 'Administrator', 0),
+(10, 'etasd', 'test', 'test', 'company ', 'add', NULL, '123', 'test@gmail.comasd', '$2y$10$pe6mh4EmrQtitv77TcxDHObRldED1RCVCda6rqXwsogO1UvnufGKq', 'Supplier', 0),
+(11, 'kobe12345', 'kobe', 'kobe', '', '', NULL, '12345', 'kobe@gmail.com', '$2y$10$yMfvXSi/n9GXJt071U8aWeT7pcQbyOF6kw3/wa3naXZU3FxnMoYx.', 'Moderator', 0);
 
 --
 -- Indexes for dumped tables
@@ -563,7 +612,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `attachment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `attachment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `customers`
 --
@@ -578,7 +627,7 @@ ALTER TABLE `customer_ailment`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -588,7 +637,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `product_categories`
 --
@@ -603,12 +652,12 @@ ALTER TABLE `product_uom`
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
-  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `quotation_detail`
 --
 ALTER TABLE `quotation_detail`
-  MODIFY `quotation_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `quotation_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `routes`
 --
@@ -623,7 +672,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Constraints for dumped tables
 --
