@@ -628,7 +628,7 @@ body.cart_open{
   height: 40px;
   width: 40px;
   padding: 0px;
-  color: rgb(10, 99, 67);
+  color: #0a5fab;
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
   padding: 10px 0px;
@@ -637,7 +637,7 @@ body.cart_open{
   cursor: pointer;
   border-width: 2px;
   border-style: solid;
-  border-color: rgb(10, 99, 67);
+  border-color: #0a5fab;
   border-image: initial;
 }
 .cart_item .btn:hover{
