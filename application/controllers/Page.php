@@ -48,6 +48,9 @@ class Page extends CI_Controller
 			default:
 				$data['isProductPage'] = 0;
 				$data['surgical_mask_items'] = $this->products_model->get_all_items_by_category(3);
+				$data['scanner'] = $this->products_model->get_all_items_by_category(2);
+				$data['shoes'] = $this->products_model->get_all_items_by_category(4);
+				$data['machines'] = $this->products_model->get_all_items_by_category(7);
 				$data['categories'] = $this->products_model->get_all_categories();
 				$this->load->view('client/home', $data);
 		}

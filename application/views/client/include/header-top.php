@@ -18,7 +18,7 @@
             <div class="navbar-brand">
               <div class="d-flex justify-content-center align-items-center">
                 <div><a href = "<?php echo base_url();?>"><img  height="100px" src="<?=base_url();?>resources/img/logo1.png" alt=""></a></div>
-                <div class="pl-0 pl-lg-4">Western Cares</div>
+                <div class="pl-0 pl-lg-4">Savers Medical</div>
               </div>
               
             </div>

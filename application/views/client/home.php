@@ -65,31 +65,39 @@
       <div class="container">
         <h2>Scanner</h2>
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-            <a href="#modal-item-info" data-toggle="modal" class="d-block">
-              <div class="section_item d-flex">
-                <div>
-                  <div class="section_item_img">
-                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="section_item_info">
-                    <h3>Sample Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
-                  </div>
+          <?php foreach($scanner as $s): ?>
+            <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
+              <a href="#" class = "viewItemModal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
+                <div class="section_item d-flex">
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
-                    <button class="btn btn-primary">Add</button>
+                    <div class="section_item_img">
+                      <img src="<?php echo base_url().$s['image_path']; ?>" alt="">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="section_item_info">
+                      <h3><?php echo $s['item_code']; ?></h3>
+                      <p><?php echo $s['description']." . ".$s['dimension']; ?></p>
+                    </div>
+                    <div>
+                      <div class=" fw-500">
+                        <p class="py-2 m-0">
+                          <label id = "current_curreny">Php</label>
+                          <label id = "spanSellingPrice"><?php echo $s['selling_price']; ?></label>
+                          
+                        </p>
+                      </div>
+                      <button class="btn btn-primary" data-product-id = "<?php echo $s['product_id']; ?>">Add</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>  
     </section>
-
+    
     <section id="section_3" class="section">
       <div class="container">
         <h2>Respatory Mask</h2>
@@ -131,27 +139,34 @@
       <div class="container">
         <h2>Protective Shoes</h2>
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-            <a href="#modal-item-info" data-toggle="modal" class="d-block">
-              <div class="section_item d-flex">
-                <div>
-                  <div class="section_item_img">
-                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="section_item_info">
-                    <h3>Sample Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
-                  </div>
+          <?php foreach($shoes as $s): ?>
+            <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
+              <a href="#" class = "viewItemModal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
+                <div class="section_item d-flex">
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
-                    <button class="btn btn-primary">Add</button>
+                    <div class="section_item_img">
+                      <img src="<?php echo base_url().$s['image_path']; ?>" alt="">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="section_item_info">
+                      <h3><?php echo $s['item_code']; ?></h3>
+                      <p><?php echo $s['description']." . ".$s['dimension']; ?></p>
+                    </div>
+                    <div>
+                      <div class=" fw-500">
+                        <p class="py-2 m-0">
+                          <label id = "current_curreny">Php</label>
+                          <label id = "spanSellingPrice"><?php echo $s['selling_price']; ?></label>
+                        </p>
+                      </div>
+                      <button class="btn btn-primary" data-product-id = "<?php echo $s['product_id']; ?>">Add</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>  
     </section>
@@ -214,34 +229,42 @@
       </div>  
     </section>
 
+
     <section id="section_7" class="section">
       <div class="container">
         <h2>Machines</h2>
         <div class="row">
-          <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
-            <a href="#modal-item-info" data-toggle="modal" class="d-block">
-              <div class="section_item d-flex">
-                <div>
-                  <div class="section_item_img">
-                    <img src="<?=base_url();?>resources/img/sample.jpg" alt="">
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="section_item_info">
-                    <h3>Sample Item</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda, deserunt ipsa autem tenetur culpa esse.</p>
-                  </div>
+          <?php foreach($machines as $s): ?>
+            <div class="col-sm-12 col-md-12 col-lg-6 px-10 py-10">
+              <a href="#" class = "viewItemModal" data-product-id = "<?php echo $s['product_id']; ?>" class="d-block">
+                <div class="section_item d-flex">
                   <div>
-                    <div class=" fw-500"><p class="py-2 m-0">Php 200.00</p></div>
-                    <button class="btn btn-primary">Add</button>
+                    <div class="section_item_img">
+                      <img src="<?php echo base_url().$s['image_path']; ?>" alt="">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="section_item_info">
+                      <h3><?php echo $s['item_code']; ?></h3>
+                      <p><?php echo $s['description']." . ".$s['dimension']; ?></p>
+                    </div>
+                    <div>
+                      <div class=" fw-500">
+                        <p class="py-2 m-0">
+                          <label id = "current_curreny">Php</label>
+                          <label id = "spanSellingPrice"><?php echo $s['selling_price']; ?></label>
+                        </p>
+                      </div>
+                      <button class="btn btn-primary" data-product-id = "<?php echo $s['product_id']; ?>">Add</button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>  
     </section>
-    <!-- Services Section End -->
 
+    <!-- Services Section End -->
     <?php $this->load->view('client/include/footer');?>

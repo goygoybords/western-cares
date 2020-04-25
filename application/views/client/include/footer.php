@@ -52,7 +52,7 @@
           </div>
           <div class="col-lg-6 col-sm-6 col-xs-12 text-right">
               <div class="text-white">
-                Western Cares &copy; All Rights Reserved.
+                Savers Medical &copy; All Rights Reserved.
               </div>
           </div>  
         </div>

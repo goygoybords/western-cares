@@ -6,7 +6,7 @@
           <div class="section_landing_content_cta_holder d-flex align-items-center">
             <div class="col text-right">
               <div class="section_landing_content_cta text-center">
-                <h1>Western Cares</h1>
+                <h1>Savers Menu</h1>
                 <p>Available for Pickup and Worldwide Delivery</p>
                 <div>
                   <button class="btn btn-primary">Order Now</button>
