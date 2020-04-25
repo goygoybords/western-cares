@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
     <title>Savers Medical</title>
-    <link rel="icon" href="<?=base_url();?>resources/img/logo1.png" type="image/gif" sizes="16x16"> 
+    <link rel="icon" href="<?=base_url();?>resources/img/logo2.png" type="image/gif" sizes="16x16"> 
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?=base_url();?>resources/css/bootstrap.min.css">
