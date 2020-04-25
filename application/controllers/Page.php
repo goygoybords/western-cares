@@ -46,6 +46,7 @@ class Page extends CI_Controller
 				break;
 			case "home":
 			default:
+				$data['surgical_gear'] = $this->products_model->get_all_items_by_category(1);
 				$data['scanner'] = $this->products_model->get_all_items_by_category(2);
 				$data['surgical_mask_items'] = $this->products_model->get_all_items_by_category(3);
 				$data['shoes'] = $this->products_model->get_all_items_by_category(4);
