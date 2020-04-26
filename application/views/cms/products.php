@@ -6,7 +6,7 @@
       content="width=device-width,
         initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-    <title>Western Cares CMS - Products</title>
+    <title>Savers Medical CMS - Products</title>
 
     <link type="text/css" rel="stylesheet"
       href="<?php echo base_url(); ?>resources/css-cms/bootstrap.min.css" />
