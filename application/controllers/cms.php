@@ -12,6 +12,7 @@ class Cms extends CI_Controller {
 		$this->load->model('pages');
 		$this->load->model('page_sections');
 		$this->load->model('quotations');
+		$this->load->model('orders');
 
 	
 		//$this->load->library('jSignature_Tools_Base30');
@@ -281,6 +282,18 @@ class Cms extends CI_Controller {
 		$this->load->view('cms/orders', $data);
 	}
 
+	public function all_orders()
+	{
+		if($this->input->is_ajax_request()) 
+		{
+			echo json_encode($this->orders->get_all_orders());
+		} 
+		else 
+		{
+			redirect('cms/orders', 'refresh');
+		}
+	}
+
 	public function quotations()
 	{
 		$data = array();
@@ -320,6 +333,9 @@ class Cms extends CI_Controller {
 		}
 
 	}
+
+
+
 
 	public function add_quotation()
 	{
@@ -461,8 +477,25 @@ class Cms extends CI_Controller {
 
 	}
 
-
-	
+	public function post_quotation() 
+	{
+		if($this->input->is_ajax_request())
+		{
+			$id = $this->input->post('id');
+			$details = $this->quotations->get_detail($id);
+			for ($i=0; $i < count($details) ; $i++) 
+			{ 
+				$product = $this->products->get_by_name($details[$i]['item_code']);
+				$data['cost'] = $details[$i]['quoted_cost'];
+				$result = $this->products->update($product->product_id,$data);
+			}
+			echo json_encode($this->quotations->post($id));
+		}
+		else
+		{
+			redirect('cms/customers', 'refresh');
+		}
+	}
 
 	public function remove_quotation() 
 	{
@@ -961,15 +994,6 @@ class Cms extends CI_Controller {
 				}
         	}
         	
-			// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) 
-			// {
-			// 	$value['error'] = 1;
-			// 	$value['errors'] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-			//     echo json_encode($value);
-			//     $uploadOk = 0;
-			//     exit;
-			// }
-
 			if($uploadOk == 1)
 			{
 				if (move_uploaded_file($_FILES["txtProductImage"]["tmp_name"], $target_file)) 

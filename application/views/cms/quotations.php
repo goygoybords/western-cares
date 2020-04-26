@@ -312,6 +312,34 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="postQuotation" tabindex="-1" role="dialog"aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header modal-remove">
+                <button type="button" class="close" data-dismiss="modal"
+                  aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title">Approved Quotation</h3>
+              </div>
+              <div class="modal-body">
+                <p id="customerToRemove">Are you sure you want to approved the selected quotation?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                  data-dismiss="modal">
+                  Close
+                </button>
+                <button id="btnPost" type="button"
+                  class="btn btn-primary">
+                  Approve
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <section id="adminContent" class="col-md-offset-2 col-md-10">
           <?php if($this->session->userdata('role') == "Administrator"): ?>
             <h1> Quotations</h1>

@@ -99,10 +99,22 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/bootstrap-formhelpers.min.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave-phone.i18n.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>resources/js/money.min.js"></script>
 
     <script type="text/javascript">
       $(function(ready)
       {
+        fx.base = "PHP";
+          fx.rates = {
+            "EUR" : 0.745101, // eg. 1 USD === 0.745101 EUR
+            "GBP" : 0.647710, // etc...
+            "HKD" : 7.781919,
+            "USD" : 56,        // always include the base rate (1:1)
+            /* etc */
+          }
+
+        var rate = fx(60).from("PHP").to("USD");
+        console.log(rate.toFixed(2));
         var cleave = new Cleave('#contactnumber', 
         {
             phone: true,

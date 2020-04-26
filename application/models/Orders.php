@@ -1,20 +1,21 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Quotations extends CI_Model 
+class Orders extends CI_Model 
 {
-  const _TABLE_NAME = 'quotations';
-  const _PRODUCT_ID = 'quotation_id';
-  const _ITEM_CODE = 'item_code';
-  const _DESCRIPTION = 'description';
-  const _DIMENSION = 'dimension';
-  const _BRAND = 'brand';
-  const _CATEGORY_ID = 'category_id';
-  const _UNIT_ID = 'unit_id';
-  const _COST = 'cost';
-  const _SELLING_PRICE = 'selling_price';
-  const _CURRENT_QUANTITY = 'current_quantity';
-  const _IMAGE_PATH = 'image_path';
+  const _TABLE_NAME = 'transaction';
+  const _TRANSACTION_ID = 'transaction_id';
+  const _REF_NUM_1 = 'ref_num_1';
+  const _REF_NUM_2 = 'ref_num_2';
+  const _TRANSACTION_DATE = 'transaction_date';
+  const _CLIENT_ID = 'client_id';
+  const _TOTAL_AMOUNT = 'total_amount';
+  const _VAT_AMOUNT = 'vat_amount';
+  const _TRANSACTED_AMOUNT = 'transacted_amount';
+  const _REMARKS = 'remarks';
+  const _PAYMENT_METHOD = 'payment_method';
+  const _PAYMENT_REFERENCE_NUMBER = 'payment_reference_number';
+  const _STATUS = "status" ;
   const _REMOVED = "removed" ;
 
   public function __construct() {
@@ -68,25 +69,17 @@ class Quotations extends CI_Model
 
   public function remove($id) 
   {
-    $this->db->set('status', "REMOVED");
+    $this->db->set('status', 0);
     $this->db->where('quotation_id', $id);
     return $this->db->update('quotations');
   }
 
-  public function post($id) 
+  public function get_all_orders() 
   {
-    $this->db->set('status', "APPROVED");
-    $this->db->where('quotation_id', $id);
-    return $this->db->update('quotations');
-  }
-
-  public function get_all() 
-  {
-    $this->db->select("p.*, u.description as uom, pc.description as category");
-    $this->db->from("products p");
-    $this->db->join('product_uom u','p.unit_id = u.id');
-    $this->db->join('product_categories pc','p.category_id = pc.category_id');
-    $this->db->where("p.removed", FALSE);
+    $this->db->select("t.*, CONCAT(u.first_name,' ',u.last_name,' / ', u.company_name) as customer_name");
+    $this->db->from("transactions t");
+    $this->db->join('users u','u.id = t.client_id');
+    $this->db->where("t.removed", FALSE);
     $query = $this->db->get();
     return $query->result_array();
   }
@@ -100,52 +93,52 @@ class Quotations extends CI_Model
  //    return $query->row_array();
  //  }
 
-  public function get($id) 
-  {
-    $this->db->select("q.*, u.*,");
-    $this->db->from("quotations q");
-    $this->db->join('users u','q.user_id = u.id');
-    $this->db->where("q.quotation_id", $id);
-    $query = $this->db->get();
-    $test = $query->row();
-    return $test;
-  }
+  // public function get($id) 
+  // {
+  //   $this->db->select("q.*, u.*,");
+  //   $this->db->from("quotations q");
+  //   $this->db->join('users u','q.user_id = u.id');
+  //   $this->db->where("q.quotation_id", $id);
+  //   $query = $this->db->get();
+  //   $test = $query->row();
+  //   return $test;
+  // }
 
-  public function get_detail($id) 
-  {
-    $this->db->select("q.quoted_cost, p.item_code");
-    $this->db->from("quotation_detail q");
-    $this->db->join('products p','p.product_id = q.quotation_id');
-    $this->db->where("q.quotation_id", $id);
-    $query = $this->db->get();
-    return $query->result_array();
-  }
+  // public function get_detail($id) 
+  // {
+  //   $this->db->select("q.quoted_cost, p.item_code");
+  //   $this->db->from("quotation_detail q");
+  //   $this->db->join('products p','p.product_id = q.quotation_id');
+  //   $this->db->where("q.quotation_id", $id);
+  //   $query = $this->db->get();
+  //   return $query->result_array();
+  // }
 
-  public function get_attachments($id)
-  {
-    $this->db->select("a.image_path, a.filename");
-    $this->db->from("attachments a");
-    $this->db->join('quotations q','q.quotation_id = a.quotation_id');
-    $this->db->where("q.quotation_id", $id);
-    $query = $this->db->get();
-    return $query->result_array();
-  }
+  // public function get_attachments($id)
+  // {
+  //   $this->db->select("a.image_path, a.filename");
+  //   $this->db->from("attachments a");
+  //   $this->db->join('quotations q','q.quotation_id = a.quotation_id');
+  //   $this->db->where("q.quotation_id", $id);
+  //   $query = $this->db->get();
+  //   return $query->result_array();
+  // }
 
-  public function get_all_categories() 
-  {
-    $this->db->select("*");
-    $this->db->from("product_categories");
-    $query = $this->db->get();
-    return $query->result_array();
-  }
+  // public function get_all_categories() 
+  // {
+  //   $this->db->select("*");
+  //   $this->db->from("product_categories");
+  //   $query = $this->db->get();
+  //   return $query->result_array();
+  // }
 
-  public function get_all_uom() 
-  {
-    $this->db->select("*");
-    $this->db->from("product_uom");
-    $query = $this->db->get();
-    return $query->result_array();
-  }
+  // public function get_all_uom() 
+  // {
+  //   $this->db->select("*");
+  //   $this->db->from("product_uom");
+  //   $query = $this->db->get();
+  //   return $query->result_array();
+  // }
 
 
 

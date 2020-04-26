@@ -6,7 +6,7 @@
       content="width=device-width,
         initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-    <title>Hatchit CMS - Orders</title>
+    <title>Savers Medical CMS - Orders</title>
 
     <link type="text/css" rel="stylesheet"
       href="<?php echo base_url(); ?>resources/css-cms/bootstrap.min.css" />
@@ -583,17 +583,22 @@
               </form> -->
             </div>
             <input type="hidden" name="base_url" id="base_url" value="<?php echo base_url(); ?>">
-            <table id="tblCustomers" class="table table-condensed table-striped table-hover"
+            <table id="tblOrders" class="table table-condensed table-striped table-hover"
             data-toolbar="#toolbar" data-search="true" data-minimum-count-columns="2" data-pagination="true"
-       data-id-field="id" data-page-list="[5, 10, 25, 50, 100, ALL]" data-show-footer="false">
+       data-id-field="transaction_id" data-page-list="[5, 10, 25, 50, 100, ALL]" data-show-footer="false">
               <thead>
                 <tr>
-                  <th data-field="id">ID</th>
-                  <th data-field="first_name">Name</th>
-                  <th data-field="address">Address</th>
-                  <th data-field="email">Email</th>
+                  <th data-field="transaction_id">ID</th>
+                  <th data-field="ref_num_1">Order #</th>
+                  <th data-field="transaction_date">Transaction Date</th>
+                  <th data-field="customer_name">Customer Name/Company</th>
+                  <th data-field="total_amount">Total</th>
+                  <th data-field="payment_method">Payment Method</th>
+                  <th data-field="remarks">Remarks</th>
+                  <th data-field="status">Status</th>
+                  <!-- <th data-field="email">Email</th>
                   <th data-field="birthdate">Birthdate</th>
-                  <th data-field="signature_image" data-formatter="signatureFormatter">Signed</th>
+                  <th data-field="signature_image" data-formatter="signatureFormatter">Signed</th> -->
                   <th data-field="action" data-formatter="actionFormatter" data-events="operateEvents">Actions</th>
                 </tr>
               </thead>
@@ -616,15 +621,9 @@
     <script type="text/javascript"
       src="<?php echo base_url(); ?>resources/js-cms/bootstrap-table.js"></script>
     <script type="text/javascript"
-      src="<?php echo base_url(); ?>resources/js-cms/customers.js"></script>
+      src="<?php echo base_url(); ?>resources/js-cms/orders.js"></script>
       <script type="text/javascript"
     src="<?php echo base_url(); ?>resources/js/shield-ui.js"></script>
 
-    <!-- JS Signature -->
-    <script type="text/javascript"  src="<?php echo base_url()?>/resources/js/signature/jSignature.js"></script>
-    <script type="text/javascript"  src="<?php echo base_url()?>/resources/js/signature/plugins/jSignature.UndoButton.js"></script>
-    <script type="text/javascript"  src="<?php echo base_url()?>/resources/js/signature/plugins/jSignature.CompressorBase30.js"></script>
-    <script type="text/javascript"  src="<?php echo base_url()?>/resources/js/signature/plugins/jSignature.CompressorSVG.js"></script>
-    <!-- end JS Signature -->
   </body>
 </html>

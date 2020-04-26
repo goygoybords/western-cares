@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<?=base_url();?>resources/css/nivo-lightbox.css">
     <link rel="stylesheet" href="<?=base_url();?>resources/css/magnific-popup.css">
     <link rel="stylesheet" href="<?=base_url();?>resources/css/slicknav.css">
-    <link rel="stylesheet" href="<?=base_url();?>resources/css/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
     <link rel="stylesheet" href="<?=base_url();?>resources/css/main.css">    
     <link rel="stylesheet" href="<?=base_url();?>resources/css/responsive.css">
     <link rel="stylesheet" href="<?=base_url();?>resources/css/flags.css?ddasda=42342423">

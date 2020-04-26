@@ -3,24 +3,14 @@ function initTable()
 {
 
   var session =  $("#session_role").data('value');
-  var $table = $('#tblQuotations');
+  var $table = $('#tblOrders');
 
-  if(session == "Administrator")
-  {
     $table.bootstrapTable({
       pagination: true,
       search: true,
-      url: 'all_quotations_by_supplier_admin'
+      url: 'all_orders'
     });
-  }
-  else
-  {
-      $table.bootstrapTable({
-      pagination: true,
-      search: true,
-      url: 'all_quotations_by_supplier'
-    });
-  }
+ 
   
 }
 
@@ -29,32 +19,19 @@ function actionFormatter(value, row, index)
 {
   if($("#session_role").data('value') == "Administrator") 
   {
-    if(row.status == "APPROVED")
-    {
       return [
-          '<div class="btn-group" role="grid">\
-            <a class="btn btn-info btn-view">\
-              <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
-            </a>\
-          </div>'
-        ].join("");
-    }
-    else
-    {
-        return [
-          '<div class="btn-group" role="grid">\
-            <a class="btn btn-info btn-view">\
-              <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
-            </a>\
-            <a class="btn btn-danger btn-delete">\
-              <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
-            </a>\
-            <a class="btn btn-primary btn-post">\
-              <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Post</span>\
-            </a>\
-          </div>'
-        ].join("");
-      }
+        '<div class="btn-group" role="grid">\
+          <a class="btn btn-info btn-view">\
+            <i class="fa fa-info-circle"></i><span class="hidden-sm hidden-xs"> View</span>\
+          </a>\
+          <a class="btn btn-danger btn-delete">\
+            <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Remove</span>\
+          </a>\
+          <a class="btn btn-primary btn-post">\
+            <i class="fa fa-trash"></i><span class="hidden-sm hidden-xs"> Post</span>\
+          </a>\
+        </div>'
+      ].join("");
     }
     else
     {
@@ -146,37 +123,6 @@ window.operateEvents = {
                   console.log(errorThrown);
                 }
               });
-          },
-          error : function(jqXHR, textStatus, errorThrown) {
-            // Log the status
-            console.error(textStatus);
-            // Log the error response object
-            console.error(jqXHR);
-            // Log error thrown
-            console.error(errorThrown);
-          }
-        });
-
-      },
-      'click .btn-post': function (e, value, row)
-      {
-        e.preventDefault();
-        var id = row.quotation_id;
-
-        $.ajax({
-          url : 'get_quotation',
-          dataType : 'json',
-          type : 'post',
-          data : {
-            csrf_token_name :
-              $('#postQuotation input[name="csrf_token_name"]').val(),
-            id : id
-          },
-          success : function(data, textStatus, jqXHR) 
-          {
-            $('#postQuotation').modal('show');
-            $('#postQuotation').attr('data-customer-id', id);
-            // $('#customerToRemove').html('Are you sure you want to remove the selected quotation?');
           },
           error : function(jqXHR, textStatus, errorThrown) {
             // Log the status
@@ -426,39 +372,6 @@ $(document).ready(
           },
           success : function(data, textStatus, jqXHR) {
             if(data) {
-              window.location.reload();
-            }
-          },
-          error : function(jqXHR, textStatus, errorThrown) {
-            // Log the status
-            console.error(textStatus);
-            // Log the error response object
-            console.error(jqXHR);
-            // Log error thrown
-            console.error(errorThrown);
-          }
-        });
-      }
-    );
-
-    $('#btnPost').click(
-      function(e) {
-        e.preventDefault();
-        var id = $('#postQuotation').attr('data-customer-id');
-
-        $.ajax({
-          url : 'post_quotation',
-          dataType : 'json',
-          type : 'post',
-          data : {
-            csrf_token_name :
-              $('#postQuotation input[name="csrf_token_name"]').val(),
-            id : id
-          },
-          success : function(data, textStatus, jqXHR) 
-          {
-            if(data) 
-            {
               window.location.reload();
             }
           },
