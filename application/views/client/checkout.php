@@ -209,18 +209,8 @@
                 <div class="col-md-4 checkout_order_summary">
                     <div class="panel px-4">
                         <label><strong>Order Summary</strong></label>
-                        <div class="cart_item d-flex">
-                            <div>
-                              <img src="img/sample.jpg" alt="">
-                            </div>
-                            <div class="col pr-0">
-                              <div class="d-flex">
-                                <div>
-                                  <p>1x Heavenly Platter</p>
-                                </div>
-                                <div class="ml-auto"><span class="cart_item_price">S$28.80</span></div>
-                              </div>
-                            </div> 
+                        <div class="cart_item d-flex" id = "checkout_items">
+                            <!-- display items here-->
                         </div>
                         <hr class="my-3" />
                         <div class="cart_item_subtotal">
