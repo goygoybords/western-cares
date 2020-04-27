@@ -209,10 +209,9 @@
                 <div class="col-md-4 checkout_order_summary">
                     <div class="panel px-4">
                         <label><strong>Order Summary</strong></label>
-                        <div class="cart_item d-flex" id = "checkout_items">
-                            <!-- display items here-->
-                        </div>
-                        <hr class="my-3" />
+                        
+                        <div id = "checkout_items"></div>
+                        <!-- <hr class="my-3" /> -->
                         <div class="cart_item_subtotal">
                             <div class="d-flex">
                               <div class="pb-2"><strong>Subtotal</strong></div>
