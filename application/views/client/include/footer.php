@@ -253,6 +253,7 @@
             );
       });
       
+
       $(".nav-link-bag").click(function(e){
         e.preventDefault();
         if(localStorage.getItem("cartItem") !== null){
@@ -307,6 +308,7 @@
         if(localStorage.getItem("cartItem") !== null){
           alert("removing all items");
           localStorage.clear();
+          cart_count = 0;
         }
         alert("already empty");
       })
@@ -327,9 +329,11 @@
         // change cart count
         cart_count = Number(cart_count) - 1;
         localStorage.setItem("cart_count", cart_count);
-        if(cart_count == null || cart_count == 0){
-        // if empty
-        localStorage.setItem("cart_count", 0);
+        
+        if(cart_count == null || cart_count == 0)
+        {
+          // if empty
+          localStorage.setItem("cart_count", 0);
           $(".nav-link-bag-count").text(cart_count);
           $(".shopping-cart-count").text(cart_count);
           $(".cart_container  #cItems").html(
