@@ -219,8 +219,8 @@ button:focus {
 
 
 /* ==========================================================================
-	 2.4  Pre Loader
-	 ========================================================================== */
+   2.4  Pre Loader
+   ========================================================================== */
 #loader {
   position: fixed;
   top: 0;
@@ -705,6 +705,7 @@ body.cart_open{
 .nav-link.active .lnr:before{
   font-size: 12px;
 }
+
 .navbar .dropdown-menu{
   padding:0px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
@@ -1128,4 +1129,55 @@ body.modal-open{
 }
 select.form-control{
   height: 58px !important;
+}
+.nav-item .form-control{
+  margin-top: 18px;
+    margin-bottom: 18px;
+    line-height: 40px;
+  height: unset !important;
+  color:#0a5fab;
+  border-color:transparent;
+}
+
+.alert_item_added{
+  width: 300px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+  border-radius: 5px;
+  z-index: 9999;
+  top:90px;
+  right: 20px;
+  position: fixed;
+  opacity: 0;
+  display: none;
+  
+ 
+}
+.alert_item_added.showing{
+  display: inline-block;
+  opacity: 1;
+  animation:fadeOut 2s 1;
+  -webkit-animation:fadeOut 2s 1;
+  animation-fill-mode: forwards;
+
+  animation-delay:2s;
+  -webkit-animation-delay:1s; /* Safari and Chrome */
+  -webkit-animation-fill-mode: forwards;
+}
+
+
+@keyframes fadeOut{
+  from {opacity :1;}
+  to {
+    opacity :0;
+    display:none;
+  }
+}
+
+@-webkit-keyframes fadeOut{
+  from {opacity :1;}
+  to {
+    opacity :0;
+    display:none;
+  }
 }

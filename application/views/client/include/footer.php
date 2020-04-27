@@ -1,3 +1,32 @@
+    
+          
+    <!-- item added alert -->
+    <div class="alert_item_added  p-3">
+      <div class="cart_item d-flex">
+        <div id="alert_item_img">
+          <img src="img/sample.jpg" alt="">
+        </div>
+        <div class="col pr-0">
+          <div class="d-flex">
+            <div>
+              <p id="alert_item_code">No item selected</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center">
+            <div id="alert_item_qty"></div>
+            <div class="px-2">&mdash;</div>
+            <div ><span id="alert_item_price"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="cItems"></div>
+      
+    </div>
+
+
+    
+    
     <!-- Footer Section Start -->
     <footer>          
       <div class="container">
@@ -141,6 +170,168 @@
 
         
     </script>
+
+
+    <script> 
+      //set cart count
+      var cart_count = localStorage.getItem("cart_count");
+      if(cart_count == null || cart_count == 0){
+       // if empty
+       localStorage.setItem("cart_count", 0);
+        $(".nav-link-bag-count").text(cart_count);
+        $(".shopping-cart-count").text(cart_count);
+        $(".cart_container  #cItems").html(
+          '<div class="py-4 text-center">'+
+          '<svg width="100px" height="100px" viewBox="0 0 29 36"><title>ShoppingBag</title><path d="M14.549 1a6.563 6.563 0 0 0-6.557 6.557v.159H3.657a.689.689 0 0 0-.683.62L1 30.61C1 33.06 3.202 35 5.914 35H23.19c2.713 0 4.915-1.94 4.915-4.327L26.124 8.337a.683.683 0 0 0-.683-.621h-4.335v-.159A6.563 6.563 0 0 0 14.549 1zm-5.19 6.557a5.193 5.193 0 0 1 5.19-5.19 5.193 5.193 0 0 1 5.19 5.19v.159H9.36v-.159zm15.454 1.525L26.73 30.7c-.02 1.622-1.601 2.933-3.547 2.933H5.914c-1.946 0-3.527-1.311-3.547-2.933L4.285 9.082h3.707v3.162c0 .38.304.683.683.683a.68.68 0 0 0 .683-.683V9.082H19.74v3.162c0 .38.304.683.684.683a.68.68 0 0 0 .683-.683V9.082h3.707z" fill="#d6d6d6" stroke="#d6d6d6" fill-rule="evenodd"></path></svg>'+
+          '<div class=" p-3"><h2>No selected items yet</h2></div>'+
+          '</div>'
+        );
+        $(".cart_item_subtotal").addClass("d-none");
+      } else {
+        $(".nav-link-bag-count").text(cart_count);
+        $(".shopping-cart-count").text(cart_count);
+        $(".cart_item_subtotal").removeClass("d-none");
+      }
+
     
+     
+
+      $("#modal-item-info .add_cart").click(function(){
+        var itemId = $("#modal-item-info").attr("data-customer-id");
+        var itemImgSrc = $("#modal-item-info #specific_image img").attr("src");
+        var itemCode = $("#modal-item-info #specific_item_code").text();
+        var itemQty =  $("#modal-item-info #qty_value").val(); 
+        var itemTotalPrice = $("#modal-item-info #specific_button_price").text();
+
+        // add item to localstorage
+        var aItems = (localStorage.getItem('cartItem')) ? JSON.parse(localStorage.getItem('cartItem')) : [];
+        var item = {
+          id: itemId,
+          name: itemCode,
+          qty: itemQty,
+          price: itemTotalPrice,
+          img: itemImgSrc
+        }
+        
+        aItems.push(item);
+        localStorage.setItem('cartItem', JSON.stringify(aItems)); 
+
+
+        //alert added item
+        $("#alert_item_img img").attr("src",itemImgSrc);
+        $("#alert_item_code").text(itemCode);
+        $("#alert_item_qty").text(itemQty);
+        $("#alert_item_price").text(itemTotalPrice);
+        $(".alert_item_added").addClass("showing");
+        setTimeout(() => {
+          $(".alert_item_added").removeClass("showing");
+        }, 1500);
+        // update cart count
+        cart_count = Number(cart_count) + 1;
+        localStorage.setItem("cart_count", cart_count);
+        $(".nav-link-bag-count").text(cart_count);
+        $(".shopping-cart-count").text(cart_count);
+
+        // show subtotal
+        $(".cart_item_subtotal").removeClass("d-none");
+        
+      });
+
+      $(".nav-link-bag").click(function(e){
+        e.preventDefault();
+        if(localStorage.getItem("cartItem") !== null){
+          // update shopping cart
+          var sItems = localStorage.getItem('cartItem');
+          var oItems = JSON.parse(sItems);
+          // show added items in console
+          console.log(localStorage.getItem('cartItem'), oItems)
+          //update cart list
+          $('#cItems').html("");
+            oItems.map(function(i) {
+            $('#cItems').append(
+              '<hr/><div class="cart_item d-flex">'+
+              '<div>'+
+                '<img src="'+i.img+'" alt="">'+
+              '</div>'+
+              '<div class="col pr-0">'+
+                '<div class="d-flex">'+
+                  '<div>'+
+                    '<p>'+i.name+'</p>'+
+                  '</div>'+
+                  '<div class="ml-auto">'+
+                    '<a onclick="removeArrItem('+i.id+')"  href="javascript:void(0);" class="cart_item_remove_btn">'+
+                      '<svg width="18px" height="18px" viewBox="0 0 32 34"><title>Delete</title><g transform="translate(-4 -2)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><path d="M34.968 7.865a.689.689 0 0 0-.508-.199h-6.842l-1.55-3.696c-.22-.546-.618-1.01-1.193-1.394-.576-.383-1.16-.576-1.75-.576h-7.083c-.59 0-1.173.193-1.749.576-.576.383-.974.848-1.195 1.394l-1.55 3.696h-6.84a.69.69 0 0 0-.509.2.693.693 0 0 0-.199.509V9.79a.69.69 0 0 0 .199.51.691.691 0 0 0 .51.199h2.125v21.073c0 1.225.346 2.269 1.04 3.132C8.567 35.57 9.4 36 10.374 36h18.418c.974 0 1.808-.447 2.502-1.338.692-.895 1.04-1.953 1.04-3.178V10.5h2.126a.69.69 0 0 0 .508-.2.691.691 0 0 0 .199-.509V8.375a.694.694 0 0 0-.2-.51zM15.71 5.077a.627.627 0 0 1 .376-.245h7.017c.148.031.274.112.376.245l1.062 2.59h-9.916l1.085-2.59zM29.5 31.484c0 .325-.051.624-.155.897-.103.273-.21.472-.32.597-.111.126-.188.189-.233.189H10.375c-.044 0-.121-.063-.233-.189-.11-.125-.217-.324-.32-.597a2.507 2.507 0 0 1-.154-.897V10.5H29.5v20.984zm-16.292-2.567h1.417a.689.689 0 0 0 .51-.199.691.691 0 0 0 .198-.51v-12.75a.69.69 0 0 0-.199-.509.689.689 0 0 0-.51-.199h-1.416a.692.692 0 0 0-.51.2.696.696 0 0 0-.198.509v12.75c0 .207.066.375.199.51a.692.692 0 0 0 .509.198zm5.668 0h1.416a.689.689 0 0 0 .508-.199.687.687 0 0 0 .2-.51v-12.75a.686.686 0 0 0-.2-.509.689.689 0 0 0-.508-.199h-1.416a.689.689 0 0 0-.51.2.69.69 0 0 0-.199.509v12.75c0 .207.066.375.2.51a.689.689 0 0 0 .509.198zm5.665 0h1.417a.689.689 0 0 0 .51-.199.691.691 0 0 0 .199-.51v-12.75a.69.69 0 0 0-.2-.509.689.689 0 0 0-.509-.199h-1.417a.687.687 0 0 0-.508.2.687.687 0 0 0-.2.509v12.75c0 .207.066.375.2.51a.687.687 0 0 0 .508.198z" fill="#212121"></path></g></svg>'+
+                    '</a>'+
+                  '</div>'+
+                '</div>'+
+                '<div class="d-flex align-items-center">'+
+                  '<div>'+
+                    '<button class="btn">'+
+                      '<svg width="18px" height="18px" viewBox="0 0 29 4"><title>Minus</title><g transform="translate(-5 -18)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><rect fill="currentColor" x="5" y="18" width="29" height="4" rx="2"></rect></g></svg>'+
+                    '</button>'+
+                  '</div>'+
+                  '<div>'+
+                    '<input type="text" value="'+i.qty+'" placeholder="1">'+
+                  '</div>'+
+                  '<div>'+
+                    '<button class="btn">'+
+                      '<svg width="18px" height="18px" viewBox="0 0 29 29"><title>Plus</title><g transform="translate(-5 -5)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><g stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M7 19.5h25M19.5 7v25"></path></g></g></svg>'+
+                    '</button>'+
+                  '</div>'+
+                  '<div class="ml-auto"><span class="cart_item_price">'+i.price+'</span></div>'+
+                '</div>'+
+              '</div>'+
+              '</div>'
+              );
+          })
+        }
+      })
+      
+      $(".cart_clear_btn").click(function(){
+        if(localStorage.getItem("cartItem") !== null){
+          alert("removing all items");
+          localStorage.clear();
+        }
+        alert("already empty");
+      })
+
+      function removeArrItem(target){
+        var targetID = target; 
+        alert("deleting item: "+targetID);
+        var getStoredItem = localStorage.getItem('cartItem'); 
+        var getItemArr = JSON.parse(getStoredItem);
+
+        for(var i = 0; i < getItemArr.length; i++){ 
+          if (getItemArr[i].id == targetID){ 
+            getItemArr.splice(i, 1); 
+            localStorage.setItem('cartItem', JSON.stringify(getItemArr)); 
+          }
+        }
+
+        // change cart count
+        cart_count = Number(cart_count) - 1;
+        localStorage.setItem("cart_count", cart_count);
+        if(cart_count == null || cart_count == 0){
+        // if empty
+        localStorage.setItem("cart_count", 0);
+          $(".nav-link-bag-count").text(cart_count);
+          $(".shopping-cart-count").text(cart_count);
+          $(".cart_container  #cItems").html(
+            '<div class="py-4 text-center">'+
+            '<svg width="100px" height="100px" viewBox="0 0 29 36"><title>ShoppingBag</title><path d="M14.549 1a6.563 6.563 0 0 0-6.557 6.557v.159H3.657a.689.689 0 0 0-.683.62L1 30.61C1 33.06 3.202 35 5.914 35H23.19c2.713 0 4.915-1.94 4.915-4.327L26.124 8.337a.683.683 0 0 0-.683-.621h-4.335v-.159A6.563 6.563 0 0 0 14.549 1zm-5.19 6.557a5.193 5.193 0 0 1 5.19-5.19 5.193 5.193 0 0 1 5.19 5.19v.159H9.36v-.159zm15.454 1.525L26.73 30.7c-.02 1.622-1.601 2.933-3.547 2.933H5.914c-1.946 0-3.527-1.311-3.547-2.933L4.285 9.082h3.707v3.162c0 .38.304.683.683.683a.68.68 0 0 0 .683-.683V9.082H19.74v3.162c0 .38.304.683.684.683a.68.68 0 0 0 .683-.683V9.082h3.707z" fill="#d6d6d6" stroke="#d6d6d6" fill-rule="evenodd"></path></svg>'+
+            '<div class=" p-3"><h2>No selected items yet</h2></div>'+
+            '</div>'
+          );
+          $(".cart_item_subtotal").addClass("d-none");
+        } else {
+          $(".nav-link-bag-count").text(cart_count);
+          $(".shopping-cart-count").text(cart_count);
+          $(".cart_item_subtotal").removeClass("d-none");
+        }
+      }
+
+    </script>
+
+        
   </body>
 </html>
