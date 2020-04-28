@@ -215,18 +215,28 @@
                         <div class="cart_item_subtotal">
                             <div class="d-flex">
                               <div class="pb-2"><strong>Subtotal</strong></div>
-                              <div class="ml-auto"><strong>S$145.00</strong></div>
+                              <div class="ml-auto">
+                                <strong>
+                                    <label id = "subtotal_currency">Php</label>
+                                    <label id = "subtotal_price">0.00</label>
+                                </strong>
+                                </div>
                             </div>
-                            <div class="d-flex">
+                            <!-- <div class="d-flex">
                               <div class="pb-2">GST (Inclusive)</div>
                               <div class="ml-auto">S$1.88</div>
-                            </div>
+                            </div> -->
                         </div>
                         <hr class="my-3"/>
                         <div class="cart_item_subtotal p2-4">
                             <div class="d-flex">
                               <div class="pb-2"><strong>Total</strong></div>
-                              <div class="ml-auto"><strong>S$28.80</strong></div>
+                              <div class="ml-auto">
+                                <strong>
+                                    <label id = "total_currency">Php</label>
+                                    <label id = "total_price">0.00</label>
+                                </strong>
+                              </div>
                             </div>
                         </div>
                     </div>
