@@ -41,13 +41,6 @@
                 <a class="nav-link" href="<?=base_url();?>store-information">Store Information</a>
               </li>
               <li class="nav-item">
-                  <span>
-                      <select class=" form-control" id = "countries">
-                        <option>Philippines</option>
-                      </select>
-                  </span>
-              </li>
-              <li class="nav-item">
                 <!-- <a class="nav-link active" id = "login-tab" href="#modal-login" data-toggle="modal"> -->
                   <?php if($this->session->userdata('isLogged') == TRUE): ?>
                     <div class="dropdown">
@@ -67,7 +60,15 @@
                     <a class="nav-link active" id = "login-tab" >Log In / Sign Up</a>
                   <?php endif; ?>
               </li>
-              
+              <li class="nav-item mr-2">
+                  <span>
+                      <select class=" form-control" id = "countries">
+                        <option>Philippine Peso</option>
+                        <option>US Dollar</option>
+                        <option>Chinese Yuan</option>
+                      </select>
+                  </span>
+              </li>
               <li class="nav-item">
                 <a class="nav-link nav-link-bag" href="#">
                   <span class="nav-link-bag-count">0</span>
