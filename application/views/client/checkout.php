@@ -217,10 +217,10 @@
                               <div class="pb-2"><strong>Subtotal</strong></div>
                               <div class="ml-auto">
                                 <strong>
-                                    <label id = "subtotal_currency">Php</label>
-                                    <label id = "subtotal_price">0.00</label>
+                                    <label id = "checkout_subtotal_currency">Php</label>
+                                    <label id = "checkout_subtotal_price">0.00</label>
                                 </strong>
-                                </div>
+                              </div>
                             </div>
                             <!-- <div class="d-flex">
                               <div class="pb-2">GST (Inclusive)</div>
@@ -233,8 +233,8 @@
                               <div class="pb-2"><strong>Total</strong></div>
                               <div class="ml-auto">
                                 <strong>
-                                    <label id = "total_currency">Php</label>
-                                    <label id = "total_price">0.00</label>
+                                    <label id = "checkout_total_currency">Php</label>
+                                    <label id = "checkout_total_price">0.00</label>
                                 </strong>
                               </div>
                             </div>

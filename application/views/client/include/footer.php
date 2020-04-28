@@ -199,6 +199,31 @@
         $("#shop-cart-tot-price").text(localStorage.getItem("total"));
       }
 
+      //checkout page portion
+      $("#checkout_subtotal_price").text(localStorage.getItem("subtotal"));
+      $("#checkout_total_price").text(localStorage.getItem("total"));
+
+      var sItems = localStorage.getItem('cartItem');
+      var oItems = JSON.parse(sItems);
+
+      oItems.map(function(i) 
+      {
+          $("#checkout_items").append(
+            `<div class="cart_item d-flex" >
+                <div>` + `<img src= "`+ i.img +`" alt=""> </div>
+                  <div class="col pr-0">
+                  <div class="d-flex"><div><p>` + i.qty + 'x' + i.name + `</p></div>
+                      <div class="ml-auto">
+                        <span class="cart_item_price">`+ i.price +`</span>
+                      </div>
+                  </div>
+                </div> 
+            </div>
+            <hr class="my-3" />`
+            );
+      });
+      //end of checkout items page disply
+    
       $("#modal-item-info .add_cart").click(function()
       {
         var itemId = $("#modal-item-info").attr("data-customer-id");
@@ -250,27 +275,6 @@
         //set to 1 counter
         $("#qty_value").val(1);
       });
-
-      var sItems = localStorage.getItem('cartItem');
-      var oItems = JSON.parse(sItems);
-
-      oItems.map(function(i) 
-      {
-          $("#checkout_items").append(
-            `<div class="cart_item d-flex" >
-                <div>` + `<img src= "`+ i.img +`" alt=""> </div>
-                  <div class="col pr-0">
-                  <div class="d-flex"><div><p>` + i.qty + 'x' + i.name + `</p></div>
-                      <div class="ml-auto">
-                        <span class="cart_item_price">`+ i.price +`</span>
-                      </div>
-                  </div>
-                </div> 
-            </div>
-            <hr class="my-3" />`
-            );
-      });
-      
 
       $(".nav-link-bag").click(function(e)
       {
