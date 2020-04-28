@@ -301,20 +301,24 @@
 
       function removeArrItem(target)
       {
+        console.log("remove item function");
         var targetID = target; 
-        alert("deleting item: "+targetID);
         var getStoredItem = localStorage.getItem('cartItem'); 
         var getItemArr = JSON.parse(getStoredItem);
-
-        for(var i = 0; i < getItemArr.length; i++){ 
-          if (getItemArr[i].id == targetID){ 
+        var quantity = 0;
+        
+        for(var i = 0; i < getItemArr.length; i++)
+        { 
+          if (getItemArr[i].id == targetID)
+          { 
+            quantity = getItemArr[i].qty;
             getItemArr.splice(i, 1); 
             localStorage.setItem('cartItem', JSON.stringify(getItemArr)); 
+            
           }
         }
-
         // change cart count
-        cart_count = Number(cart_count) - 1;
+        cart_count = Number(cart_count) - quantity;
         localStorage.setItem("cart_count", cart_count);
         
         if(cart_count == null || cart_count == 0)
