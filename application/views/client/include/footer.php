@@ -196,6 +196,7 @@
         $(".cart_item_subtotal").removeClass("d-none");
 
         $("#shop-cart-sub-price").text(localStorage.getItem("subtotal"));
+        $("#shop-cart-tot-price").text(localStorage.getItem("total"));
       }
 
       $("#modal-item-info .add_cart").click(function()
@@ -206,6 +207,7 @@
         var itemQty =  $("#modal-item-info #qty_value").val(); 
         var itemTotalPrice = $("#modal-item-info #specific_button_price").text();
         var subtotal = $("#shop-cart-sub-price").text();
+        var total = $("#shop-cart-tot-price").text();
 
         // add item to localstorage
         var aItems = (localStorage.getItem('cartItem')) ? JSON.parse(localStorage.getItem('cartItem')) : [];
@@ -234,14 +236,19 @@
         localStorage.setItem("cart_count", cart_count);
         $(".nav-link-bag-count").text(cart_count);
         $(".shopping-cart-count").text(cart_count);
-
         // show subtotal
         $(".cart_item_subtotal").removeClass("d-none");
         subtotal = parseFloat(subtotal) + parseFloat(itemTotalPrice);
+        total = parseFloat(subtotal);
         
         $("#shop-cart-sub-price").text(subtotal.toFixed(2));
+        $("#shop-cart-tot-price").text(total.toFixed(2));
+
         localStorage.setItem('subtotal', subtotal.toFixed(2)); 
-        
+        localStorage.setItem('total', total); 
+
+        //set to 1 counter
+        $("#qty_value").val(1);
       });
 
       var sItems = localStorage.getItem('cartItem');
@@ -274,7 +281,7 @@
           var sItems = localStorage.getItem('cartItem');
           var oItems = JSON.parse(sItems);
           // show added items in console
-          console.log(localStorage.getItem('cartItem'), oItems)
+          // console.log(localStorage.getItem('cartItem'), oItems)
           //update cart list
           $('#cItems').html("");
           oItems.map(function(i) { $('#cItems').append(populateTable(i)); })
@@ -283,7 +290,6 @@
       
       $(".cart_clear_btn").click(function()
       {
-          console.log("removing items");
           localStorage.clear();
           cart_count = 0;
           $(".nav-link-bag-count").text(cart_count);
@@ -296,31 +302,43 @@
           $(".cart_item_subtotal").addClass("d-none");
           localStorage.setItem("cart_count", 0);
           localStorage.setItem("subtotal", 0);
+          localStorage.setItem('total', 0);
           $("#shop-cart-sub-price").text("0.00");
+          $("#shop-cart-tot-price").text("0.00");
       })
 
       function removeArrItem(target)
       {
-        console.log("remove item function");
         var targetID = target; 
         var getStoredItem = localStorage.getItem('cartItem'); 
         var getItemArr = JSON.parse(getStoredItem);
         var quantity = 0;
-        
+        var subtotal = $("#shop-cart-sub-price").text();
+        var total = $("#shop-cart-tot-price").text();
+        var subtotal_computation = 0;
+        var total_computation = 0;
+
         for(var i = 0; i < getItemArr.length; i++)
         { 
           if (getItemArr[i].id == targetID)
           { 
             quantity = getItemArr[i].qty;
+            subtotal_computation = parseFloat(subtotal) - getItemArr[i].price;
+            total_computation = parseFloat(subtotal) - getItemArr[i].price;
             getItemArr.splice(i, 1); 
-            localStorage.setItem('cartItem', JSON.stringify(getItemArr)); 
-            
+            localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
           }
         }
+
         // change cart count
+        $("#shop-cart-sub-price").text(subtotal_computation.toFixed(2));
+        $("#shop-cart-tot-price").text(total_computation.toFixed(2));
+
         cart_count = Number(cart_count) - quantity;
         localStorage.setItem("cart_count", cart_count);
-        
+        localStorage.setItem("subtotal", subtotal_computation.toFixed(2));
+        localStorage.setItem('total', total_computation.toFixed(2));
+
         if(cart_count == null || cart_count == 0)
         {
           // if empty
