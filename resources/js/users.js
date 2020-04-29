@@ -4,6 +4,7 @@ $(document).ready(
     $(".login-tab").click(
       function(e)
       {
+        $("body").removeClass("cart_open");
         $('#modal-login').modal('show');
       });
 
@@ -15,6 +16,11 @@ $(document).ready(
         $('#modal-signup').modal('show');
       });
 
+    // $(".qty_counter_cart").on("click", function () 
+    //   {
+    //     alert("Test");
+    //   });
+    
     $(".qty_counter").on("click", function () 
       {
           var $button = $(this);

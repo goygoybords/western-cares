@@ -120,30 +120,15 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.counterup.min.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.magnific-popup.min.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/waypoints.min.js"></script>    
-    <!-- <script type="text/javascript" src="<?=base_url();?>resources/js/form-validator.min.js"></script>
-    <script type="text/javascript" src="<?=base_url();?>resources/js/contact-form-script.js"></script>  -->  
     <script type="text/javascript" src="<?=base_url();?>resources/js/main.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/users.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/bootstrap-formhelpers.min.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave-phone.i18n.js"></script>
-    <script type="text/javascript" src="<?=base_url();?>resources/js/money.min.js"></script>
 
     <script type="text/javascript">
       $(function(ready)
       {
-        // fx.base = "PHP";
-        //   fx.rates = {
-        //     "EUR" : 0.745101, // eg. 1 USD === 0.745101 EUR
-        //     "GBP" : 0.647710, // etc...
-        //     "HKD" : 7.781919,
-        //     "USD" : 56,        // always include the base rate (1:1)
-        //     /* etc */
-        //   }
-
-        // var rate = fx(60).from("PHP").to("USD");
-        // console.log(rate.toFixed(2));
         var cleave = new Cleave('#contactnumber', 
         {
             phone: true,
@@ -293,6 +278,8 @@
           oItems.map(function(i) { $('#cItems').append(populateTable(i)); })
         }
       })
+
+
       
       $(".cart_clear_btn").click(function()
       {
@@ -400,15 +387,15 @@
                 '</div>'+
                 '<div class="d-flex align-items-center">'+
                   '<div>'+
-                    '<button class="btn">'+
+                    '<button class="btn" onclick="myFunction(this)">'+
                       '<svg width="18px" height="18px" viewBox="0 0 29 4"><title>Minus</title><g transform="translate(-5 -18)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><rect fill="currentColor" x="5" y="18" width="29" height="4" rx="2"></rect></g></svg>'+
                     '</button>'+
                   '</div>'+
                   '<div>'+
-                    '<input type="text" value="'+i.qty+'" placeholder="1">'+
+                    '<input type="text" value="'+i.qty+'" id = "qty_value_cart" placeholder="1">'+
                   '</div>'+
                   '<div>'+
-                    '<button class="btn">'+
+                    '<button class="btn" onclick="myFunction(this)">'+
                       '<svg width="18px" height="18px" viewBox="0 0 29 29"><title>Plus</title><g transform="translate(-5 -5)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><g stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M7 19.5h25M19.5 7v25"></path></g></g></svg>'+
                     '</button>'+
                   '</div>'+
@@ -418,6 +405,17 @@
               '</div>'
       }
 
+      function myFunction(obj) 
+      {
+        var id = $(obj).id;
+        var t = $(obj).text();
+        var oldValue = $("#qty_value_cart").val();
+        var button_cart = $("#specific_button_price").text();
+        var price = $(".cart_item_price").text();
+        alert(price + " ");
+        //if ($.trim($button.text()) == "Plus") 
+
+     }
     </script>
 
         
