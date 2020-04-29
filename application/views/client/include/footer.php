@@ -110,8 +110,7 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/nivo-lightbox.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/owl.carousel.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.stellar.min.js"></script>    
-    <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.nav.js"></script>    
-    <script type="text/javascript" src="<?=base_url();?>resources/js/scrolling-nav.js"></script>    
+    <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.nav.js"></script>      
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.easing.min.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/smoothscroll.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.slicknav.js"></script>     
@@ -125,6 +124,10 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/bootstrap-formhelpers.min.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/cleave-phone.i18n.js"></script>
+    
+    <?php if (isset($_SERVER['PATH_INFO']) != '/checkout'): ?> 
+      <script type="text/javascript" src="<?=base_url();?>resources/js/scrolling-nav.js"></script> 
+    <?php endif; ?>
 
     <script type="text/javascript">
       $(function(ready)
@@ -152,10 +155,7 @@
           cleave_edit.setRawValue('');
         });
       });
-
-        
     </script>
-
 
     <script> 
       //set cart count
@@ -414,8 +414,56 @@
         var price = $(".cart_item_price").text();
         alert(price + " ");
         //if ($.trim($button.text()) == "Plus") 
-
      }
+
+
+     $('#checkout_button').click(
+      function(e) 
+      {
+        e.preventDefault();
+        var total_amount = localStorage.getItem('total'); 
+        var getStoredItem = localStorage.getItem('cartItem'); 
+        var getItemArr = JSON.parse(getStoredItem);
+        var id = $("#checkout_form").attr('data-id');
+       
+        var obj = {
+            order_items : getItemArr,
+            ship_name: $("#ship_name").val(),
+            ship_address: $("#ship_address").val(),
+            ship_countrycode: $("#ship_countrycode").val(),
+            ship_contact_number: $("#ship_contactnumber").val(),
+            checkout_remarks: $("#checkout_remarks").val(),
+            payment_method: $('input[name="payment_method"]:checked').val(),
+            user_id : id,
+            total_amount: total_amount,
+            csrf_token_name : $.cookie('csrf_cookie_name'),
+          }
+
+          $.ajax({
+            data : obj,
+            //dataType : 'json',
+            type : 'post',
+            url : 'users/store_order',
+            success : function(data) 
+            {
+                console.log(data);
+              
+            },
+            error : function(jqXHR, textStatus, errorThrown) 
+            {
+              // Log the status
+              console.error(textStatus);
+              // Log the error response object
+              console.error(jqXHR);
+              // Log error thrown
+              console.error(errorThrown);
+            }
+          });
+       
+      }
+    );
+
+
     </script>
 
         

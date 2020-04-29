@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Orders extends CI_Model 
 {
-  const _TABLE_NAME = 'transaction';
+  const _TABLE_NAME = 'transactions';
   const _TRANSACTION_ID = 'transaction_id';
   const _REF_NUM_1 = 'ref_num_1';
   const _REF_NUM_2 = 'ref_num_2';
@@ -24,7 +24,7 @@ class Orders extends CI_Model
 
   public function add($productInfo) 
   {
-    $this->db->insert(Quotations::_TABLE_NAME, $productInfo);
+    $this->db->insert(Orders::_TABLE_NAME, $productInfo);
     return $this->db->insert_id();
   }
 

@@ -7,6 +7,7 @@ class Users extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('users_model');
+		$this->load->model('orders');
 	}
 
 	public function register()
@@ -177,5 +178,50 @@ class Users extends CI_Controller
 			// Redirect to the login page if it is not an AJAX request
 			redirect('', 'refresh');
 		}
-	}                  
+	}              
+
+	public function store_order() 
+	{
+		$sql = $this->db->query("SELECT transaction_id as id FROM transactions WHERE
+		transaction_type = 'Sales' ");
+		$count = count($sql->result()) + 1;
+		$transactionNumber = "ST-".str_pad($count, 7, "0", STR_PAD_LEFT);
+
+		$salesInfo['transaction_type'] = "Sales";
+		$salesInfo['ref_num_1'] = $transactionNumber;
+		$salesInfo['transaction_date'] = date('Y-m-d');
+		$salesInfo['client_id'] = $this->input->post('user_id');
+		$salesInfo["ship_name"] = $this->input->post('ship_name');
+		$salesInfo['ship_address'] = $this->input->post('ship_address');
+		$salesInfo['ship_countrycode'] = $this->input->post('ship_countrycode');
+
+		$salesInfo['ship_contact_number'] = $this->input->post('ship_contact_number');
+		$salesInfo['total_amount'] = $this->input->post('total_amount');
+		$salesInfo['remarks'] = $this->input->post('checkout_remarks');
+		$salesInfo['payment_method'] = $this->input->post('payment_method');
+
+
+		$salesInfo['removed'] = 0;
+		$salesInfo['status'] = 'POSTED';
+		$resultSalesInfo = $this->orders->add($salesInfo);
+
+		// if($resultSalesInfo)
+		// {
+		// 	//For Sales Items
+		// 	$salesItemsRecord = $this->input->post('order_items');
+		// 	if(!empty($salesItemsRecord))
+		// 	{
+		// 		for ($i = 0; $i < count($salesItemsRecord); $i++) 
+		// 		{
+		// 			$salesItemsInfo[Transaction_Items_table::_TRANSACTION_ID] = $resultSalesInfo;
+		// 			$salesItemsInfo[Transaction_Items_table::_LOADED_ITEM] = $salesItemsRecord[$i]['item_name'];
+		// 			$salesItemsInfo[Transaction_Items_table::_QUANTITY] = $salesItemsRecord[$i]['quantity'];
+		// 			$salesItemsInfo[Transaction_Items_table::_LOADED_UOM] = $salesItemsRecord[$i]['uom'];
+		// 			$resultSalesItemsInfo = $this->sales_model->add_sales_items($salesItemsInfo);
+	 // 			}
+ 	// 		}
+		// }
+	
+		echo json_encode("sucess: order-created");
+	}              
 }

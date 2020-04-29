@@ -1,6 +1,7 @@
 <?php $this->load->view('client/include/header');?>
     
     <section class="section checkout_section">
+    <form method="POST" id = "checkout_form" data-id = "<?php echo $this->session->userdata('userID');?>">
         <div class="container">
             <div class="pt-4">
               <a href="<?php echo base_url(); ?>" class="text-white"><i class="lnr lnr-arrow-left mr-2"></i> <u>Continue Shopping</u></a>
@@ -28,7 +29,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <p>Store Name</p>
-                                        <p>Western Cares - 18@Tai Seng</p>
+                                        <p>Savers Medical - 18@Tai Seng</p>
                                     </div>
                                     <div class="col-md-6">
                                         <p>Store Address</p>
@@ -61,7 +62,7 @@
                                             <div class="d-flex">
                                                 <div>
                                                     <?php $code = $this->session->userdata('country_code');?>
-                                                    <select class="form-control form-control-gray" id = "">
+                                                    <select class="form-control form-control-gray" id = "" readonly>
                                                         
                                                         <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
                                                         <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
@@ -73,10 +74,6 @@
                                                     <label>Phone Number</label>
                                             
                                                 </div>
-                                                <!-- <div class="col px-0 pos-relative">
-                                                    <input class="form-control form-control-gray" value="" required type="text">
-                                                    <label>Phone Number</label>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -107,13 +104,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group  ">
-                                            <input class="form-control form-control-gray" value="" required type="text" >
+                                            <input class="form-control" id = "ship_name" name="ship_name" value="" type="text" >
                                             <label>Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-gray" value="" required type="text" >
+                                            <input class="form-control" id = "ship_address" name = "ship_address" type="text" >
                                             <label>Address</label>
                                         </div>
                                     </div>
@@ -121,18 +118,15 @@
                                         <div class="form-group">
                                             <div class="d-flex">
                                                 <div>
-                                                    <?php $code = $this->session->userdata('country_code');?>
-                                                    <select class="form-control form-control-gray" id = "">
-                                                        
-                                                        <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
-                                                        <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
-                                                        <option value="CH" <?php if($code=="CH") echo 'selected="selected"'; ?> >CH</option>
+                                                    <select class="form-control" id = "ship_countrycode">
+                                                        <option value="PH">PH</option>
+                                                        <option value="US">US</option>
+                                                        <option value="CH">CH</option>
                                                     </select>
                                                 </div>
                                                 <div class="col px-0 pos-relative">
-                                                    <input type="text" class="form-control form-control-gray" name = "checkoutContactNumber" value="<?php echo $this->session->userdata('contactnumber');?>" id = "checkoutContactNumber" readonly>
+                                                    <input type="text" class="form-control" name = "ship_contactnumber" id = "ship_contactnumber">
                                                     <label>Phone Number</label>
-                                            
                                                 </div>
                                             </div>
                                         </div>
@@ -151,16 +145,9 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label><strong>Customer Remarks</strong></label>
-                                        <textarea placeholder="Customer Remarks or Pickup/Delivery Instructions" class="form-control" rows="5"></textarea>
+                                        <textarea placeholder="Customer Remarks or Pickup/Delivery Instructions" class="form-control" id = "checkout_remarks" rows="5"></textarea>
                                     </div>
                                 </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="py-4">
-                                            <button class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                         <hr class="mt-4 mb-4">
@@ -174,7 +161,7 @@
                                         <label><strong>Select Payment Method</strong></label>
                                         <label for="pm_cod" class="form-radio cursor-pointer d-flex align-items-center">
                                             <div>
-                                                <input id="pm_cod" type="radio" name="payment_medthod">
+                                                <input id="payment_method" type="radio" name="payment_method" value="COD">
                                             </div>
                                             <div class="col">
                                                 Cash on Delivery
@@ -182,34 +169,35 @@
                                         </label>
                                         <label for="pm_gcash" class="form-radio cursor-pointer d-flex align-items-center">
                                             <div>
-                                                <input id="pm_gcash" type="radio" name="payment_medthod">
+                                                <input id="payment_method" type="radio" name="payment_method" value="GCASH">
                                             </div>
                                             <div class="col">
                                                 Gcash
                                             </div>
                                         </label>
+                                        <label for="pm_paymaya" class="form-radio cursor-pointer d-flex align-items-center">
+                                            <div>
+                                                <input id="payment_method" type="radio" name="payment_method" value="PAYMAYA">
+                                            </div>
+                                            <div class="col">
+                                                Paymaya
+                                            </div>
+                                        </label>
                                         <label for="pm_wechat" class="form-radio cursor-pointer d-flex align-items-center">
                                             <div>
-                                                <input id="pm_wechat" type="radio" name="payment_medthod">
+                                                <input id="payment_method" type="radio" name="payment_method" value="WECHAT">
                                             </div>
                                             <div class="col">
                                                 Wechat
                                             </div>
                                         </label>
-                                        <label for="pm_alipay" class="form-radio cursor-pointer d-flex align-items-center">
-                                            <div>
-                                                <input id="pm_alipay" type="radio" name="payment_medthod">
-                                            </div>
-                                            <div class="col">
-                                                Alipay
-                                            </div>
-                                        </label>
+                                        
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <br>
 
-                                            <div class="px-3 py-2">
+                                            <!-- <div class="px-3 py-2">
                                                 <label class="form-check cursor-pointer">
                                                     <input type="checkbox" class="form-check-input" id="check_accept">
                                                     <span class="checkmark"></span>
@@ -220,7 +208,7 @@
                                                         <a href="#"><u>Privacy Policy</u></a>
                                                     </label>
                                                 </label>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <!-- <div class="col-md-12">
                                             <div class="px-3 py-2">
@@ -236,7 +224,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="py-4">
-                                            <button class="btn btn-primary">Submit</button>
+                                            <button class="btn btn-primary" id ="checkout_button">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -281,7 +269,7 @@
                 </div>
             </div>
         </div>
-
+    </form>
     </section>
     <br/>
     <?php $this->load->view('client/include/footer'); ?>
