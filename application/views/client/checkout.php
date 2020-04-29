@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <hr class="mt-3 mb-3">
+                                <hr class="mt-3 mb-3">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="form-check cursor-pointer">
@@ -96,24 +96,25 @@
                                             <label class="form-check-label" for="check_ff">This is for my friends or family</label>
                                         </label>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             <!-- other receiver to get the item -->
-                            <!-- <div class="px-3 pt-3"> 
+                            <div class = "ship_to d-none">
+                            <div class="px-3 pt-3"> 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h2 class="pb-4">Ship To Details</h2>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group  ">
-                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('name');?>" required type="text" readonly>
+                                            <input class="form-control form-control-gray" value="" required type="text" >
                                             <label>Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('email');?>" required type="email" readonly>
-                                            <label>Email</label>
+                                            <input class="form-control form-control-gray" value="" required type="text" >
+                                            <label>Address</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -136,14 +137,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input class="form-control" value="<?php echo $this->session->userdata('company');?>" required type="text">
-                                            <label>Organization Name (optional)</label>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div> -->
+                            </div>
+                            </div >
                             <!-- other receiver to get the item -->
                         </div>
                         <hr class="mt-4 mb-4">

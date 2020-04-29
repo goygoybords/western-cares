@@ -60,6 +60,18 @@ $(document).ready(
           $("#qty_value").val(newVal);
         });
 
+        $('#check_ff').click(function()
+          {
+            if($(this).prop("checked") == true)
+            {
+                $(".ship_to").removeClass("d-none");
+            }
+            else
+            {
+                $(".ship_to").addClass("d-none");
+            }
+        });
+
     $('#registerButton').click(
       function(e) {
         // Prevent default action of button
