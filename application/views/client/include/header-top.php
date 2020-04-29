@@ -57,7 +57,7 @@
                         </div>
                     </div>
                   <?php else: ?>
-                    <a class="nav-link active" id = "login-tab" >Log In / Sign Up</a>
+                    <a class="nav-link active login-tab">Log In / Sign Up</a>
                   <?php endif; ?>
               </li>
               <li class="nav-item mr-2">

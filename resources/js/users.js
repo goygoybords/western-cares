@@ -1,7 +1,7 @@
 $(document).ready(
   function() 
   {
-    $("#login-tab").click(
+    $(".login-tab").click(
       function(e)
       {
         $('#modal-login').modal('show');

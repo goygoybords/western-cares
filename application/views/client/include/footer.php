@@ -120,8 +120,8 @@
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.counterup.min.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/jquery.magnific-popup.min.js"></script>    
     <script type="text/javascript" src="<?=base_url();?>resources/js/waypoints.min.js"></script>    
-    <script type="text/javascript" src="<?=base_url();?>resources/js/form-validator.min.js"></script>
-    <script type="text/javascript" src="<?=base_url();?>resources/js/contact-form-script.js"></script>   
+    <!-- <script type="text/javascript" src="<?=base_url();?>resources/js/form-validator.min.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>resources/js/contact-form-script.js"></script>  -->  
     <script type="text/javascript" src="<?=base_url();?>resources/js/main.js"></script>
     <script type="text/javascript" src="<?=base_url();?>resources/js/users.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -133,17 +133,17 @@
     <script type="text/javascript">
       $(function(ready)
       {
-        fx.base = "PHP";
-          fx.rates = {
-            "EUR" : 0.745101, // eg. 1 USD === 0.745101 EUR
-            "GBP" : 0.647710, // etc...
-            "HKD" : 7.781919,
-            "USD" : 56,        // always include the base rate (1:1)
-            /* etc */
-          }
+        // fx.base = "PHP";
+        //   fx.rates = {
+        //     "EUR" : 0.745101, // eg. 1 USD === 0.745101 EUR
+        //     "GBP" : 0.647710, // etc...
+        //     "HKD" : 7.781919,
+        //     "USD" : 56,        // always include the base rate (1:1)
+        //     /* etc */
+        //   }
 
-        var rate = fx(60).from("PHP").to("USD");
-        console.log(rate.toFixed(2));
+        // var rate = fx(60).from("PHP").to("USD");
+        // console.log(rate.toFixed(2));
         var cleave = new Cleave('#contactnumber', 
         {
             phone: true,
@@ -205,23 +205,25 @@
 
       var sItems = localStorage.getItem('cartItem');
       var oItems = JSON.parse(sItems);
-
-      oItems.map(function(i) 
+      if(sItems != null)
       {
-          $("#checkout_items").append(
-            `<div class="cart_item d-flex" >
-                <div>` + `<img src= "`+ i.img +`" alt=""> </div>
-                  <div class="col pr-0">
-                  <div class="d-flex"><div><p>` + i.qty + 'x' + i.name + `</p></div>
-                      <div class="ml-auto">
-                        <span class="cart_item_price">`+ i.price +`</span>
-                      </div>
-                  </div>
-                </div> 
-            </div>
-            <hr class="my-3" />`
-            );
-      });
+        oItems.map(function(i) 
+        {
+            $("#checkout_items").append(
+              `<div class="cart_item d-flex" >
+                  <div>` + `<img src= "`+ i.img +`" alt=""> </div>
+                    <div class="col pr-0">
+                    <div class="d-flex"><div><p>` + i.qty + 'x' + i.name + `</p></div>
+                        <div class="ml-auto">
+                          <span class="cart_item_price">`+ i.price +`</span>
+                        </div>
+                    </div>
+                  </div> 
+              </div>
+              <hr class="my-3" />`
+              );
+        });
+      }
       //end of checkout items page disply
     
       $("#modal-item-info .add_cart").click(function()
@@ -270,7 +272,7 @@
         $("#shop-cart-tot-price").text(total.toFixed(2));
 
         localStorage.setItem('subtotal', subtotal.toFixed(2)); 
-        localStorage.setItem('total', total); 
+        localStorage.setItem('total', total.toFixed(2)); 
 
         //set to 1 counter
         $("#qty_value").val(1);

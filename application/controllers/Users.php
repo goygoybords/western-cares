@@ -157,6 +157,8 @@ class Users extends CI_Controller
 					$this->session->set_userdata('name', $result['first_name'] . ' ' .$result['last_name']);
 			 		$this->session->set_userdata('email', $result['email']);
 			 		$this->session->set_userdata('role', $result['role']);
+			 		$this->session->set_userdata('company', $result['company_name']);
+			 		$this->session->set_userdata('contactnumber', $result['contactnumber']);
 				} 
 				else 
 				{

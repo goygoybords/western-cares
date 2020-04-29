@@ -26,6 +26,8 @@ class Users_model extends CI_Model
       Users_table::_ROLE,
       Users_table::_USERNAME,
       'country_code',
+      'company_name',
+      'contactnumber',
     )));
     $this->db->from(Users_table::_TABLE_NAME);
     $this->db->where(Users_table::_EMAIL, $email);
@@ -46,6 +48,8 @@ class Users_model extends CI_Model
           Users_table::_ROLE => $row[Users_table::_ROLE],
           Users_table::_USERNAME => $row[Users_table::_USERNAME],
           'country_code' => $row['country_code'],
+          'company_name' => $row['company_name'],
+          'contactnumber' => $row['contactnumber'],
         );
       }
     }

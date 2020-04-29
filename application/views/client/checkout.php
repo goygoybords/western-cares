@@ -46,13 +46,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group  ">
-                                            <input class="form-control form-control-gray" value="" required type="text">
+                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('name');?>" required type="text" readonly>
                                             <label>Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control form-control-gray" value="" required type="email">
+                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('email');?>" required type="email" readonly>
                                             <label>Email</label>
                                         </div>
                                     </div>
@@ -60,39 +60,34 @@
                                         <div class="form-group">
                                             <div class="d-flex">
                                                 <div>
-                                                    <div class="dropdown">
-                                                        <div data-toggle="dropdown" class="form-dropdown cursor-pointer d-flex align-items-center">
-                                                            <div><img width="30" src="img/flag/flag-ph.png" alt=""></div>
-                                                            <div class="pl-2"><i class="fa fa-caret-down"></i></div>
-                                                        </div>
-                                                        <div class="dropdown-menu py-0">
-                                                            <a href="#" class="dropdown-item px-3 py-2 d-flex align-items-center">
-                                                                <div><img width="30" src="img/flag/flag-ph.png" alt=""></div>
-                                                                <div class="pl-2">Philippines</div>
-                                                            </a>
-                                                            <a href="#" class="dropdown-item px-3 py-2 d-flex align-items-center">
-                                                                <div><img width="30" src="img/flag/flag-sg.png" alt=""></div>
-                                                                <div class="pl-2">Signapore</div>
-                                                            </a>
-                                                            
-                                                        </div>
-                                                    </div>
+                                                    <?php $code = $this->session->userdata('country_code');?>
+                                                    <select class="form-control form-control-gray" id = "">
+                                                        
+                                                        <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
+                                                        <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
+                                                        <option value="CH" <?php if($code=="CH") echo 'selected="selected"'; ?> >CH</option>
+                                                    </select>
                                                 </div>
                                                 <div class="col px-0 pos-relative">
+                                                    <input type="text" class="form-control form-control-gray" name = "checkoutContactNumber" value="<?php echo $this->session->userdata('contactnumber');?>" id = "checkoutContactNumber" readonly>
+                                                    <label>Phone Number</label>
+                                            
+                                                </div>
+                                                <!-- <div class="col px-0 pos-relative">
                                                     <input class="form-control form-control-gray" value="" required type="text">
                                                     <label>Phone Number</label>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <input class="form-control" value="" required type="email">
-                                            <label>Organization Name (optional)</label>
+                                            <input class="form-control" value="<?php echo $this->session->userdata('company');?>" required type="text">
+                                            <label>Company/Organization Name (optional)</label>
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="mt-3 mb-3">
+                                <!-- <hr class="mt-3 mb-3">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label class="form-check cursor-pointer">
@@ -101,8 +96,55 @@
                                             <label class="form-check-label" for="check_ff">This is for my friends or family</label>
                                         </label>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
+                            <!-- other receiver to get the item -->
+                            <!-- <div class="px-3 pt-3"> 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="pb-4">Ship To Details</h2>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group  ">
+                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('name');?>" required type="text" readonly>
+                                            <label>Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control form-control-gray" value="<?php echo $this->session->userdata('email');?>" required type="email" readonly>
+                                            <label>Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <?php $code = $this->session->userdata('country_code');?>
+                                                    <select class="form-control form-control-gray" id = "">
+                                                        
+                                                        <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
+                                                        <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
+                                                        <option value="CH" <?php if($code=="CH") echo 'selected="selected"'; ?> >CH</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col px-0 pos-relative">
+                                                    <input type="text" class="form-control form-control-gray" name = "checkoutContactNumber" value="<?php echo $this->session->userdata('contactnumber');?>" id = "checkoutContactNumber" readonly>
+                                                    <label>Phone Number</label>
+                                            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" value="<?php echo $this->session->userdata('company');?>" required type="text">
+                                            <label>Organization Name (optional)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- other receiver to get the item -->
                         </div>
                         <hr class="mt-4 mb-4">
                         <div >
@@ -116,13 +158,13 @@
                                         <textarea placeholder="Customer Remarks or Pickup/Delivery Instructions" class="form-control" rows="5"></textarea>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-12">
                                         <div class="py-4">
                                             <button class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <hr class="mt-4 mb-4">

@@ -44,7 +44,11 @@
                 <label id = "shop-cart-tot-price">0.00</label>
               </div>
             </div>
-            <a href = "<?=base_url();?>checkout" class="btn btn-block btn-primary">Proceed to checkout</a>
+            <?php if($this->session->userdata("isLogged") != TRUE):?>
+                <a href = "#" class="btn btn-block btn-primary login-tab">Proceed to Checkout</a>
+            <?php else: ?> 
+              <a href = "<?=base_url();?>checkout" class="btn btn-block btn-primary">Proceed to checkout</a>
+            <?php endif; ?>
           </div>
         </div>
       </div>

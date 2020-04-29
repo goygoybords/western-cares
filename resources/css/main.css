@@ -995,17 +995,17 @@ footer h3{
   height: 25px;
   width: 25px;
   border-radius: 2px;
-  border: 2px solid rgb(214, 214, 214);
+  border: 2px solid #0a5fab;
 }
 
 /* On mouse-over, add a grey background color */
 .form-check:hover input ~ .checkmark {
-  border-color:rgb(10, 99, 67);
+  border-color:#0a5fab;
 }
 
 /* When the checkbox is checked, add a blue background */
 .form-check input:checked ~ .checkmark {
-  border-color:rgb(10, 99, 67);
+  border-color:#0a5fab;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -1026,7 +1026,7 @@ footer h3{
   top: 2px;
   width: 8px;
   height: 14px;
-  border: solid rgb(10, 99, 67);
+  border: solid #0a5fab;
   border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
@@ -1065,7 +1065,7 @@ footer h3{
   background-color: #ccc  ;
 }
 .form-radio input:checked{
-  border-color: rgb(10, 99, 67);
+  border-color: #0a5fab;
   background-color: #fff;
 }
 /* modal */
