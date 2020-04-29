@@ -37,7 +37,12 @@
                 <input class="form-control" value="" id = "lastname" name="lastname" required type="text">
                 <label>Last Name</label>
               </div>
-            
+
+              <div class="form-group">
+                <input class="form-control" value="" id = "address" name="address" required type="text">
+                <label>Address</label>
+              </div>
+
               <div class="row">
                 <div class="col">
                   <div class="form-group">
@@ -55,7 +60,10 @@
                   </div>
                 </div>
               </div>
-             
+              <div class="form-group">
+                <input class="form-control" value="" id = "company_name" name="company_name" type="text">
+                <label>Company/Organization Name(optional)</label>
+              </div>
               <div class="form-group">
                 <input class="form-control" value="" id = "email" name="email" required type="email">
                 <label>Email Address</label>

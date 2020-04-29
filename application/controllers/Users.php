@@ -16,6 +16,7 @@ class Users extends CI_Controller
 			$this->form_validation->set_rules('firstname', 'Firstname', 'required');
             $this->form_validation->set_rules('lastname', 'Lastname', 'required');
             $this->form_validation->set_rules('contactnumber', 'Password Confirmation', 'required');
+            $this->form_validation->set_rules('address', 'Address', 'required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]|max_length[25]|regex_match["^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"]',
 				array('regex_match' => 'Password must contain at least eight characters, at least one letter and one number')
 			);
@@ -27,6 +28,8 @@ class Users extends CI_Controller
 			$data['last_name'] = $this->input->post('lastname');
 			$data['contactnumber'] = $this->input->post('contactnumber');
 			$data['email'] = $this->input->post('email');
+			$data['company_name'] = $this->input->post('company_name');
+			$data['address'] = $this->input->post('address');
 			$data['password'] = $this->users_model->hash($this->input->post('password'));
 			$data['country_code'] = trim($this->input->post('country_code'));
 			$data['role'] = "Moderator";

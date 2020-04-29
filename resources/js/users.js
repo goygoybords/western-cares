@@ -70,10 +70,12 @@ $(document).ready(
             contactnumber : $('#registrationForm #contactnumber').val(),
             email : $('#registrationForm #email').val(),
             password : $('#registrationForm #password').val(),
-            country_code : $('#registrationForm #select-country').val(),
+            country_code : $('#registrationForm #country_code option:selected').val(),
+            company_name : $('#registrationForm #company_name').val(),
+            address : $('#registrationForm #address').val(),
             csrf_token_name : $.cookie('csrf_cookie_name')
           };
-          // Invoke the AJAX request for updating user information
+          //Invoke the AJAX request for updating user information
           $.ajax({
             data : obj,
             dataType : 'json',
