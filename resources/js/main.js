@@ -36,13 +36,20 @@
                 $('.fixed-top').removeClass('menu-bg');
             }
         });
-        $(".nav-link-bag").click(function(){
+        $(".nav-link-bag").click(function(e)
+        {
           $("body").addClass("cart_open");
+          e.stopPropagation();
         });
+
         $(".cart_close_btn").click(function(){
           $("body").removeClass("cart_open");
         })
-
+        
+        //remove cart when click anywhere
+        $(document).click(function(){
+            $("body").removeClass("cart_open");
+        });
     });
 
     // Slick Nav 

@@ -182,43 +182,51 @@ class Users extends CI_Controller
 
 	public function store_order() 
 	{
-		$sql = $this->db->query("SELECT transaction_id as id FROM transactions WHERE
-		transaction_type = 'Sales' ");
-		$count = count($sql->result()) + 1;
-		$transactionNumber = "ST-".str_pad($count, 7, "0", STR_PAD_LEFT);
-
-		$salesInfo['transaction_type'] = "Sales";
-		$salesInfo['ref_num_1'] = $transactionNumber;
-		$salesInfo['transaction_date'] = date('Y-m-d');
-		$salesInfo['client_id'] = $this->input->post('user_id');
-		$salesInfo["ship_name"] = $this->input->post('ship_name');
-		$salesInfo['ship_address'] = $this->input->post('ship_address');
-		$salesInfo['ship_countrycode'] = $this->input->post('ship_countrycode');
-		$salesInfo['ship_contact_number'] = $this->input->post('ship_contact_number');
-		$salesInfo['total_amount'] = $this->input->post('total_amount');
-		$salesInfo['remarks'] = $this->input->post('checkout_remarks');
-		$salesInfo['payment_method'] = $this->input->post('payment_method');
-		$salesInfo['removed'] = 0;
-		$salesInfo['status'] = 'POSTED';
-		$resultSalesInfo = $this->orders->add($salesInfo);
-
-		if($resultSalesInfo)
+		if($this->input->is_ajax_request()) 
 		{
-			$salesItemsRecord = $this->input->post('order_items');
-			if(!empty($salesItemsRecord))
+			$sql = $this->db->query("SELECT transaction_id as id FROM transactions WHERE
+			transaction_type = 'Sales' ");
+			$count = count($sql->result()) + 1;
+			$transactionNumber = "ST-".str_pad($count, 7, "0", STR_PAD_LEFT);
+
+			$salesInfo['transaction_type'] = "Sales";
+			$salesInfo['ref_num_1'] = $transactionNumber;
+			$salesInfo['transaction_date'] = date('Y-m-d');
+			$salesInfo['client_id'] = $this->input->post('user_id');
+			$salesInfo["ship_name"] = $this->input->post('ship_name');
+			$salesInfo['ship_address'] = $this->input->post('ship_address');
+			$salesInfo['ship_countrycode'] = $this->input->post('ship_countrycode');
+			$salesInfo['ship_contact_number'] = $this->input->post('ship_contact_number');
+			$salesInfo['total_amount'] = $this->input->post('total_amount');
+			$salesInfo['remarks'] = $this->input->post('checkout_remarks');
+			$salesInfo['payment_method'] = $this->input->post('payment_method');
+			$salesInfo['removed'] = 0;
+			$salesInfo['status'] = 'POSTED';
+			$resultSalesInfo = $this->orders->add($salesInfo);
+
+			if($resultSalesInfo)
 			{
-				for ($i = 0; $i < count($salesItemsRecord); $i++) 
+				$salesItemsRecord = $this->input->post('order_items');
+				if(!empty($salesItemsRecord))
 				{
-					$salesItemsInfo['transaction_id'] = $resultSalesInfo;
-					$salesItemsInfo['item_id'] = $salesItemsRecord[$i]['id'];
-					$salesItemsInfo['quantity'] = $salesItemsRecord[$i]['qty'];
-					$salesItemsInfo['amount'] = $salesItemsRecord[$i]['price'];
-					$salesItemsInfo['status'] = "POSTED";
-					$salesItemsInfo['removed'] = 0;
-					$resultSalesItemsInfo = $this->orders->add_sales_items($salesItemsInfo);
+					for ($i = 0; $i < count($salesItemsRecord); $i++) 
+					{
+						$salesItemsInfo['transaction_id'] = $resultSalesInfo;
+						$salesItemsInfo['item_id'] = $salesItemsRecord[$i]['id'];
+						$salesItemsInfo['quantity'] = $salesItemsRecord[$i]['qty'];
+						$salesItemsInfo['amount'] = $salesItemsRecord[$i]['price'];
+						$salesItemsInfo['status'] = "POSTED";
+						$salesItemsInfo['removed'] = 0;
+						$resultSalesItemsInfo = $this->orders->add_sales_items($salesItemsInfo);
+		 			}
 	 			}
- 			}
+	 			echo json_encode("sucess: order-created");
+			}
 		}
-		echo json_encode("sucess: order-created");
+		else 
+		{
+			// Redirect to the login page if it is not an AJAX request
+			redirect('', 'refresh');
+		}
 	}              
 }

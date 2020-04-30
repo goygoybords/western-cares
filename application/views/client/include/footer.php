@@ -143,7 +143,7 @@
           cleave.setPhoneRegionCode(this.value);
           cleave.setRawValue('');
         });
-        
+
         var cleave_edit = new Cleave('#editContactNumber', 
         {
             phone: true,
@@ -441,13 +441,32 @@
 
           $.ajax({
             data : obj,
-            //dataType : 'json',
+            dataType : 'json',
             type : 'post',
             url : 'users/store_order',
             success : function(data) 
             {
-                console.log(data);
-              
+                if(data == "sucess: order-created")
+                {
+                  localStorage.clear();
+                  localStorage.setItem("cart_count", 0);
+                  localStorage.setItem("subtotal", 0);
+                  localStorage.setItem('total', 0);
+                  $("#shop-cart-sub-price").text("0.00");
+                  $("#shop-cart-tot-price").text("0.00");
+
+                  $('#cItems').html("");
+                  $(".nav-link-bag-count").text(cart_count);
+                  $(".shopping-cart-count").text(cart_count);
+                  $(".cart_container  #cItems").html(
+                    '<div class="py-4 text-center">'+
+                    '<svg width="100px" height="100px" viewBox="0 0 29 36"><title>ShoppingBag</title><path d="M14.549 1a6.563 6.563 0 0 0-6.557 6.557v.159H3.657a.689.689 0 0 0-.683.62L1 30.61C1 33.06 3.202 35 5.914 35H23.19c2.713 0 4.915-1.94 4.915-4.327L26.124 8.337a.683.683 0 0 0-.683-.621h-4.335v-.159A6.563 6.563 0 0 0 14.549 1zm-5.19 6.557a5.193 5.193 0 0 1 5.19-5.19 5.193 5.193 0 0 1 5.19 5.19v.159H9.36v-.159zm15.454 1.525L26.73 30.7c-.02 1.622-1.601 2.933-3.547 2.933H5.914c-1.946 0-3.527-1.311-3.547-2.933L4.285 9.082h3.707v3.162c0 .38.304.683.683.683a.68.68 0 0 0 .683-.683V9.082H19.74v3.162c0 .38.304.683.684.683a.68.68 0 0 0 .683-.683V9.082h3.707z" fill="#d6d6d6" stroke="#d6d6d6" fill-rule="evenodd"></path></svg>'+
+                    '<div class=" p-3"><h2>No selected items yet</h2></div>'+
+                    '</div>'
+                  );
+                  $(".cart_item_subtotal").addClass("d-none");
+                  location.reload();
+                }
             },
             error : function(jqXHR, textStatus, errorThrown) 
             {
@@ -462,10 +481,6 @@
        
       }
     );
-
-
-    </script>
-
-        
+    </script>   
   </body>
 </html>
