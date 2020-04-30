@@ -28,6 +28,12 @@ class Orders extends CI_Model
     return $this->db->insert_id();
   }
 
+  public function add_sales_items($productInfo) 
+  {
+    $this->db->insert('transaction_items', $productInfo);
+    return $this->db->insert_id();
+  }
+
   public function add_attachment($productInfo) 
   {
     $this->db->insert('attachments', $productInfo);

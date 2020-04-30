@@ -194,34 +194,31 @@ class Users extends CI_Controller
 		$salesInfo["ship_name"] = $this->input->post('ship_name');
 		$salesInfo['ship_address'] = $this->input->post('ship_address');
 		$salesInfo['ship_countrycode'] = $this->input->post('ship_countrycode');
-
 		$salesInfo['ship_contact_number'] = $this->input->post('ship_contact_number');
 		$salesInfo['total_amount'] = $this->input->post('total_amount');
 		$salesInfo['remarks'] = $this->input->post('checkout_remarks');
 		$salesInfo['payment_method'] = $this->input->post('payment_method');
-
-
 		$salesInfo['removed'] = 0;
 		$salesInfo['status'] = 'POSTED';
 		$resultSalesInfo = $this->orders->add($salesInfo);
 
-		// if($resultSalesInfo)
-		// {
-		// 	//For Sales Items
-		// 	$salesItemsRecord = $this->input->post('order_items');
-		// 	if(!empty($salesItemsRecord))
-		// 	{
-		// 		for ($i = 0; $i < count($salesItemsRecord); $i++) 
-		// 		{
-		// 			$salesItemsInfo[Transaction_Items_table::_TRANSACTION_ID] = $resultSalesInfo;
-		// 			$salesItemsInfo[Transaction_Items_table::_LOADED_ITEM] = $salesItemsRecord[$i]['item_name'];
-		// 			$salesItemsInfo[Transaction_Items_table::_QUANTITY] = $salesItemsRecord[$i]['quantity'];
-		// 			$salesItemsInfo[Transaction_Items_table::_LOADED_UOM] = $salesItemsRecord[$i]['uom'];
-		// 			$resultSalesItemsInfo = $this->sales_model->add_sales_items($salesItemsInfo);
-	 // 			}
- 	// 		}
-		// }
-	
+		if($resultSalesInfo)
+		{
+			$salesItemsRecord = $this->input->post('order_items');
+			if(!empty($salesItemsRecord))
+			{
+				for ($i = 0; $i < count($salesItemsRecord); $i++) 
+				{
+					$salesItemsInfo['transaction_id'] = $resultSalesInfo;
+					$salesItemsInfo['item_id'] = $salesItemsRecord[$i]['id'];
+					$salesItemsInfo['quantity'] = $salesItemsRecord[$i]['qty'];
+					$salesItemsInfo['amount'] = $salesItemsRecord[$i]['price'];
+					$salesItemsInfo['status'] = "POSTED";
+					$salesItemsInfo['removed'] = 0;
+					$resultSalesItemsInfo = $this->orders->add_sales_items($salesItemsInfo);
+	 			}
+ 			}
+		}
 		echo json_encode("sucess: order-created");
 	}              
 }
