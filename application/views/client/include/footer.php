@@ -489,7 +489,7 @@
           localStorage.setItem('total', total.toFixed(2));
           $("#shop-cart-sub-price").text(subtotal.toFixed(2));
           $("#shop-cart-tot-price").text(total.toFixed(2));   
-
+          
           var getStoredItem = localStorage.getItem('cartItem'); 
           var getItemArr = JSON.parse(getStoredItem);
           for(var i = 0; i < getItemArr.length; i++)
