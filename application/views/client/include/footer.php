@@ -354,8 +354,6 @@
             // update shopping cart
             var sItems = localStorage.getItem('cartItem');
             var oItems = JSON.parse(sItems);
-            // show added items in console
-            console.log(localStorage.getItem('cartItem'), oItems)
             //update cart list
             $('#cItems').html("");
               oItems.map(function(i) 
@@ -390,7 +388,7 @@
                     '</button>'+
                   '</div>'+
                   '<div>'+
-                    '<input type="text" min="0" data="cart_item_'+i.id+'"  onchange="changed_input(this)" value="'+i.qty+'" id = "cart_item_'+i.id+'_qty" class="cart_item_qty" placeholder="1">'+
+                    '<input type="text" min="1" data="cart_item_'+i.id+'"  onchange="changed_input(this)" value="'+i.qty+'" id = "cart_item_'+i.id+'_qty" class="cart_item_qty" placeholder="1">'+
                   '</div>'+
                   '<div>'+
                     '<button class="btn" data="cart_item_'+i.id+'" onclick="addFunction(this)">'+
@@ -444,13 +442,12 @@
 
         var getStoredItem = localStorage.getItem('cartItem'); 
         var getItemArr = JSON.parse(getStoredItem);
-        console.log(getItemArr);
         for(var i = 0; i < getItemArr.length; i++)
         { 
           if(parseInt(split_data[2]) == parseInt(getItemArr[i].id))
           { 
             getItemArr[i].qty = newValue;
-            getItemArr[i].price = newPrice.toFixed(2);
+            getItemArr[i].price = newPrice.toFixed(2);     
           }
           localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
         }
@@ -468,42 +465,47 @@
         var price = $(".cart_item_price").text();
         var newValue = oldQtyValue - 1;
         // assign new value to input
+        if (oldQtyValue > 0) 
+        {
           $("#"+targetInput+"_qty").val(newValue);
-        
-        var currentPrice = parseFloat($("#"+targetInput+"_price").text());
-        var defaultPrice = parseFloat($("#"+targetInput+"_price").attr("defaultPrice"));
-        var newPrice = currentPrice - defaultPrice;
-        // update total price
-        $("#"+targetInput+"_price").text(newPrice.toFixed(2));
+          var currentPrice = parseFloat($("#"+targetInput+"_price").text());
+          var defaultPrice = parseFloat($("#"+targetInput+"_price").attr("defaultPrice"));
+          var newPrice = currentPrice - defaultPrice;
+          // update total price
+          $("#"+targetInput+"_price").text(newPrice.toFixed(2));
 
-        cart_count = Number(cart_count) - 1;
-        localStorage.setItem("cart_count", cart_count);
-        $(".nav-link-bag-count").text(cart_count);
-        $(".shopping-cart-count").text(cart_count);
+          cart_count = Number(cart_count) - 1;
+          localStorage.setItem("cart_count", cart_count);
+          $(".nav-link-bag-count").text(cart_count);
+          $(".shopping-cart-count").text(cart_count);
 
-        var subtotal = $("#shop-cart-sub-price").text();
-        var total = $("#shop-cart-tot-price").text();
+          var subtotal = $("#shop-cart-sub-price").text();
+          var total = $("#shop-cart-tot-price").text();
 
-        subtotal = parseFloat(subtotal) - parseFloat(defaultPrice);
-        total = parseFloat(subtotal);
+          subtotal = parseFloat(subtotal) - parseFloat(defaultPrice);
+          total = parseFloat(subtotal);
 
-        localStorage.setItem("subtotal", subtotal.toFixed(2));
-        localStorage.setItem('total', total.toFixed(2));
-        $("#shop-cart-sub-price").text(subtotal.toFixed(2));
-        $("#shop-cart-tot-price").text(total.toFixed(2));   
+          localStorage.setItem("subtotal", subtotal.toFixed(2));
+          localStorage.setItem('total', total.toFixed(2));
+          $("#shop-cart-sub-price").text(subtotal.toFixed(2));
+          $("#shop-cart-tot-price").text(total.toFixed(2));   
 
-        var getStoredItem = localStorage.getItem('cartItem'); 
-        var getItemArr = JSON.parse(getStoredItem);
-        for(var i = 0; i < getItemArr.length; i++)
-        { 
-          if(parseInt(split_data[2]) == parseInt(getItemArr[i].id))
+          var getStoredItem = localStorage.getItem('cartItem'); 
+          var getItemArr = JSON.parse(getStoredItem);
+          for(var i = 0; i < getItemArr.length; i++)
           { 
-            getItemArr[i].qty = newValue;
-            getItemArr[i].price = newPrice.toFixed(2);
+            if(parseInt(split_data[2]) == parseInt(getItemArr[i].id))
+            { 
+              getItemArr[i].qty = newValue;
+              getItemArr[i].price = newPrice.toFixed(2);
+              if(newPrice == 0) 
+              {
+                getItemArr.splice(i, 1); 
+              }
+            }
+            localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
           }
-          localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
-        }
-        
+        }  
      }
      
       function changed_input(obj){

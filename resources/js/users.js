@@ -15,7 +15,7 @@ $(document).ready(
         $('#modal-login').modal('hide');
         $('#modal-signup').modal('show');
       });
-          
+
     $(".qty_counter").on("click", function () 
       {
           var $button = $(this);
@@ -47,7 +47,7 @@ $(document).ready(
                   total = parseFloat(total);
                   $("#specific_button_price").text(total.toFixed(2)); 
               } 
-              else 
+              else
               {
                   newVal = 0;
               }
