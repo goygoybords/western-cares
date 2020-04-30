@@ -15,12 +15,7 @@ $(document).ready(
         $('#modal-login').modal('hide');
         $('#modal-signup').modal('show');
       });
-
-    // $(".qty_counter_cart").on("click", function () 
-    //   {
-    //     alert("Test");
-    //   });
-    
+          
     $(".qty_counter").on("click", function () 
       {
           var $button = $(this);

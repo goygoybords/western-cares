@@ -19,7 +19,9 @@
           </div>
         </div>
       </div>
-
+      <div class="pt-2">
+      <button class="alert_item_btn btn-block btn-border btn btn-primary bg-white text-primary border-primary">View Cart</button>
+      </div>
       <div id="cItems"></div>
       
     </div>
@@ -196,7 +198,7 @@
         {
             $("#checkout_items").append(
               `<div class="cart_item d-flex" >
-                  <div>` + `<img src= "`+ i.img +`" alt=""> </div>
+                  <div style="width:80px;">` + `<img src= "`+ i.img +`" alt=""> </div>
                     <div class="col pr-0">
                     <div class="d-flex"><div><p>` + i.qty + 'x' + i.name + `</p></div>
                         <div class="ml-auto">
@@ -233,7 +235,6 @@
         
         aItems.push(item);
         localStorage.setItem('cartItem', JSON.stringify(aItems)); 
-
         //alert added item
         $("#alert_item_img img").attr("src",itemImgSrc);
         $("#alert_item_code").text(itemCode);
@@ -272,15 +273,12 @@
           var sItems = localStorage.getItem('cartItem');
           var oItems = JSON.parse(sItems);
           // show added items in console
-          // console.log(localStorage.getItem('cartItem'), oItems)
           //update cart list
           $('#cItems').html("");
           oItems.map(function(i) { $('#cItems').append(populateTable(i)); })
         }
       })
 
-
-      
       $(".cart_clear_btn").click(function()
       {
           localStorage.clear();
@@ -371,7 +369,7 @@
       function populateTable(i) 
       { 
         return '<hr/><div class="cart_item d-flex">'+
-              '<div>'+
+              '<div  style="width:80px;">'+
                 '<img src="'+i.img+'" alt="">'+
               '</div>'+
               '<div class="col pr-0">'+
@@ -387,35 +385,124 @@
                 '</div>'+
                 '<div class="d-flex align-items-center">'+
                   '<div>'+
-                    '<button class="btn" onclick="myFunction(this)">'+
+                    '<button class="btn" data="cart_item_'+i.id+'" onclick="minusFunction(this)">'+
                       '<svg width="18px" height="18px" viewBox="0 0 29 4"><title>Minus</title><g transform="translate(-5 -18)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><rect fill="currentColor" x="5" y="18" width="29" height="4" rx="2"></rect></g></svg>'+
                     '</button>'+
                   '</div>'+
                   '<div>'+
-                    '<input type="text" value="'+i.qty+'" id = "qty_value_cart" placeholder="1">'+
+                    '<input type="text" min="0" data="cart_item_'+i.id+'"  onchange="changed_input(this)" value="'+i.qty+'" id = "cart_item_'+i.id+'_qty" class="cart_item_qty" placeholder="1">'+
                   '</div>'+
                   '<div>'+
-                    '<button class="btn" onclick="myFunction(this)">'+
+                    '<button class="btn" data="cart_item_'+i.id+'" onclick="addFunction(this)">'+
                       '<svg width="18px" height="18px" viewBox="0 0 29 29"><title>Plus</title><g transform="translate(-5 -5)" fill="none" fill-rule="evenodd"><rect width="39" height="39" rx="5"></rect><g stroke="currentColor" stroke-linecap="round" stroke-width="4"><path d="M7 19.5h25M19.5 7v25"></path></g></g></svg>'+
                     '</button>'+
                   '</div>'+
-                  '<div class="ml-auto"><span class="cart_item_price">'+i.price+'</span></div>'+
+                  '<div class="ml-auto"><span defaultPrice="'+i.price/i.qty+'" id="cart_item_'+i.id+'_price" class="cart_item_price">'+i.price+'</span></div>'+
                 '</div>'+
               '</div>'+
               '</div>'
       }
 
-      function myFunction(obj) 
+      function addFunction(obj) 
       {
         var id = $(obj).id;
         var t = $(obj).text();
-        var oldValue = $("#qty_value_cart").val();
+        var targetInput = $(obj).attr("data");
+        var split_data = $(obj).attr("data").split('_');
+        
+        // convert text to int
+        var oldQtyValue = parseFloat($("#"+targetInput+"_qty").val());
+        var newValue = parseFloat(oldQtyValue + 1);
+
         var button_cart = $("#specific_button_price").text();
         var price = $(".cart_item_price").text();
-        alert(price + " ");
+        
+        // assign new qty to input
+        $("#"+targetInput+"_qty").val(newValue);
         //if ($.trim($button.text()) == "Plus") 
+        var currentPrice = parseFloat($("#"+targetInput+"_price").text());
+        var defaultPrice = parseFloat($("#"+targetInput+"_price").attr("defaultPrice"));
+        var newPrice = parseFloat(currentPrice) + parseFloat(defaultPrice);
+
+        // update total price
+        $("#"+targetInput+"_price").text(newPrice.toFixed(2));
+
+        var subtotal = $("#shop-cart-sub-price").text();
+        var total = $("#shop-cart-tot-price").text();
+
+        subtotal = parseFloat(subtotal) + parseFloat(defaultPrice);
+        total = parseFloat(subtotal);
+
+        cart_count = Number(cart_count) + 1;
+        localStorage.setItem("cart_count", cart_count);
+        $(".nav-link-bag-count").text(cart_count);
+        $(".shopping-cart-count").text(cart_count);
+
+        localStorage.setItem("subtotal", subtotal.toFixed(2));
+        localStorage.setItem('total', total.toFixed(2));
+        $("#shop-cart-sub-price").text(subtotal.toFixed(2));
+        $("#shop-cart-tot-price").text(total.toFixed(2));     
+
+        var getStoredItem = localStorage.getItem('cartItem'); 
+        var getItemArr = JSON.parse(getStoredItem);
+        console.log("array");
+        console.log(getItemArr);
+        for(var i = 0; i < getItemArr.length; i++)
+        { 
+          if(parseInt(split_data[2]) == parseInt(getItemArr[i].id))
+          { 
+            getItemArr[i].qty = newValue;
+            getItemArr[i].price = newPrice.toFixed(2);
+          }
+          localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
+        }
      }
 
+     function minusFunction(obj) 
+      {
+        var id = $(obj).id;
+        var t = $(obj).text();
+        var targetInput = $(obj).attr("data");
+        // convert text to int
+        var oldQtyValue = parseInt($("#"+targetInput+"_qty").val());
+        var button_cart = $("#specific_button_price").text();
+        var price = $(".cart_item_price").text();
+        var newValue = oldQtyValue - 1;
+        // assign new value to input
+          $("#"+targetInput+"_qty").val(newValue);
+        
+        var currentPrice = parseInt($("#"+targetInput+"_price").text());
+        var defaultPrice = parseInt($("#"+targetInput+"_price").attr("defaultPrice"));
+        var newPrice = currentPrice - defaultPrice;
+        // update total price
+        $("#"+targetInput+"_price").text(newPrice.toFixed(2));
+
+        cart_count = Number(cart_count) - 1;
+        localStorage.setItem("cart_count", cart_count);
+        $(".nav-link-bag-count").text(cart_count);
+        $(".shopping-cart-count").text(cart_count);
+
+        var subtotal = $("#shop-cart-sub-price").text();
+        var total = $("#shop-cart-tot-price").text();
+
+        subtotal = parseFloat(subtotal) - parseFloat(defaultPrice);
+        total = parseFloat(subtotal);
+
+        localStorage.setItem("subtotal", subtotal.toFixed(2));
+        localStorage.setItem('total', total.toFixed(2));
+        $("#shop-cart-sub-price").text(subtotal.toFixed(2));
+        $("#shop-cart-tot-price").text(total.toFixed(2));   
+        
+     }
+     
+      function changed_input(obj){
+        var input_val = parseInt($(obj).val());
+        var input_id = $(obj).attr("data");
+        var currentPrice = parseInt($("#"+input_id+"_price").attr("defaultPrice"));
+        var newPrice = currentPrice * input_val;
+        // update total price
+        $("#"+input_id+"_price").text(newPrice.toFixed(2));
+      }
 
      $('#checkout_button').click(
       function(e) 

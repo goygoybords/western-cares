@@ -47,9 +47,9 @@
         })
         
         //remove cart when click anywhere
-        $(document).click(function(){
-            $("body").removeClass("cart_open");
-        });
+        // $(document).click(function(){
+        //     $("body").removeClass("cart_open");
+        // });
     });
 
     // Slick Nav 
