@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2020 at 08:32 AM
+-- Generation Time: Apr 30, 2020 at 08:55 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 7.0.1
 
@@ -239,7 +239,8 @@ INSERT INTO `logs` (`id`, `user_id`, `date`, `message`) VALUES
 (117, 3, '2020-04-23 08:54:50', 'supplier sup has successfully logged out.'),
 (118, 2, '2020-04-24 06:31:23', 'admin admin has successfully logged in.'),
 (119, 2, '2020-04-25 02:01:54', 'admin admin has successfully logged in.'),
-(120, 2, '2020-04-25 02:07:32', 'admin admin has successfully logged out.');
+(120, 2, '2020-04-25 02:07:32', 'admin admin has successfully logged out.'),
+(121, 2, '2020-04-26 04:33:28', 'admin admin has successfully logged in.');
 
 -- --------------------------------------------------------
 
@@ -266,7 +267,8 @@ INSERT INTO `pages` (`id`, `title`, `page`, `date`) VALUES
 (5, 'Store', 'store-information', '2020-04-15 03:10:30'),
 (6, 'Checkout', 'checkout', '2020-04-15 03:39:51'),
 (7, 'Detail', 'user-detail', '2020-04-16 05:14:04'),
-(8, 'Account', 'account-details', '2020-04-17 01:43:38');
+(8, 'Account', 'account-details', '2020-04-17 01:43:38'),
+(9, 'Thank You', 'thank-you', '2020-04-30 02:06:48');
 
 -- --------------------------------------------------------
 
@@ -294,7 +296,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `item_code`, `description`, `dimension`, `brand`, `category_id`, `unit_id`, `cost`, `selling_price`, `current_quantity`, `image_path`, `removed`) VALUES
-(1, 'FFFP2 CE', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '900.00', 0, 'resources/img/fffp2.jpg', 0),
+(1, 'FFFP2 CE', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '123.00', '900.00', 0, 'resources/img/fffp2.jpg', 0),
 (2, 'FFFP3 with Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '950.00', 0, 'resources/img/ffp3.png', 0),
 (5, 'FFFP2 without Respirator', 'Anti Pollution Face Mask', '190x100x100mm   50 pcs/box  ', 'OEM', 3, 6, '850.00', '1000.00', 0, 'resources/img/ffp2-without.png', 0),
 (9, 'YH-830 Non dependent', 'YH-830 Bi-Level PAP with non dependent humidifier\r\n', '48.5x32.5x21.5', 'OEM', 7, 6, '1500.00', '3500.00', 0, 'resources/img/yh-830.png', 0),
@@ -403,7 +405,7 @@ CREATE TABLE `quotations` (
 --
 
 INSERT INTO `quotations` (`quotation_id`, `user_id`, `status`) VALUES
-(1, 3, 'UNPOSTED'),
+(1, 3, 'APPROVED'),
 (2, 3, 'REMOVED');
 
 -- --------------------------------------------------------
@@ -454,7 +456,8 @@ INSERT INTO `routes` (`id`, `page_id`, `slug`, `controller`) VALUES
 (6, 5, 'store-information', 'page/store-information'),
 (7, 6, 'checkout', 'page/checkout'),
 (9, 7, 'user-detail', 'page/user-detail'),
-(10, 8, 'account-details', 'page/account-details');
+(10, 8, 'account-details', 'page/account-details'),
+(11, 9, 'thank-you', 'page/thank-you');
 
 -- --------------------------------------------------------
 
@@ -482,6 +485,73 @@ INSERT INTO `suppliers` (`supplier_id`, `company_name`, `location`, `contact_num
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `transaction_id` int(11) NOT NULL,
+  `transaction_type` varchar(255) NOT NULL,
+  `ref_num_1` varchar(255) NOT NULL,
+  `ref_num_2` varchar(255) NOT NULL,
+  `transaction_date` date NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `ship_name` varchar(250) DEFAULT NULL,
+  `ship_address` varchar(250) DEFAULT NULL,
+  `ship_address2` varchar(250) DEFAULT NULL,
+  `ship_city` varchar(100) DEFAULT NULL,
+  `ship_state` varchar(100) DEFAULT NULL,
+  `ship_zip` varchar(100) DEFAULT NULL,
+  `ship_country` varchar(100) DEFAULT NULL,
+  `ship_countrycode` varchar(5) DEFAULT NULL,
+  `ship_contact_number` varchar(20) DEFAULT NULL,
+  `total_amount` varchar(255) NOT NULL,
+  `vat_amount` float NOT NULL,
+  `transacted_amount` float NOT NULL,
+  `remarks` text NOT NULL,
+  `payment_method` varchar(255) NOT NULL,
+  `payment_due` date NOT NULL,
+  `payment_reference_number` varchar(100) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `removed` tinyint(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`transaction_id`, `transaction_type`, `ref_num_1`, `ref_num_2`, `transaction_date`, `client_id`, `ship_name`, `ship_address`, `ship_address2`, `ship_city`, `ship_state`, `ship_zip`, `ship_country`, `ship_countrycode`, `ship_contact_number`, `total_amount`, `vat_amount`, `transacted_amount`, `remarks`, `payment_method`, `payment_due`, `payment_reference_number`, `status`, `removed`) VALUES
+(1, 'Sales', 'ST-0000001', '', '2020-04-30', 1, 'sean ming', '188 cebu city', NULL, NULL, NULL, NULL, NULL, 'PH', '0923232332', '4500.00', 0, 0, 'ASAP', 'COD', '0000-00-00', '', 'POSTED', 0),
+(2, 'Sales', 'ST-0000002', '', '2020-04-30', 1, '', '', NULL, NULL, NULL, NULL, NULL, 'PH', '', '1500.00', 0, 0, 'GCASH', 'GCASH', '0000-00-00', '', 'POSTED', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction_items`
+--
+
+CREATE TABLE `transaction_items` (
+  `transaction_items_id` int(11) NOT NULL,
+  `transaction_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `amount` decimal(8,2) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `removed` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaction_items`
+--
+
+INSERT INTO `transaction_items` (`transaction_items_id`, `transaction_id`, `item_id`, `quantity`, `amount`, `status`, `removed`) VALUES
+(1, 1, 18, 1, '1500.00', 'POSTED', 0),
+(2, 1, 13, 2, '2000.00', 'POSTED', 0),
+(3, 1, 14, 1, '1000.00', 'POSTED', 0),
+(4, 2, 19, 1, '1500.00', 'POSTED', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -505,7 +575,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `company_name`, `address`, `country_code`, `contactnumber`, `email`, `password`, `role`, `removed`) VALUES
-(1, 'kevin', 'kevin sean', 'kobe', '', '', 'US', '1 232 323 2323', 'kevin@yahoo.com', '$2y$10$nKclJv8peFoZic1WJN5gueRuveyjdQkpWNx2DbOZ9F8Xq/5tLETjC', 'Moderator', 0),
+(1, 'kevin', 'kevin sean', 'kobe', 'PETRO', '', 'US', '1 232 323 2323', 'kevin@yahoo.com', '$2y$10$nKclJv8peFoZic1WJN5gueRuveyjdQkpWNx2DbOZ9F8Xq/5tLETjC', 'Moderator', 0),
 (2, 'admin', 'admin', 'admin', '', '', 'PH', '12345', 'admin@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Administrator', 0),
 (3, 'supplier', 'supplier', 'sup', 'cHINA  up', 'CHINA up', 'PH', '12345', 'supplier@admin.com', '$2y$10$sxGgNUbZHHWShkf2XcnT0.Fupzp0zIY4d36esJqiV3IRueCtj1fsO', 'Supplier', 0),
 (4, NULL, 'kobe', 'kobe', '', '', 'PH', '12345', 'kobe@lakers.com', '$2y$10$.bwdFTQJyTBfoZNht9RVEeDR.kXUeuwz7Jf2J40O.6fA2kmUXLQ0C', 'Moderator', 0),
@@ -515,7 +585,8 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `company_name`
 (8, 'cmsadmin', 'cms', 'cms', '', '', NULL, '', 'cmsadmin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Supplier', 0),
 (9, 'asdasdasd', 'asdasd', 'asdasd', '', '', NULL, '88888888888888', 'tessdsdsd@yahoo.com', '$2y$10$c4GvST87iLBgmyhgajZSFexmf4vk58IPAjebwygN6sOm93xPBaB1m', 'Administrator', 0),
 (10, 'etasd', 'test', 'test', 'company ', 'add', NULL, '123', 'test@gmail.comasd', '$2y$10$pe6mh4EmrQtitv77TcxDHObRldED1RCVCda6rqXwsogO1UvnufGKq', 'Supplier', 0),
-(11, 'kobe12345', 'kobe', 'kobe', '', '', NULL, '12345', 'kobe@gmail.com', '$2y$10$yMfvXSi/n9GXJt071U8aWeT7pcQbyOF6kw3/wa3naXZU3FxnMoYx.', 'Moderator', 0);
+(11, 'kobe12345', 'kobe', 'kobe', '', '', NULL, '12345', 'kobe@gmail.com', '$2y$10$yMfvXSi/n9GXJt071U8aWeT7pcQbyOF6kw3/wa3naXZU3FxnMoYx.', 'Moderator', 0),
+(15, NULL, 'sean', 'kingston', 'BDO', 'cebu', 'PH', '0923 252 5162', 'seankingston@gmail.com', '$2y$10$Cj7y9UgSpEoO.vJKNpprXeaqTZZjCocs7a9MVimSz1cYXJrWzHnyW', 'Moderator', 0);
 
 --
 -- Indexes for dumped tables
@@ -599,6 +670,18 @@ ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`supplier_id`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`transaction_id`);
+
+--
+-- Indexes for table `transaction_items`
+--
+ALTER TABLE `transaction_items`
+  ADD PRIMARY KEY (`transaction_items_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -627,12 +710,12 @@ ALTER TABLE `customer_ailment`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -662,17 +745,27 @@ ALTER TABLE `quotation_detail`
 -- AUTO_INCREMENT for table `routes`
 --
 ALTER TABLE `routes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
   MODIFY `supplier_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `transaction_items`
+--
+ALTER TABLE `transaction_items`
+  MODIFY `transaction_items_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Constraints for dumped tables
 --

@@ -409,7 +409,6 @@
         var t = $(obj).text();
         var targetInput = $(obj).attr("data");
         var split_data = $(obj).attr("data").split('_');
-        
         // convert text to int
         var oldQtyValue = parseFloat($("#"+targetInput+"_qty").val());
         var newValue = parseFloat(oldQtyValue + 1);
@@ -445,7 +444,6 @@
 
         var getStoredItem = localStorage.getItem('cartItem'); 
         var getItemArr = JSON.parse(getStoredItem);
-        console.log("array");
         console.log(getItemArr);
         for(var i = 0; i < getItemArr.length; i++)
         { 
@@ -463,16 +461,17 @@
         var id = $(obj).id;
         var t = $(obj).text();
         var targetInput = $(obj).attr("data");
+        var split_data = $(obj).attr("data").split('_');
         // convert text to int
-        var oldQtyValue = parseInt($("#"+targetInput+"_qty").val());
+        var oldQtyValue = parseFloat($("#"+targetInput+"_qty").val());
         var button_cart = $("#specific_button_price").text();
         var price = $(".cart_item_price").text();
         var newValue = oldQtyValue - 1;
         // assign new value to input
           $("#"+targetInput+"_qty").val(newValue);
         
-        var currentPrice = parseInt($("#"+targetInput+"_price").text());
-        var defaultPrice = parseInt($("#"+targetInput+"_price").attr("defaultPrice"));
+        var currentPrice = parseFloat($("#"+targetInput+"_price").text());
+        var defaultPrice = parseFloat($("#"+targetInput+"_price").attr("defaultPrice"));
         var newPrice = currentPrice - defaultPrice;
         // update total price
         $("#"+targetInput+"_price").text(newPrice.toFixed(2));
@@ -492,6 +491,18 @@
         localStorage.setItem('total', total.toFixed(2));
         $("#shop-cart-sub-price").text(subtotal.toFixed(2));
         $("#shop-cart-tot-price").text(total.toFixed(2));   
+
+        var getStoredItem = localStorage.getItem('cartItem'); 
+        var getItemArr = JSON.parse(getStoredItem);
+        for(var i = 0; i < getItemArr.length; i++)
+        { 
+          if(parseInt(split_data[2]) == parseInt(getItemArr[i].id))
+          { 
+            getItemArr[i].qty = newValue;
+            getItemArr[i].price = newPrice.toFixed(2);
+          }
+          localStorage.setItem('cartItem', JSON.stringify(getItemArr));  
+        }
         
      }
      
