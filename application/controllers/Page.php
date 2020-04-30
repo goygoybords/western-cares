@@ -17,6 +17,9 @@ class Page extends CI_Controller
 			case "store-information":
 				$this->load->view('client/store-information' );
 				break;
+			case "thank-you":
+				$this->load->view('client/thank-you');
+				break;
 			case "user-detail":
 				if($this->session->userdata('isLogged') == TRUE)
 				{

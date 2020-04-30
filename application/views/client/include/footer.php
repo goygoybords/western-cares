@@ -465,7 +465,7 @@
                     '</div>'
                   );
                   $(".cart_item_subtotal").addClass("d-none");
-                  location.reload();
+                  window.location.href = "thank-you"; 
                 }
             },
             error : function(jqXHR, textStatus, errorThrown) 
@@ -478,7 +478,6 @@
               console.error(errorThrown);
             }
           });
-       
       }
     );
     </script>   
