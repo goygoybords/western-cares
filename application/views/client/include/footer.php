@@ -403,6 +403,7 @@
 
       function addFunction(obj) 
       {
+        event.stopPropagation();
         var id = $(obj).id;
         var t = $(obj).text();
         var targetInput = $(obj).attr("data");
@@ -455,6 +456,7 @@
 
      function minusFunction(obj) 
       {
+        event.stopPropagation();
         var id = $(obj).id;
         var t = $(obj).text();
         var targetInput = $(obj).attr("data");
@@ -489,7 +491,7 @@
           localStorage.setItem('total', total.toFixed(2));
           $("#shop-cart-sub-price").text(subtotal.toFixed(2));
           $("#shop-cart-tot-price").text(total.toFixed(2));   
-          
+
           var getStoredItem = localStorage.getItem('cartItem'); 
           var getItemArr = JSON.parse(getStoredItem);
           for(var i = 0; i < getItemArr.length; i++)
@@ -498,8 +500,7 @@
             { 
               getItemArr[i].qty = newValue;
               getItemArr[i].price = newPrice.toFixed(2);
-              if(newPrice == 0) 
-              {
+              if(newPrice == 0){
                 getItemArr.splice(i, 1); 
               }
             }
