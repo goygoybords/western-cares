@@ -50,6 +50,12 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <input class="form-control " value="<?php echo $user_detail->address;?>" id = "editAddress" name = "editAddress" required type="text">
+                                        <label>Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <div class="d-flex">
                                             <div>
                                                 <!-- <div class="dropdown-menu py-0">
@@ -63,7 +69,7 @@
                                                             <div class="pl-2">Signapore</div>
                                                         </a>
                                                     </div> -->
-                                                    <?php $code = $this->session->userdata('country_code');?>
+                                                    <?php $code = $user_detail->country_code;?>
                                                 <select class="form-control" id = "select-country-edit">
                                                     <option value="PH" <?php if($code=="PH") echo 'selected="selected"'; ?> >PH</option>
                                                     <option value="US" <?php if($code=="US") echo 'selected="selected"'; ?> >US</option>
@@ -77,12 +83,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <input class="form-control" value="" required type="email">
+                                        <input class="form-control" value="<?php echo $user_detail->company_name;?>" id = "editCompanyName" required type="text">
                                         <label>Organization Name (optional)</label>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">

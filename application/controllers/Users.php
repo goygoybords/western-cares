@@ -69,7 +69,8 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules('firstname', 'Firstname', 'required');
         $this->form_validation->set_rules('lastname', 'Lastname', 'required');
         $this->form_validation->set_rules('contactnumber', 'Password Confirmation', 'required');
-        
+        $this->form_validation->set_rules('address', 'Address', 'required');
+
 		$value['success'] = 1;
 		$value['message'] = "success:updated";
 
@@ -84,12 +85,15 @@ class Users extends CI_Controller
 			$data['last_name'] = $this->input->post('lastname');
 			$data['contactnumber'] = trim($this->input->post('contactnumber'));
 			$data['email'] = $this->input->post('email');
+			$data['address'] = $this->input->post('address');
+			$data['company_name'] = $this->input->post('company_name');
+			$data['country_code'] = $this->input->post('country_code');
 			$this->users_model->update($id, $data);
 			$this->session->set_userdata('name', $data['first_name'] . ' ' .$data['last_name']);
+			$this->session->set_userdata('country_code', $this->input->post('country_code') );
 	    	echo json_encode($value);
     	}
 	}
-
 
 	public function change_password($id)
 	{

@@ -182,7 +182,9 @@ $(document).ready(
         var lastname = $('#editLastName').val();
         var contactnumber = $("#editContactNumber").val();
         var email = $("#editEmail").val();
-
+        var address = $("#editAddress").val();
+        var company_name = $("#editCompanyName").val();
+        var country_code = $("#select-country-edit").val();
         $.ajax({
             data : 
             {
@@ -190,6 +192,9 @@ $(document).ready(
               lastname: lastname,
               contactnumber: contactnumber,
               email : email,
+              address: address,
+              company_name : company_name,
+              country_code: country_code,
               csrf_token_name : $.cookie('csrf_cookie_name'),
             },
             dataType : 'json',
@@ -197,6 +202,7 @@ $(document).ready(
             url : 'users/edit/' + id,
             success : function(data) 
             {
+              console.log(data);
               if(data.is_error == 1)
               {
                   $("#editUserForm #error_mesage").html();
