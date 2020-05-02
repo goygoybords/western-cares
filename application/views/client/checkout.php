@@ -116,6 +116,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <input class="form-control" id = "ship_email" name = "ship_email" type="email" >
+                                            <label>Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <div class="d-flex">
                                                 <div>
                                                     <select class="form-control" id = "ship_countrycode">

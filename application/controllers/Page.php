@@ -65,12 +65,4 @@ class Page extends CI_Controller
   	{
   		$this->load->view('client/error_404');
   	}
-
-  	// protected function get_all_categories()
-  	// {
-  	// 	$this->db->select('*');
-	  //   $this->db->from('product_categories');
-	  //   $query = $this->db->get();
-	  //   return $query->result_array();
-  	// }
 }

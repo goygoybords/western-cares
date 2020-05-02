@@ -199,6 +199,7 @@ class Users extends CI_Controller
 			$salesInfo['client_id'] = $this->input->post('user_id');
 			$salesInfo["ship_name"] = $this->input->post('ship_name');
 			$salesInfo['ship_address'] = $this->input->post('ship_address');
+			$salesInfo['ship_email'] = $this->input->post('ship_email');
 			$salesInfo['ship_countrycode'] = $this->input->post('ship_countrycode');
 			$salesInfo['ship_contact_number'] = $this->input->post('ship_contact_number');
 			$salesInfo['total_amount'] = $this->input->post('total_amount');
@@ -206,6 +207,7 @@ class Users extends CI_Controller
 			$salesInfo['payment_method'] = $this->input->post('payment_method');
 			$salesInfo['removed'] = 0;
 			$salesInfo['status'] = 'POSTED';
+			$salesInfo['reference_number'] = $ref_number = mt_rand(100000,999999); 
 			$resultSalesInfo = $this->orders->add($salesInfo);
 
 			if($resultSalesInfo)
@@ -224,6 +226,20 @@ class Users extends CI_Controller
 						$resultSalesItemsInfo = $this->orders->add_sales_items($salesItemsInfo);
 		 			}
 	 			}
+	 			if($this->session->userdata('name') == null || $this->session->userdata('name') == '')
+	 			{
+	 				$data['name'] = $this->input->post('ship_name');
+	 				$to = $data['email'] = $this->input->post('ship_email');
+	 			}
+	 			else
+	 			{
+	 				$data['name'] = $this->session->userdata('name');
+	 				$to = $data['email'] = $this->session->userdata('email');
+	 			}
+	 			$data['ref_number'] = $ref_number; 
+	 			$data['sales_items'] = $this->input->post('order_items');
+	 			
+	 			$this->send_email($to, $data);
 	 			echo json_encode("sucess: order-created");
 			}
 		}
@@ -232,5 +248,54 @@ class Users extends CI_Controller
 			// Redirect to the login page if it is not an AJAX request
 			redirect('', 'refresh');
 		}
-	}              
+	}      
+	public function send_email($to, $data)
+	{
+		// $config['protocol']    = 'smtp';
+		// $config['smtp_host']    = 'ssl://smtp.gmail.com';
+		// $config['smtp_port']    = '465';
+		// $config['smtp_timeout'] = '60';
+
+	 //    $config['smtp_user']    = 'john.flashpark@gmail.com';    //Important
+	 //    $config['smtp_pass']    = 'goygoy08';  //Important
+
+	 //    $config['charset']    = 'iso-8859-1'; //iso-8859-1
+	 //    $config['newline']    = "\r\n";
+	    $config['mailtype'] = 'html'; // or html or text
+	    $config['validation'] = TRUE; // bool whether to validate email or not 
+	    $config['wordwrap'] = TRUE;
+
+		$this->load->library('email' ,$config);
+		$this->email->from('sales@saversmedical.com', 'Savers Medical');
+		$this->email->to($to);
+	
+		$this->email->subject('Your Order is being processed');
+		$this->email->message($this->contactLayout($data));
+		$this->email->set_mailtype('html');
+
+		$result = $this->email->send();
+	} 
+
+	public function contactLayout($data)
+	{
+		return '<!DOCTYPE html><html>
+				<head>
+				    <meta charset="utf-8" />
+				    <title>THANK YOU</title>
+				    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				</head>
+				<body>
+				<div>
+					<p style="Margin-top: 0;color: #565656;font:300 15px "Open Sans", Arial, Helvetica, sans-serif; color:#333332;line-height: 25px;Margin-bottom: 25px">Dear '.$data['name'].'!</p>
+					<br>
+					<p style="Margin-top: 0;color: #565656;font:300 15px "Open Sans", Arial, Helvetica, sans-serif; color:#333332;line-height: 25px;Margin-bottom: 25px">'."Thank you for purchasing our products.
+					<br> here is your reference number ".$data['ref_number'].'</p>
+
+					<p style="Margin-top: 0;color: #565656;font:300 15px "Open Sans", Arial, Helvetica, sans-serif; color:#333332;line-height: 25px;Margin-bottom: 25px">
+					<p>Regards,</p>
+					<p>Savers Medical Team</p>
+				</div>
+				</body>
+				</html>';
+	}       
 }
