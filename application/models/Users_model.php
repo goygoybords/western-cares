@@ -28,6 +28,7 @@ class Users_model extends CI_Model
       'country_code',
       'company_name',
       'contactnumber',
+      'address',
     )));
     $this->db->from(Users_table::_TABLE_NAME);
     $this->db->where(Users_table::_EMAIL, $email);
@@ -50,6 +51,7 @@ class Users_model extends CI_Model
           'country_code' => $row['country_code'],
           'company_name' => $row['company_name'],
           'contactnumber' => $row['contactnumber'],
+          'address' => $row['address'],
         );
       }
     }

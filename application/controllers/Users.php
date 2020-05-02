@@ -89,8 +89,13 @@ class Users extends CI_Controller
 			$data['company_name'] = $this->input->post('company_name');
 			$data['country_code'] = $this->input->post('country_code');
 			$this->users_model->update($id, $data);
+
 			$this->session->set_userdata('name', $data['first_name'] . ' ' .$data['last_name']);
 			$this->session->set_userdata('country_code', $this->input->post('country_code') );
+			$this->session->set_userdata('email', $this->input->post('email'));
+			$this->session->set_userdata('company', $this->input->post('company_name'));
+			$this->session->set_userdata('contactnumber', trim($this->input->post('contactnumber')));
+
 	    	echo json_encode($value);
     	}
 	}
@@ -167,6 +172,7 @@ class Users extends CI_Controller
 			 		$this->session->set_userdata('role', $result['role']);
 			 		$this->session->set_userdata('company', $result['company_name']);
 			 		$this->session->set_userdata('contactnumber', $result['contactnumber']);
+			 		$this->session->set_userdata('address', $result['address']);
 				} 
 				else 
 				{
